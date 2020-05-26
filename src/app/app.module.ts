@@ -13,12 +13,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { AngularFireModule } from '@angular/fire';
+//import { AngularFireModule } from '@angular/fire';
+import { AngularFireModule } from 'angularfire2'; //AGREGO LUCAS
+
 import { environment } from '../environments/environment';
-import { AngularFirestoreModule, SETTINGS } from '@angular/fire/firestore';
+//
+//import { AngularFirestoreModule, SETTINGS } from '@angular/fire/firestore';
+import { AngularFirestoreModule } from 'angularfire2/firestore'; // AGREGO LUCAS
+//
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireStorageModule } from '@angular/fire/storage';
-
+ 
 
 import { HomeComponent } from './componentes/home/home.component';
 import { QrComponent } from './componentes/qr/qr.component';
@@ -36,7 +41,7 @@ import { QrComponent } from './componentes/qr/qr.component';
     AppRoutingModule,
     CommonModule,
     FormsModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule
@@ -45,7 +50,7 @@ import { QrComponent } from './componentes/qr/qr.component';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    { provide: SETTINGS, useValue: {} },
+   // { provide: SETTINGS, useValue: {} },
     Vibration,
     Camera
   ],
