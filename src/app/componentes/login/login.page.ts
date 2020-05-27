@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AngularFirestore } from 'angularfire2/firestore';
+// import { AngularFirestore } from 'angularfire2/firestore'; // PATO
+import { AngularFirestore } from '@angular/fire/firestore'; // PATO
 import * as $ from 'jquery';
-import { IfStmt } from '@angular/compiler';
+import { VibrationService } from 'src/app/servicios/vibration.service';
+// import { IfStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-login',
@@ -11,78 +13,116 @@ import { IfStmt } from '@angular/compiler';
   styleUrls: ['./login.page.scss'],
 })
 
-export class LoginPage implements OnInit 
+export class LoginPage implements OnInit
 {
-  correo : string;
-  clave : string;
-  usuarios: Observable<any[]>; //variable aux
-  listaSupDue: any[];  //lista dueños y supervisores
+  correo: string;
+  clave: string;
+  usuarios: Observable<any[]>; // variable aux
+  usuarios2: Observable<any[]>; // variable aux
+  listaSupDue: any[];  // lista dueños y supervisores
+  listaEmpleados: any[]; //lista empleados
 
-  constructor(public router : Router, public db : AngularFirestore) 
-  { 
-    this.usuarios = db.collection('supDue').valueChanges(); //supDue - coleccion dueños y supervisores
+  esSupDue: boolean = false;
+  esEmpleado: boolean = false;
+
+  constructor(public router: Router, public db: AngularFirestore)
+  {
+    //LISTA SUPERVISORES Y DUEÑOS
+    this.usuarios = db.collection('supDue').valueChanges(); 
     this.usuarios.subscribe(usuarios => this.listaSupDue = usuarios, error => console.log(error));
+
+    //LISTA EMPLEADOS
+    this.usuarios = db.collection('empleados').valueChanges(); 
+    this.usuarios.subscribe(usuarios => this.listaEmpleados = usuarios, error => console.log(error));
   }
 
   ngOnInit() {}
 
-  onSubmitLogin()
+  onSubmitLogin(): void
   {
-    let usuarioEncontrado : boolean = false;
-    this.correo=$("#inpCorreoLogin").val();
-    this.clave=$("#inpClaveLogin").val();
-    if(this.datosValidos(this.correo, this.clave))
+    let usuarioEncontrado = false;
+    let path : string = "";
+    this.correo = $('#inpCorreoLogin').val();
+    this.clave = $('#inpClaveLogin').val();
+
+    if (this.datosValidos(this.correo, this.clave))
     {
-      for (let usuario of this.listaSupDue)
+      for(let usuario of this.listaSupDue)
       {
-        if(usuario.correo == this.correo && usuario.clave == this.clave)
+        if (usuario.correo == this.correo && usuario.clave == this.clave)
         {
           usuarioEncontrado = true;
-          localStorage.setItem("usuario", usuario.perfil);
-          this.moveToHome();
+          path = "supervisoresDueños";
           break;
         }
       }
+
       if(usuarioEncontrado == false)
       {
-        $("#errUsuarioLogin").attr("hidden", false);
+        for(let usuario of this.listaEmpleados)
+        {
+          if (usuario.correo === this.correo && usuario.clave === this.clave)
+          {
+            usuarioEncontrado = true;
+            path = "empleados";
+            break;
+          }
+        }
+      }
+      
+      
+      if(usuarioEncontrado)
+      {
+        this.moveToHome(path);
+      }
+      else
+      {
+        $('#errUsuarioLogin').attr('hidden', false);
       }
     }
   }
 
-  moveToHome() : void
+  moveToHome(caso : string): void
   {
     this.limpiarErrores();
     this.limpiarInputs();
-    $("#loadingContainerLogin").attr("hidden", false);
+    $('#loadingContainerLogin').attr('hidden', false);
     setTimeout(() => {
-      $("#loadingContainerLogin").attr("hidden", true);
-      this.router.navigate(['/home']);
+      $('#loadingContainerLogin').attr('hidden', true);
+      switch(caso)
+      {
+        case 'supervisoresDueños':
+          this.router.navigate(['/sup-due']); //pagina dueños y supervisores
+          break;
+        case 'empleados':
+          this.router.navigate(['/empleados']);
+          break;
+      }
     }, 2000);
   }
 
-  datosValidos(correo : string, clave : string) : boolean
+  datosValidos(correo: string, clave: string): boolean
   {
-    let contador : number = 0;
-    if(this.correoValido(correo))
+    let contador = 0;
+    if (this.correoValido(correo))
     {
-      $("#errCorreoLogin").attr("hidden", true);
+      $('#errCorreoLogin').attr('hidden', true);
       contador++;
     }
     else
     {
-      $("#errCorreoLogin").attr("hidden", false);
+      $('#errCorreoLogin').attr('hidden', false);
     }
-    if(this.claveValida(clave))
+    if (this.claveValida(clave))
     {
-      $("#errClaveLogin").attr("hidden", true);
+      $('#errClaveLogin').attr('hidden', true);
       contador++;
     }
     else
     {
-      $("#errClaveLogin").attr("hidden", false);
+      $('#errClaveLogin').attr('hidden', false);
     }
-    if(contador == 2)
+    if (contador == 2)
     {
       return true;
     }
@@ -92,23 +132,23 @@ export class LoginPage implements OnInit
     }
   }
 
-  correoValido(correo : string) : boolean
+  correoValido(correo: string): boolean
   {
-    let regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-    let retorno = regexp.test(correo);
+    const regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    const retorno = regexp.test(correo);
     return retorno;
   }
 
-  claveValida(clave : string) : boolean
+  claveValida(clave: string): boolean
   {
     let retorno = true;
-    if(clave != "")
+    if (clave !== '')
     {
-      if(clave.length == 4)
+      if (clave.length == 4)
       {
-        for(let caracter of clave)
+        for (let caracter of clave)
         {
-          if(caracter < '0' || caracter > '9')
+          if (caracter < '0' || caracter > '9')
           {
             retorno = false;
             break;
@@ -127,19 +167,19 @@ export class LoginPage implements OnInit
     return retorno;
   }
 
-  limpiarErrores() : void
+  limpiarErrores(): void
   {
-    $("#errCorreoLogin").attr("hidden", true);
-    $("#errClaveLogin").attr("hidden", true);
-    $("#errUsuarioLogin").attr("hidden", true);
+    $('#errCorreoLogin').attr('hidden', true);
+    $('#errClaveLogin').attr('hidden', true);
+    $('#errUsuarioLogin').attr('hidden', true);
   }
 
-  limpiarInputs() : void
+  limpiarInputs(): void
   {
-    $("#inpCorreoLogin").val("");
-    $("#inpClaveLogin").val("");
-    //LIMPIAMOS LOS VALORES PORQUE A VECES QUEDAN CARGADOS
-    this.correo = "";
-    this.clave = "";
+    $('#inpCorreoLogin').val('');
+    $('#inpClaveLogin').val('');
+    // LIMPIAMOS LOS VALORES PORQUE A VECES QUEDAN CARGADOS
+    this.correo = '';
+    this.clave = '';
   }
 }
