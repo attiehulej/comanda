@@ -4,7 +4,8 @@ import { HomeComponent } from './componentes/home/home.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
-  { path: '', redirectTo: 'login', pathMatch: 'full'},
+  { path: '', redirectTo: 'splash', pathMatch: 'full'},
+  { path: 'splash', loadChildren: () => import('./app.component').then( m => m.AppComponent)},
   { path: 'login', loadChildren: () => import('./componentes/login/login.module').then( m => m.LoginPageModule)},
   { path: 'sup-due', loadChildren: () => import('./componentes/sup-due/sup-due.module').then( m => m.SupDuePageModule)},
   { path: 'empleados', loadChildren: () => import('./componentes/empleados/empleados.module').then( m => m.EmpleadosPageModule)},

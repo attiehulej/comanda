@@ -25,7 +25,7 @@ export class LoginPage implements OnInit
   esSupDue: boolean = false;
   esEmpleado: boolean = false;
 
-  constructor(public router: Router, public db: AngularFirestore)
+  constructor(public router: Router, public db: AngularFirestore, public vibration : VibrationService)
   {
     //LISTA SUPERVISORES Y DUEÑOS
     this.usuarios = db.collection('supDue').valueChanges(); 
@@ -77,6 +77,7 @@ export class LoginPage implements OnInit
       }
       else
       {
+        this.vibration.vibrar(500);
         $('#errUsuarioLogin').attr('hidden', false);
       }
     }
@@ -128,6 +129,7 @@ export class LoginPage implements OnInit
     }
     else
     {
+      this.vibration.vibrar(500);
       return false;
     }
   }
