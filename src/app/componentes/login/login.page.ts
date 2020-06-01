@@ -6,6 +6,7 @@ import { AngularFirestore } from '@angular/fire/firestore'; // PATO
 import * as $ from 'jquery';
 import { VibrationService } from 'src/app/servicios/vibration.service';
 // import { IfStmt } from '@angular/compiler';
+import { SpinnerRouterService } from 'src/app/servicios/spinner-router.service';
 
 @Component({
   selector: 'app-login',
@@ -17,23 +18,15 @@ export class LoginPage implements OnInit
 {
   correo: string;
   clave: string;
-  usuarios: Observable<any[]>; // variable aux
-  usuarios2: Observable<any[]>; // variable aux
-  listaSupDue: any[];  // lista dueños y supervisores
-  listaEmpleados: any[]; //lista empleados
+  usuarios: Observable<any[]>;
+  listaUsuarios: any[];
 
-  esSupDue: boolean = false;
-  esEmpleado: boolean = false;
+  esDuenio: boolean = false;
 
-  constructor(public router: Router, public db: AngularFirestore, public vibration : VibrationService)
+  constructor(public router: Router, public db: AngularFirestore, public vibration : VibrationService, public spinnerRouter : SpinnerRouterService)
   {
-    //LISTA SUPERVISORES Y DUEÑOS
-    this.usuarios = db.collection('supDue').valueChanges(); 
-    this.usuarios.subscribe(usuarios => this.listaSupDue = usuarios, error => console.log(error));
-
-    //LISTA EMPLEADOS
-    this.usuarios = db.collection('empleados').valueChanges(); 
-    this.usuarios.subscribe(usuarios => this.listaEmpleados = usuarios, error => console.log(error));
+    this.usuarios = db.collection('usuarios').valueChanges(); 
+    this.usuarios.subscribe(usuarios => this.listaUsuarios = usuarios, error => console.log(error));
   }
 
   ngOnInit() {}
@@ -41,39 +34,23 @@ export class LoginPage implements OnInit
   onSubmitLogin(): void
   {
     let usuarioEncontrado = false;
-    let path : string = "";
     this.correo = $('#inpCorreoLogin').val();
     this.clave = $('#inpClaveLogin').val();
 
     if (this.datosValidos(this.correo, this.clave))
     {
-      for(let usuario of this.listaSupDue)
+      for(let usuario of this.listaUsuarios)
       {
         if (usuario.correo == this.correo && usuario.clave == this.clave)
         {
           usuarioEncontrado = true;
-          path = "supervisoresDueños";
           break;
         }
       }
-
-      if(usuarioEncontrado == false)
-      {
-        for(let usuario of this.listaEmpleados)
-        {
-          if (usuario.correo === this.correo && usuario.clave === this.clave)
-          {
-            usuarioEncontrado = true;
-            path = "empleados";
-            break;
-          }
-        }
-      }
-      
       
       if(usuarioEncontrado)
       {
-        this.moveToHome(path);
+        this.moveToHome();
       }
       else
       {
@@ -83,23 +60,11 @@ export class LoginPage implements OnInit
     }
   }
 
-  moveToHome(caso : string): void
+  moveToHome(): void
   {
     this.limpiarErrores();
     this.limpiarInputs();
-    $('#loadingContainerLogin').attr('hidden', false);
-    setTimeout(() => {
-      $('#loadingContainerLogin').attr('hidden', true);
-      switch(caso)
-      {
-        case 'supervisoresDueños':
-          this.router.navigate(['/sup-due']); //pagina dueños y supervisores
-          break;
-        case 'empleados':
-          this.router.navigate(['/empleados']);
-          break;
-      }
-    }, 2000);
+    this.spinnerRouter.showSpinnerAndNavigate('home', 'loadingContainerLogin', 2000);
   }
 
   datosValidos(correo: string, clave: string): boolean

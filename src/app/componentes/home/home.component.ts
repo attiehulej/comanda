@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SpinnerRouterService } from 'src/app/servicios/spinner-router.service';
 
 @Component({
   selector: 'app-home',
@@ -7,8 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(public spinnerRouter : SpinnerRouterService) { }
 
   ngOnInit() {}
 
+  volverHome(): void
+  {
+    this.spinnerRouter.showSpinnerAndNavigate('login', 'loadingContainerHome', 2000);
+  }
 }

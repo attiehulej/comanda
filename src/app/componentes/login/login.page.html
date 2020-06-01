@@ -2,19 +2,19 @@
   <form  (ngSubmit) ="onSubmitLogin()">
 
     <label class="lblCorreoLogin">Correo Electrónico</label>
-      <ion-input type="text" class="inpCorreoLogin" id="inpCorreoLogin" name="inpCorreoLogin"></ion-input>
+    <ion-input type="text" class="inpCorreoLogin" id="inpCorreoLogin" name="inpCorreoLogin"></ion-input>
         
-      <div id="errCorreoLogin" class="errCorreoLogin" hidden>CORREO INVALIDO</div>
+    <div id="errCorreoLogin" class="errCorreoLogin" hidden>CORREO INVALIDO</div>
 
-      <label class="lblClaveLogin">Contraseña</label>
-      <ion-input type="password" class="inpClaveLogin" id="inpClaveLogin" name="inpClaveLogin"></ion-input>
+    <label class="lblClaveLogin">Contraseña</label>
+    <ion-input type="password" class="inpClaveLogin" id="inpClaveLogin" name="inpClaveLogin"></ion-input>
 
-      <div id="errClaveLogin" class="errClaveLogin" hidden>CLAVE INVALIDA</div>
+    <div id="errClaveLogin" class="errClaveLogin" hidden>CLAVE INVALIDA</div>
       
-      <div id="errUsuarioLogin" class="errUsuarioLogin" hidden>USUARIO NO EXISTE</div>
+    <div id="errUsuarioLogin" class="errUsuarioLogin" hidden>USUARIO NO EXISTE</div>
 
-      <button type="submit" class="btnSubmitLogin">Enviar</button>
-      <button type="button" (click)="limpiarInputs()" (click)="limpiarErrores()" class="btnResetLogin">Limpiar</button>
+    <button type="submit" class="btnSubmitLogin">Enviar</button>
+    <button type="button" (click)="limpiarInputs()" (click)="limpiarErrores()" class="btnResetLogin">Limpiar</button>
 
     
   </form>

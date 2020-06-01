@@ -1,14 +1,18 @@
-#fondo{
+.fondo{
     position: absolute;
     top: 0;
     left: 0;
     z-index: 999;
     width: 100vw;
     height: 100vh;
-    background: url("../assets/splashComanda.png") no-repeat center / cover;
+    background: url("../assets/splash.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
 }
 
-#logoSplash{
+.logoSplash{
     height: 40vh;
     width: 40vw;
     display: flex;
@@ -18,6 +22,27 @@
     justify-content: center;
     animation: animacion 4s linear;
     position: absolute;
+}
+
+.divTitulo{
+    position: absolute;
+    width: 100vw;
+    height: 5vh;
+    left: 0vw;
+    top: 75vh;
+    color: black;
+    font-size: 6vh;
+    text-align: center;
+}
+
+.divNombres{
+    position: absolute;
+    width: 100vw;
+    height: 15vh;
+    left: 0vw;
+    top: 85vh;
+    color: black;
+    font-size: 2vh;
 }
 
 @keyframes animacion{
