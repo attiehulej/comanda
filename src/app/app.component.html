@@ -1,3 +1,14 @@
 <ion-app>
+  <div class="fondo" [style.display]="splash ? 'flex' : 'none'">
+    <div class="logoSplash">
+      <img src="../assets/spinner.png">
+    </div>
+    <label class="divTitulo">COHERENCE</label>
+    <label class="divNombres">
+      <p>Attie Patricio</p>
+      <p>Hulej Lucas</p>
+      <p>Flippi Franco</p>  
+    </label>
+  </div>
   <ion-router-outlet></ion-router-outlet>
 </ion-app>

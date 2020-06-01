@@ -1,0 +1,210 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    outline: none;
+}
+
+.fondoLogin{
+    background-image: url("../../../assets/fondoLogin.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.lblCorreoLogin{
+    position: absolute;
+    width: 80vw; 
+    height: 5vh;
+    top: 10vh;
+    left: 10vw;
+    border-radius: 10px;
+    background-color: rgb(255,215,0);
+    color:  grey;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 5vh; 
+    font-size: 3vh;
+    font-family:Helvetica, sans-serif;
+    font-weight:bold;
+}
+
+.inpCorreoLogin{
+    position: absolute;
+    width: 80vw; 
+    height: 5vh;
+    top: 15vh;
+    left: 10vw;
+    color: grey;
+    border-bottom: 3px solid grey;
+    font-size: 3vh;
+    font-family:Helvetica, sans-serif;
+    font-weight:bold;
+}
+
+.lblClaveLogin{
+    position: absolute;
+    width: 80vw; 
+    height: 5vh;
+    top: 30vh;
+    left: 10vw;
+    border-radius: 10px;
+    background-color:  rgb(255,215,0);
+    color:  grey;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 5vh; 
+    font-size: 3vh;
+    font-family:Helvetica, sans-serif;
+    font-weight:bold;
+}
+
+.inpClaveLogin{
+    position: absolute;
+    width: 80vw; 
+    height: 5vh;
+    top: 35vh;
+    left: 10vw;
+    color: grey;
+    border-bottom: 3px solid grey;
+    font-size: 3vh;
+    font-family:Helvetica, sans-serif;
+    font-weight:bold;
+}
+
+//ERRORES
+///////////////////////////////////////////////////////////////////////////
+
+.errCorreoLogin{
+    position: absolute;
+    width: 80vw; 
+    height: 5vh;
+    top: 43vh;
+    left: 10vw;
+    border-radius: 10px;
+    color: grey;
+    background-color: black;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 6vh; 
+    font-size: x-large;
+    font-family:Helvetica, sans-serif;
+    font-weight:bold;
+    animation: showErrorLogin 2s linear;
+}
+
+.errClaveLogin{
+    position: absolute;
+    width: 80vw; 
+    height: 5vh;
+    top: 52vh;
+    left: 10vw;
+    border-radius: 10px;
+    color: grey;
+    background-color: black;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 6vh; 
+    font-size: x-large;
+    font-family:Helvetica, sans-serif;
+    font-weight:bold;
+    animation: showErrorLogin 2s linear;
+}
+
+.errUsuarioLogin{
+    position: absolute;
+    width: 80vw; 
+    height: 5vh;
+    top: 47vh;
+    left: 10vw;
+    border-radius: 10px;
+    color: grey;
+    background-color: black;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 6vh; 
+    font-size: x-large;
+    font-family:Helvetica, sans-serif;
+    font-weight:bold;
+    animation: showErrorLogin 2s linear;
+}
+
+///////////////////////////////////////////////////////////////////////////
+.btnSubmitLogin{
+    position: absolute; 
+    width: 70vw; 
+    height: 10vh;
+    top: 60vh;
+    left: 15vw;
+    color: grey;
+    background-color:  rgb(255,215,0);
+    border-radius: 10px;
+    box-shadow: 0 10px 	rgb(218,165,32);
+    font-size: 5vh;
+    font-family:Helvetica, sans-serif;
+    font-weight:bold;
+}
+
+.btnSubmitLogin:active{
+    transform: translate(0px, 5px);
+    box-shadow: 0 5px rgb(218,165,32);
+}
+
+
+.btnResetLogin{
+    position: absolute; 
+    width: 70vw; 
+    height: 10vh;
+    top: 80vh;
+    left: 15vw;
+    color: grey;
+    background-color:  rgb(255,215,0);
+    border-radius: 10px;
+    box-shadow: 0 10px 	rgb(218,165,32);
+    font-size: 5vh;
+    font-family:Helvetica, sans-serif;
+    font-weight:bold;
+}
+
+.btnResetLogin:active{
+    transform: translate(0px, 5px);
+    box-shadow: 0 5px rgb(218,165,32);
+}
+
+.loadingContainerLogin{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.678);
+    z-index: 299;
+}
+
+.loadingLogin{
+    width: 100px;
+    height: 100px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 300;
+    animation: spinLogin 2s linear infinite;
+    background-color: gold;
+    border-radius: 100px;
+}
+
+@keyframes spinLogin{
+    from{transform: rotate(0deg);}
+    to{transform: rotate(360deg);}
+}
+
+@keyframes showErrorLogin{
+    from {transform: scale(0.5, 0.5);}
+    to {transform: scale(1, 1);}
+}
