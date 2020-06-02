@@ -30,13 +30,15 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { HomeComponent } from './componentes/home/home.component';
 import { QrComponent } from './componentes/qr/qr.component';
 import { CargaMesaComponent } from './componentes/carga-mesa/carga-mesa.component';
+import { CargaProductoComponent } from './componentes/carga-producto/carga-producto.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     QrComponent,
-    CargaMesaComponent
+    CargaMesaComponent, // PATO
+    CargaProductoComponent // PATO
   ],
   entryComponents: [],
   imports: [

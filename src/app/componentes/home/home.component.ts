@@ -20,4 +20,8 @@ export class HomeComponent implements OnInit {
   public abmMesa(): void {
     this.spinnerRouter.showSpinnerAndNavigate('cargaMesa', 'loadingContainerHome', 2000);
   }
+
+  public abmProducto(): void {
+    this.spinnerRouter.showSpinnerAndNavigate('cargaProducto', 'loadingContainerHome', 2000);
+  }
 }
