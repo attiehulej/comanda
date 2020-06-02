@@ -16,4 +16,8 @@ export class HomeComponent implements OnInit {
   {
     this.spinnerRouter.showSpinnerAndNavigate('login', 'loadingContainerHome', 2000);
   }
+
+  public abmMesa(): void {
+    this.spinnerRouter.showSpinnerAndNavigate('cargaMesa', 'loadingContainerHome', 2000);
+  }
 }

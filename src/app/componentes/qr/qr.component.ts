@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+// import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { QrService } from '../../servicios/qr.service';
 import { VibrationService } from '../../servicios/vibration.service';
 import { Subject } from 'rxjs';
@@ -15,7 +16,8 @@ export class QrComponent implements OnInit, OnDestroy {
 
   constructor(
     private qr: QrService,
-    private router: Router,
+    // private router: Router,
+    private location: Location,
     private vibration: VibrationService
   ) {}
 
@@ -25,6 +27,7 @@ export class QrComponent implements OnInit, OnDestroy {
     .subscribe(() => {
       this.vibration.vibrar(100);
       // this.router.navigate(['principal']);
+      this.location.back();
     });
     this.qr.escanear();
   }

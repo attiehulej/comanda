@@ -8,7 +8,7 @@ import { Foto } from '../clases/foto';
   providedIn: 'root'
 })
 export class CameraService {
-  private fotos: Foto[] = [];
+  public fotos: Foto[] = [];
 
   constructor(
     private camera: Camera,
@@ -52,5 +52,9 @@ export class CameraService {
 
   public getCantidad(): number {
     return this.fotos.length;
+  }
+
+  public getFotos(): Foto[] {
+    return this.fotos;
   }
 }

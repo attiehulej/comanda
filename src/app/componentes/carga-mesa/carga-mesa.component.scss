@@ -17,11 +17,12 @@
   justify-content: center;
 }
 
-.btnVolverHome, .btnCargaMesa {
+.btnVolverHome{
   position: absolute; 
   width: 20vw; 
   height: 10vh;
   top: 5vh;
+  left: 5vw;
   color: grey;
   background-color:  rgb(255,215,0);
   border-radius: 10px;
@@ -31,21 +32,13 @@
   font-weight:bold;
 }
 
-.btnVolverHome {
-  left: 5vw;
-}
-
-.btnCargaMesa {
-  left: 30vw;
-}
-
-.btnVolverHome:active, .btnCargaMesa:active {
+.btnVolverHome:active{
   transform: translate(0px, 5px);
   box-shadow: 0 5px rgb(218,165,32);
 }
 
 
-.loadingContainerHome{
+.loadingContainerMesa{
   width: 100vw;
   height: 100vh;
   position: absolute;
@@ -53,7 +46,7 @@
   z-index: 299;
 }
 
-.loadingHome{
+.loadingMesa{
   width: 100px;
   height: 100px;
   position: fixed;
@@ -71,4 +64,52 @@
 @keyframes spinHome{
   from{transform: rotate(0deg);}
   to{transform: rotate(360deg);}
+}
+
+.lblTitulo {
+  border-radius: 10px;
+  background-color: rgb(255,215,0);
+  color:  grey;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 5vh; 
+  font-size: 3vh;
+  font-family:Helvetica, sans-serif;
+  font-weight:bold;
+}
+
+.lblError {
+  border-radius: 10px;
+  background-color: rgb(255,215,0);
+  color:  red;
+  display: block;
+  /*text-align: center;
+  vertical-align: middle;
+  line-height: 5vh; 
+  font-size: 3vh;
+  font-family:Helvetica, sans-serif;
+  font-weight:bold;*/
+}
+
+ion-input, ion-select {
+  color: grey;
+  border-bottom: 3px solid grey;
+  font-size: 3vh;
+  font-family:Helvetica, sans-serif;
+  font-weight:bold;
+}
+
+button {
+  color: grey;
+  background-color:  rgb(255,215,0);
+  border-radius: 10px;
+  box-shadow: 0 10px 	rgb(218,165,32);
+  font-size: 5vh;
+  font-family:Helvetica, sans-serif;
+  font-weight:bold;
+}
+
+button:active {
+  transform: translate(0px, 5px);
+  box-shadow: 0 5px rgb(218,165,32);
 }
