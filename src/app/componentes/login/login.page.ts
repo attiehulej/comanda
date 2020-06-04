@@ -43,6 +43,7 @@ export class LoginPage implements OnInit
       {
         if (usuario.correo == this.correo && usuario.clave == this.clave)
         {
+          localStorage.setItem('tipoDeAlta', usuario.tipo);
           usuarioEncontrado = true;
           break;
         }
@@ -64,7 +65,7 @@ export class LoginPage implements OnInit
   {
     this.limpiarErrores();
     this.limpiarInputs();
-    this.spinnerRouter.showSpinnerAndNavigate('home', 'loadingContainerLogin', 2000);
+    this.spinnerRouter.showSpinnerAndNavigate('alta-usuarios', 'loadingContainerLogin', 2000);
   }
 
   datosValidos(correo: string, clave: string): boolean
@@ -111,7 +112,7 @@ export class LoginPage implements OnInit
     let retorno = true;
     if (clave !== '')
     {
-      if (clave.length == 4)
+      if (clave.length >= 4 && clave.length <= 6)
       {
         for (let caracter of clave)
         {

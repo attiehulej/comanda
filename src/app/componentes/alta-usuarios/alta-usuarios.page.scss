@@ -1,0 +1,410 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    outline: none;
+}
+  
+.fondoAltaUsuarios{
+    background-image: url("../../../assets/fondoLogin.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+  
+.btnVolverAltaUsuarios{
+    position: absolute; 
+    width: 20vw; 
+    height: 4vh;
+    top: 95vh;
+    left: 0vw;
+    color: grey;
+    background-color:  rgb(255,215,0);
+    border-radius: 10px;
+    box-shadow: 0 10px 	rgb(218,165,32);
+    font-size: 2vh;
+    font-family:Helvetica, sans-serif;
+    font-weight:bold;
+}
+  
+.btnVolverAltaUsuarios:active{
+    transform: translate(0px, 5px);
+    box-shadow: 0 5px rgb(218,165,32);
+}
+
+.btnSubmitAltaUsuarios{
+    position: absolute; 
+    width: 20vw; 
+    height: 4vh;
+    top: 95vh;
+    left: 80vw;
+    color: grey;
+    background-color:  rgb(255,215,0);
+    border-radius: 10px;
+    box-shadow: 0 10px 	rgb(218,165,32);
+    font-size: 2vh;
+    font-family:Helvetica, sans-serif;
+    font-weight:bold;
+}
+  
+.btnSubmitAltaUsuarios:active{
+    transform: translate(0px, 5px);
+    box-shadow: 0 5px rgb(218,165,32);
+}
+
+.btnFotoAltaUsuarios{
+    position: absolute; 
+    width: 20vw; 
+    height: 4vh;
+    top: 95vh;
+    left: 40vw;
+    color: grey;
+    background-color:  rgb(255,215,0);
+    border-radius: 10px;
+    box-shadow: 0 10px 	rgb(218,165,32);
+    font-size: 2vh;
+    font-family:Helvetica, sans-serif;
+    font-weight:bold;
+}
+
+.btnFotoAltaUsuarios:active{
+    transform: translate(0px, 5px);
+    box-shadow: 0 5px rgb(218,165,32);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+.lblCorreoAltaUsuarios{
+    position: absolute;
+    width: 80vw; 
+    height: 5vh;
+    top: 5vh;
+    left: 10vw;
+    border-radius: 10px;
+    background-color: rgb(255,215,0);
+    color:  grey;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 5vh; 
+    font-size: 3vh;
+    font-family:Helvetica, sans-serif;
+    font-weight:bold;
+}
+
+.inpCorreoAltaUsuarios{
+    position: absolute;
+    width: 80vw; 
+    height: 5vh;
+    top: 10vh;
+    left: 10vw;
+    color: grey;
+    background-color: rgba(255, 255, 255, 0);
+    text-align: center;
+    border: 0px;
+    border-bottom: 3px solid grey;
+    font-size: 3vh;
+    font-family:Helvetica, sans-serif;
+    font-weight:bold;
+}
+
+.lblErrorCorreoAltaUsuarios{
+    position: absolute;
+    width: 80vw; 
+    height: 4vh;
+    top: 15vh;
+    left: 10vw;
+    border-radius: 10px;
+    background-color: rgb(255, 0, 0);
+    color:  grey;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 4vh; 
+    font-size: 2vh;
+    font-family:Helvetica, sans-serif;
+    font-weight:bold;
+}
+
+.lblClaveAltaUsuarios{
+    position: absolute;
+    width: 80vw; 
+    height: 5vh;
+    top: 20vh;
+    left: 10vw;
+    border-radius: 10px;
+    background-color: rgb(255,215,0);
+    color:  grey;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 5vh; 
+    font-size: 3vh;
+    font-family:Helvetica, sans-serif;
+    font-weight:bold;
+}
+
+.inpClaveAltaUsuarios{
+    position: absolute;
+    width: 80vw; 
+    height: 5vh;
+    top: 25vh;
+    left: 10vw;
+    color: grey;
+    background-color: rgba(255, 255, 255, 0);
+    text-align: center;
+    border: 0px;
+    border-bottom: 3px solid grey;
+    font-size: 3vh;
+    font-family:Helvetica, sans-serif;
+    font-weight:bold;
+}
+
+.lblErrorClaveAltaUsuarios{
+    position: absolute;
+    width: 80vw; 
+    height: 4vh;
+    top: 30vh;
+    left: 10vw;
+    border-radius: 10px;
+    background-color: rgb(255, 0, 0);
+    color:  grey;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 4vh; 
+    font-size: 2vh;
+    font-family:Helvetica, sans-serif;
+    font-weight:bold;
+}
+
+.lblNombreAltaUsuarios{
+    position: absolute;
+    width: 80vw; 
+    height: 5vh;
+    top: 35vh;
+    left: 10vw;
+    border-radius: 10px;
+    background-color: rgb(255,215,0);
+    color:  grey;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 5vh; 
+    font-size: 3vh;
+    font-family:Helvetica, sans-serif;
+    font-weight:bold;
+}
+
+.inpNombreAltaUsuarios{
+    position: absolute;
+    width: 80vw; 
+    height: 5vh;
+    top: 40vh;
+    left: 10vw;
+    color: grey;
+    background-color: rgba(255, 255, 255, 0);
+    text-align: center;
+    border: 0px;
+    border-bottom: 3px solid grey;
+    font-size: 3vh;
+    font-family:Helvetica, sans-serif;
+    font-weight:bold;
+}
+
+.lblErrorNombreAltaUsuarios{
+    position: absolute;
+    width: 80vw; 
+    height: 4vh;
+    top: 45vh;
+    left: 10vw;
+    border-radius: 10px;
+    background-color: rgb(255, 0, 0);
+    color:  grey;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 4vh; 
+    font-size: 2vh;
+    font-family:Helvetica, sans-serif;
+    font-weight:bold;
+}
+
+.lblApellidoAltaUsuarios{
+    position: absolute;
+    width: 80vw; 
+    height: 5vh;
+    top: 50vh;
+    left: 10vw;
+    border-radius: 10px;
+    background-color: rgb(255,215,0);
+    color:  grey;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 5vh; 
+    font-size: 3vh;
+    font-family:Helvetica, sans-serif;
+    font-weight:bold;
+}
+
+.inpApellidoAltaUsuarios{
+    position: absolute;
+    width: 80vw; 
+    height: 5vh;
+    top: 55vh;
+    left: 10vw;
+    color: grey;
+    background-color: rgba(255, 255, 255, 0);
+    text-align: center;
+    border: 0px;
+    border-bottom: 3px solid grey;
+    font-size: 3vh;
+    font-family:Helvetica, sans-serif;
+    font-weight:bold;
+}
+
+.lblErrorApellidoAltaUsuarios{
+    position: absolute;
+    width: 80vw; 
+    height: 4vh;
+    top: 60vh;
+    left: 10vw;
+    border-radius: 10px;
+    background-color: rgb(255, 0, 0);
+    color:  grey;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 4vh; 
+    font-size: 2vh;
+    font-family:Helvetica, sans-serif;
+    font-weight:bold;
+}
+
+.lblDniAltaUsuarios{
+    position: absolute;
+    width: 80vw; 
+    height: 5vh;
+    top: 65vh;
+    left: 10vw;
+    border-radius: 10px;
+    background-color: rgb(255,215,0);
+    color:  grey;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 5vh; 
+    font-size: 3vh;
+    font-family:Helvetica, sans-serif;
+    font-weight:bold;
+}
+
+.inpDniAltaUsuarios{
+    position: absolute;
+    width: 80vw; 
+    height: 5vh;
+    top: 70vh;
+    left: 10vw;
+    color: grey;
+    background-color: rgba(255, 255, 255, 0);
+    text-align: center;
+    border: 0px;
+    border-bottom: 3px solid grey;
+    font-size: 3vh;
+    font-family:Helvetica, sans-serif;
+    font-weight:bold;
+}
+
+.lblErrorDniAltaUsuarios{
+    position: absolute;
+    width: 80vw; 
+    height: 4vh;
+    top: 75vh;
+    left: 10vw;
+    border-radius: 10px;
+    background-color: rgb(255, 0, 0);
+    color:  grey;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 4vh; 
+    font-size: 2vh;
+    font-family:Helvetica, sans-serif;
+    font-weight:bold;
+}
+
+.lblCuilAltaUsuarios{
+    position: absolute;
+    width: 80vw; 
+    height: 5vh;
+    top: 80vh;
+    left: 10vw;
+    border-radius: 10px;
+    background-color: rgb(255,215,0);
+    color:  grey;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 5vh; 
+    font-size: 3vh;
+    font-family:Helvetica, sans-serif;
+    font-weight:bold;
+}
+
+.inpCuilAltaUsuarios{
+    position: absolute;
+    width: 80vw; 
+    height: 5vh;
+    top: 85vh;
+    left: 10vw;
+    color: grey;
+    background-color: rgba(255, 255, 255, 0);
+    text-align: center;
+    border: 0px;
+    border-bottom: 3px solid grey;
+    font-size: 3vh;
+    font-family:Helvetica, sans-serif;
+    font-weight:bold;
+}
+
+.lblErrorCuilAltaUsuarios{
+    position: absolute;
+    width: 80vw; 
+    height: 4vh;
+    top: 90vh;
+    left: 10vw;
+    border-radius: 10px;
+    background-color: rgb(255, 0, 0);
+    color:  grey;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 4vh; 
+    font-size: 2vh;
+    font-family:Helvetica, sans-serif;
+    font-weight:bold;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+.loadingContainerAltaUsuarios{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.678);
+    z-index: 299;
+}
+  
+.loadingAltaUsuarios{
+    width: 100px;
+    height: 100px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 300;
+    animation: spinAltaUsuarios 2s linear infinite;
+    background-color: gold;
+    border-radius: 100px;
+}
+  
+@keyframes spinAltaUsuarios{
+    from{transform: rotate(0deg);}
+    to{transform: rotate(360deg);}
+}

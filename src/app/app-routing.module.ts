@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'splash', pathMatch: 'full'},
   { path: 'splash', loadChildren: () => import('./app.component').then( m => m.AppComponent)},
   { path: 'login', loadChildren: () => import('./componentes/login/login.module').then( m => m.LoginPageModule)},
+  { path: 'alta-usuarios', loadChildren: () => import('./componentes/alta-usuarios/alta-usuarios.module').then( m => m.AltaUsuariosPageModule)},
 ];
 
 @NgModule({

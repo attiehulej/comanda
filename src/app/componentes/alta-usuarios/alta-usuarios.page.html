@@ -1,0 +1,54 @@
+<div class="fondoAltaUsuarios">
+
+  <button type="button" class="btnVolverAltaUsuarios" (click)="volverAltaUsuarios()">Volver</button>
+  
+  <form [formGroup]="formUsuario" (ngSubmit)="onSubmitUsuario()">
+
+    <div *ngIf="mostrarSegunAlta('correo')">
+      <label class="lblCorreoAltaUsuarios">INGRESE CORREO</label>
+      <input type="email" class="inpCorreoAltaUsuarios" [formControl]="formUsuario.controls.correo">
+      <label class="lblErrorCorreoAltaUsuarios" *ngIf="formUsuario.controls.correo.invalid && (formUsuario.controls.correo.touched || formUsuario.controls.correo.dirty)">CORREO INVALIDO</label>
+    </div>
+
+    <div *ngIf="mostrarSegunAlta('clave')">
+      <label class="lblClaveAltaUsuarios" *ngIf="mostrarSegunAlta('clave')">INGRESE CLAVE</label>
+      <input type="password" class="inpClaveAltaUsuarios" [formControl]="formUsuario.controls.clave" >
+      <label class="lblErrorClaveAltaUsuarios" *ngIf="formUsuario.controls.clave.invalid && (formUsuario.controls.clave.touched || formUsuario.controls.clave.dirty)">CLAVE INVALIDA</label>
+    </div>
+
+    <div *ngIf="mostrarSegunAlta('nombre')">
+      <label class="lblNombreAltaUsuarios" >INGRESE NOMBRE</label>
+      <input type="text" class="inpNombreAltaUsuarios" [formControl]="formUsuario.controls.nombre">
+      <label class="lblErrorNombreAltaUsuarios" *ngIf="formUsuario.controls.nombre.invalid && (formUsuario.controls.nombre.touched || formUsuario.controls.nombre.dirty)">NOMBRE INVALIDO</label>
+    </div>
+
+    <div *ngIf="mostrarSegunAlta('apellido')">
+      <label class="lblApellidoAltaUsuarios">INGRESE APELLIDO</label>
+      <input type="text" class="inpApellidoAltaUsuarios" [formControl]="formUsuario.controls.apellido" >
+      <label class="lblErrorApellidoAltaUsuarios" *ngIf="formUsuario.controls.apellido.invalid && (formUsuario.controls.apellido.touched || formUsuario.controls.apellido.dirty)">APELLIDO INVALIDO</label>
+    </div>
+
+    <div *ngIf="mostrarSegunAlta('dni')">
+      <label class="lblDniAltaUsuarios">INGRESE DNI</label>
+      <input type="text" class="inpDniAltaUsuarios" [formControl]="formUsuario.controls.dni">
+      <label class="lblErrorDniAltaUsuarios" *ngIf="formUsuario.controls.dni.invalid && (formUsuario.controls.dni.touched || formUsuario.controls.dni.dirty)">DNI INVALIDO</label>
+    </div>
+
+    <div *ngIf="mostrarSegunAlta('cuil')">
+      <label class="lblCuilAltaUsuarios">INGRESE CUIL</label>
+      <input type="text" class="inpCuilAltaUsuarios" [formControl]="formUsuario.controls.cuil">
+      <label class="lblErrorCuilAltaUsuarios" *ngIf="formUsuario.controls.cuil.invalid && (formUsuario.controls.cuil.touched || formUsuario.controls.cuil.dirty)">CUIL INVALIDO</label>
+    </div>
+   
+    <button class="btnFotoAltaUsuarios" type="button" (click)="tomarFotoAltaUsuarios()">FOTO</button>
+
+    <button class="btnSubmitAltaUsuarios" type="submit">ENVIAR</button>
+  </form>
+
+  <div class="loadingContainerAltaUsuarios" id="loadingContainerAltaUsuarios" hidden>
+    <div class="loadingAltaUsuarios">
+      <img src="../../../assets/spinner.png">
+    </div>
+  </div>
+
+</div>
