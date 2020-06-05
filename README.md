@@ -1,16 +1,16 @@
 # PPS - UTN FRA 2020 - COHERENCE
 
 ## Integrantes
-Patricio
-Lucas
-Franco
+- Patricio
+- Lucas
+- Franco
 
 ## Branchs
-PATO
-LUCAS
-FLIPPI
-TEST
-PROD
+- PATO
+- LUCAS
+- FLIPPI
+- TEST
+- PROD
 
 # Tareas
 
