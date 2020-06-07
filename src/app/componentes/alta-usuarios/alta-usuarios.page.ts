@@ -165,6 +165,7 @@ export class AltaUsuariosPage implements OnInit {
   volverAltaUsuarios(): void
   {
     this.formUsuario.reset();
-    this.spinnerRouter.showSpinnerAndNavigate('login', 'loadingContainerAltaUsuarios', 2000);
+    // this.spinnerRouter.showSpinnerAndNavigate('login', 'loadingContainerAltaUsuarios', 2000);
+    this.spinnerRouter.showSpinnerAndNavigate('home', 'loadingContainerAltaUsuarios', 2000);
   }
 }
