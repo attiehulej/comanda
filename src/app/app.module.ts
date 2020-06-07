@@ -2,16 +2,20 @@ import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Vibration } from '@ionic-native/vibration/ngx';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
+import { QRScanner } from '@ionic-native/qr-scanner/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AngularFireModule } from '@angular/fire'; // PATO
 // import { AngularFireModule } from 'angularfire2'; // AGREGO LUCAS
@@ -26,12 +30,16 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 
 import { HomeComponent } from './componentes/home/home.component';
 import { QrComponent } from './componentes/qr/qr.component';
+import { CargaMesaComponent } from './componentes/carga-mesa/carga-mesa.component';
+import { CargaProductoComponent } from './componentes/carga-producto/carga-producto.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    QrComponent
+    QrComponent,
+    CargaMesaComponent, // PATO
+    CargaProductoComponent // PATO
   ],
   entryComponents: [],
   imports: [
@@ -40,7 +48,7 @@ import { QrComponent } from './componentes/qr/qr.component';
     AppRoutingModule,
     CommonModule,
     FormsModule,
-    ReactiveFormsModule, //PROBADO LUCAS
+    ReactiveFormsModule, // PATO
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
@@ -52,7 +60,10 @@ import { QrComponent } from './componentes/qr/qr.component';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: SETTINGS, useValue: {} }, // PATO
     Vibration,
-    Camera
+    Camera,
+    WebView, // PATO
+    DatePipe, // PATO
+    QRScanner // PATO
   ],
   bootstrap: [AppComponent]
 })
