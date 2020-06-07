@@ -77,5 +77,5 @@ export class CameraService {
   public getFotos(): Foto[] {
     return this.fotos;
   }
+  */
 }
-*/

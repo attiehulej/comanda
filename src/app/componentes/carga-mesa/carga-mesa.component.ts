@@ -48,7 +48,7 @@ export class CargaMesaComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.desuscribir.next();
     this.desuscribir.complete();
-    this.camara.limpiarFotos();
+    // this.camara.limpiarFotos();
   }
 
   public volverHome(): void {

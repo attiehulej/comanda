@@ -154,7 +154,9 @@ export class AltaUsuariosPage implements OnInit {
   tomarFotoAltaUsuarios(): void
   {
     let foto: string = "";
-    foto = this.camera.tomarFoto();
+    // foto = this.camera.tomarFoto();
+    this.camera.tomarFoto()
+    .then(nuevaFoto => foto = nuevaFoto);
     this.db.collection('usuarios').add({
         foto: foto, 
     })
