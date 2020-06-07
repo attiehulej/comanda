@@ -21,70 +21,122 @@
     position: absolute; 
     width: 20vw; 
     height: 4vh;
-    top: 95vh;
+    top: 96vh;
     left: 0vw;
     color: grey;
     background-color:  rgb(255,215,0);
     border-radius: 10px;
-    box-shadow: 0 10px 	rgb(218,165,32);
     font-size: 2vh;
     font-family:Helvetica, sans-serif;
     font-weight:bold;
 }
   
-.btnVolverAltaUsuarios:active{
-    transform: translate(0px, 5px);
-    box-shadow: 0 5px rgb(218,165,32);
+.btnFotoAltaUsuarios:active{
+    background-color: rgb(218,165,32);
 }
 
 .btnSubmitAltaUsuarios{
     position: absolute; 
     width: 20vw; 
     height: 4vh;
-    top: 95vh;
+    top: 96vh;
     left: 80vw;
     color: grey;
     background-color:  rgb(255,215,0);
     border-radius: 10px;
-    box-shadow: 0 10px 	rgb(218,165,32);
     font-size: 2vh;
     font-family:Helvetica, sans-serif;
     font-weight:bold;
 }
   
-.btnSubmitAltaUsuarios:active{
-    transform: translate(0px, 5px);
-    box-shadow: 0 5px rgb(218,165,32);
+.btnFotoAltaUsuarios:active{
+    background-color: rgb(218,165,32);
 }
 
 .btnFotoAltaUsuarios{
     position: absolute; 
-    width: 20vw; 
+    width: 40vw; 
     height: 4vh;
-    top: 95vh;
-    left: 40vw;
+    top: 96vh;
+    left: 30vw;
     color: grey;
     background-color:  rgb(255,215,0);
     border-radius: 10px;
-    box-shadow: 0 10px 	rgb(218,165,32);
     font-size: 2vh;
     font-family:Helvetica, sans-serif;
     font-weight:bold;
 }
 
 .btnFotoAltaUsuarios:active{
-    transform: translate(0px, 5px);
-    box-shadow: 0 5px rgb(218,165,32);
+    background-color: rgb(218,165,32);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+.divCorreoAltaUsuarios{
+    position: absolute;
+    width: 80vw;
+    height: 15vh;
+    top: 0vh;
+    left: 10vw;
+}
+
+.divClaveAltaUsuarios{
+    position: absolute;
+    width: 80vw;
+    height: 15vh;
+    top: 15vh;
+    left: 10vw;
+}
+
+.divNombreAltaUsuarios{
+    position: absolute;
+    width: 80vw;
+    height: 15vh;
+    top: 30vh;
+    left: 10vw;
+}
+
+.divApellidoAltaUsuarios{
+    position: absolute;
+    width: 80vw;
+    height: 15vh;
+    top: 45vh;
+    left: 10vw;
+}
+
+.divDniAltaUsuarios{
+    position: absolute;
+    width: 80vw;
+    height: 15vh;
+    top: 60vh;
+    left: 10vw;
+}
+
+.divCuilAltaUsuarios{
+    position: absolute;
+    width: 80vw;
+    height: 15vh;
+    top: 75vh;
+    left: 10vw;
+}
+
+.divTipoAltaUsuarios{
+    position: absolute;
+    width: 80vw;
+    height: 5vh;
+    top: 90vh;
+    left: 10vw;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 .lblCorreoAltaUsuarios{
     position: absolute;
-    width: 80vw; 
-    height: 5vh;
-    top: 5vh;
-    left: 10vw;
+    width: 100%; 
+    height: 40%;
+    top: 0%;
+    left: 0%;
     border-radius: 10px;
     background-color: rgb(255,215,0);
     color:  grey;
@@ -98,10 +150,10 @@
 
 .inpCorreoAltaUsuarios{
     position: absolute;
-    width: 80vw; 
-    height: 5vh;
-    top: 10vh;
-    left: 10vw;
+    width: 100%; 
+    height: 40%;
+    top: 40%;
+    left: 0%;
     color: grey;
     background-color: rgba(255, 255, 255, 0);
     text-align: center;
@@ -114,10 +166,10 @@
 
 .lblErrorCorreoAltaUsuarios{
     position: absolute;
-    width: 80vw; 
-    height: 4vh;
-    top: 15vh;
-    left: 10vw;
+    width: 100%; 
+    height: 20%;
+    top: 80%;
+    left: 0%;
     border-radius: 10px;
     background-color: rgb(255, 0, 0);
     color:  grey;
@@ -129,12 +181,14 @@
     font-weight:bold;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+
 .lblClaveAltaUsuarios{
     position: absolute;
-    width: 80vw; 
-    height: 5vh;
-    top: 20vh;
-    left: 10vw;
+    width: 100%; 
+    height: 40%;
+    top: 0%;
+    left: 0%;
     border-radius: 10px;
     background-color: rgb(255,215,0);
     color:  grey;
@@ -148,10 +202,10 @@
 
 .inpClaveAltaUsuarios{
     position: absolute;
-    width: 80vw; 
-    height: 5vh;
-    top: 25vh;
-    left: 10vw;
+    width: 100%; 
+    height: 40%;
+    top: 40%;
+    left: 0%;
     color: grey;
     background-color: rgba(255, 255, 255, 0);
     text-align: center;
@@ -164,10 +218,10 @@
 
 .lblErrorClaveAltaUsuarios{
     position: absolute;
-    width: 80vw; 
-    height: 4vh;
-    top: 30vh;
-    left: 10vw;
+    width: 100%; 
+    height: 20%;
+    top: 80%;
+    left: 0%;
     border-radius: 10px;
     background-color: rgb(255, 0, 0);
     color:  grey;
@@ -179,12 +233,14 @@
     font-weight:bold;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+
 .lblNombreAltaUsuarios{
     position: absolute;
-    width: 80vw; 
-    height: 5vh;
-    top: 35vh;
-    left: 10vw;
+    width: 100%; 
+    height: 40%;
+    top: 0%;
+    left: 0%;
     border-radius: 10px;
     background-color: rgb(255,215,0);
     color:  grey;
@@ -198,10 +254,10 @@
 
 .inpNombreAltaUsuarios{
     position: absolute;
-    width: 80vw; 
-    height: 5vh;
-    top: 40vh;
-    left: 10vw;
+    width: 100%; 
+    height: 40%;
+    top: 40%;
+    left: 0%;
     color: grey;
     background-color: rgba(255, 255, 255, 0);
     text-align: center;
@@ -214,10 +270,10 @@
 
 .lblErrorNombreAltaUsuarios{
     position: absolute;
-    width: 80vw; 
-    height: 4vh;
-    top: 45vh;
-    left: 10vw;
+    width: 100%; 
+    height: 20%;
+    top: 80%;
+    left: 0%;
     border-radius: 10px;
     background-color: rgb(255, 0, 0);
     color:  grey;
@@ -229,12 +285,14 @@
     font-weight:bold;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+
 .lblApellidoAltaUsuarios{
     position: absolute;
-    width: 80vw; 
-    height: 5vh;
-    top: 50vh;
-    left: 10vw;
+    width: 100%; 
+    height: 40%;
+    top: 0%;
+    left: 0%;
     border-radius: 10px;
     background-color: rgb(255,215,0);
     color:  grey;
@@ -248,10 +306,10 @@
 
 .inpApellidoAltaUsuarios{
     position: absolute;
-    width: 80vw; 
-    height: 5vh;
-    top: 55vh;
-    left: 10vw;
+    width: 100%; 
+    height: 40%;
+    top: 40%;
+    left: 0%;
     color: grey;
     background-color: rgba(255, 255, 255, 0);
     text-align: center;
@@ -264,10 +322,10 @@
 
 .lblErrorApellidoAltaUsuarios{
     position: absolute;
-    width: 80vw; 
-    height: 4vh;
-    top: 60vh;
-    left: 10vw;
+    width: 100%; 
+    height: 20%;
+    top: 80%;
+    left: 0%;
     border-radius: 10px;
     background-color: rgb(255, 0, 0);
     color:  grey;
@@ -279,12 +337,14 @@
     font-weight:bold;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+
 .lblDniAltaUsuarios{
     position: absolute;
-    width: 80vw; 
-    height: 5vh;
-    top: 65vh;
-    left: 10vw;
+    width: 100%; 
+    height: 40%;
+    top: 0%;
+    left: 0%;
     border-radius: 10px;
     background-color: rgb(255,215,0);
     color:  grey;
@@ -298,10 +358,10 @@
 
 .inpDniAltaUsuarios{
     position: absolute;
-    width: 80vw; 
-    height: 5vh;
-    top: 70vh;
-    left: 10vw;
+    width: 100%; 
+    height: 40%;
+    top: 40%;
+    left: 0%;
     color: grey;
     background-color: rgba(255, 255, 255, 0);
     text-align: center;
@@ -314,10 +374,10 @@
 
 .lblErrorDniAltaUsuarios{
     position: absolute;
-    width: 80vw; 
-    height: 4vh;
-    top: 75vh;
-    left: 10vw;
+    width: 100%; 
+    height: 20%;
+    top: 80%;
+    left: 0%;
     border-radius: 10px;
     background-color: rgb(255, 0, 0);
     color:  grey;
@@ -329,12 +389,14 @@
     font-weight:bold;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+
 .lblCuilAltaUsuarios{
     position: absolute;
-    width: 80vw; 
-    height: 5vh;
-    top: 80vh;
-    left: 10vw;
+    width: 100%; 
+    height: 40%;
+    top: 0%;
+    left: 0%;
     border-radius: 10px;
     background-color: rgb(255,215,0);
     color:  grey;
@@ -348,10 +410,10 @@
 
 .inpCuilAltaUsuarios{
     position: absolute;
-    width: 80vw; 
-    height: 5vh;
-    top: 85vh;
-    left: 10vw;
+    width: 100%; 
+    height: 40%;
+    top: 40%;
+    left: 0%;
     color: grey;
     background-color: rgba(255, 255, 255, 0);
     text-align: center;
@@ -364,10 +426,10 @@
 
 .lblErrorCuilAltaUsuarios{
     position: absolute;
-    width: 80vw; 
-    height: 4vh;
-    top: 90vh;
-    left: 10vw;
+    width: 100%; 
+    height: 20%;
+    top: 80%;
+    left: 0%;
     border-radius: 10px;
     background-color: rgb(255, 0, 0);
     color:  grey;
@@ -375,6 +437,26 @@
     vertical-align: middle;
     line-height: 4vh; 
     font-size: 2vh;
+    font-family:Helvetica, sans-serif;
+    font-weight:bold;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+.listTipoAltaUsuarios{
+    position: absolute;
+    width: 100%; 
+    height: 100%;
+    top: 0%;
+    left: 0%;
+    border-radius: 10px;
+    background-color: rgb(255,215,0);
+    border: 0px;
+    color:  grey;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 5vh; 
+    font-size: 3vh;
     font-family:Helvetica, sans-serif;
     font-weight:bold;
 }

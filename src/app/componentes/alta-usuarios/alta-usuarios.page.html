@@ -1,47 +1,54 @@
 <div class="fondoAltaUsuarios">
-
-  <button type="button" class="btnVolverAltaUsuarios" (click)="volverAltaUsuarios()">Volver</button>
   
   <form [formGroup]="formUsuario" (ngSubmit)="onSubmitUsuario()">
 
-    <div *ngIf="mostrarSegunAlta('correo')">
-      <label class="lblCorreoAltaUsuarios">INGRESE CORREO</label>
-      <input type="email" class="inpCorreoAltaUsuarios" [formControl]="formUsuario.controls.correo">
-      <label class="lblErrorCorreoAltaUsuarios" *ngIf="formUsuario.controls.correo.invalid && (formUsuario.controls.correo.touched || formUsuario.controls.correo.dirty)">CORREO INVALIDO</label>
+    <div class="divCorreoAltaUsuarios" *ngIf="mostrarSegunAlta('correo')">
+      <label class="lblCorreoAltaUsuarios" >INGRESE CORREO</label>
+      <input type="email" class="inpCorreoAltaUsuarios" formControlName="correo">
+      <label class="lblErrorCorreoAltaUsuarios" [hidden]="formUsuario.controls.correo.valid || formUsuario.controls.correo.pristine">CORREO INVALIDO</label>
     </div>
 
-    <div *ngIf="mostrarSegunAlta('clave')">
-      <label class="lblClaveAltaUsuarios" *ngIf="mostrarSegunAlta('clave')">INGRESE CLAVE</label>
-      <input type="password" class="inpClaveAltaUsuarios" [formControl]="formUsuario.controls.clave" >
-      <label class="lblErrorClaveAltaUsuarios" *ngIf="formUsuario.controls.clave.invalid && (formUsuario.controls.clave.touched || formUsuario.controls.clave.dirty)">CLAVE INVALIDA</label>
+    <div class="divClaveAltaUsuarios" *ngIf="mostrarSegunAlta('clave')">
+      <label class="lblClaveAltaUsuarios">INGRESE CLAVE</label>
+      <input type="password" class="inpClaveAltaUsuarios" formControlName="clave">
+      <label class="lblErrorClaveAltaUsuarios" [hidden]="formUsuario.controls.clave.valid || formUsuario.controls.clave.pristine">CLAVE INVALIDA</label>   
+    </div>
+  
+    <div class="divNombreAltaUsuarios" *ngIf="mostrarSegunAlta('nombre')">
+      <label class="lblNombreAltaUsuarios">INGRESE NOMBRE</label>
+      <input type="text" class="inpNombreAltaUsuarios" formControlName="nombre">
+      <label class="lblErrorNombreAltaUsuarios" [hidden]="formUsuario.controls.nombre.valid || formUsuario.controls.nombre.pristine">NOMBRE INVALIDO</label>
     </div>
 
-    <div *ngIf="mostrarSegunAlta('nombre')">
-      <label class="lblNombreAltaUsuarios" >INGRESE NOMBRE</label>
-      <input type="text" class="inpNombreAltaUsuarios" [formControl]="formUsuario.controls.nombre">
-      <label class="lblErrorNombreAltaUsuarios" *ngIf="formUsuario.controls.nombre.invalid && (formUsuario.controls.nombre.touched || formUsuario.controls.nombre.dirty)">NOMBRE INVALIDO</label>
-    </div>
-
-    <div *ngIf="mostrarSegunAlta('apellido')">
+    <div class="divApellidoAltaUsuarios" *ngIf="mostrarSegunAlta('apellido')">
       <label class="lblApellidoAltaUsuarios">INGRESE APELLIDO</label>
-      <input type="text" class="inpApellidoAltaUsuarios" [formControl]="formUsuario.controls.apellido" >
-      <label class="lblErrorApellidoAltaUsuarios" *ngIf="formUsuario.controls.apellido.invalid && (formUsuario.controls.apellido.touched || formUsuario.controls.apellido.dirty)">APELLIDO INVALIDO</label>
+      <input type="text" class="inpApellidoAltaUsuarios" formControlName="apellido">
+      <label class="lblErrorApellidoAltaUsuarios" [hidden]="formUsuario.controls.apellido.valid || formUsuario.controls.apellido.pristine">APELLIDO INVALIDO</label>
     </div>
 
-    <div *ngIf="mostrarSegunAlta('dni')">
+    <div class="divDniAltaUsuarios" *ngIf="mostrarSegunAlta('dni')">
       <label class="lblDniAltaUsuarios">INGRESE DNI</label>
-      <input type="text" class="inpDniAltaUsuarios" [formControl]="formUsuario.controls.dni">
-      <label class="lblErrorDniAltaUsuarios" *ngIf="formUsuario.controls.dni.invalid && (formUsuario.controls.dni.touched || formUsuario.controls.dni.dirty)">DNI INVALIDO</label>
+      <input type="text" class="inpDniAltaUsuarios" formControlName="dni">
+      <label class="lblErrorDniAltaUsuarios" [hidden]="formUsuario.controls.dni.valid || formUsuario.controls.dni.pristine">DNI INVALIDO</label>
     </div>
 
-    <div *ngIf="mostrarSegunAlta('cuil')">
+    <div class="divCuilAltaUsuarios" *ngIf="mostrarSegunAlta('cuil')">
       <label class="lblCuilAltaUsuarios">INGRESE CUIL</label>
-      <input type="text" class="inpCuilAltaUsuarios" [formControl]="formUsuario.controls.cuil">
-      <label class="lblErrorCuilAltaUsuarios" *ngIf="formUsuario.controls.cuil.invalid && (formUsuario.controls.cuil.touched || formUsuario.controls.cuil.dirty)">CUIL INVALIDO</label>
+      <input type="text" class="inpCuilAltaUsuarios" formControlName="cuil">
+      <label class="lblErrorCuilAltaUsuarios" [hidden]="formUsuario.controls.cuil.valid || formUsuario.controls.cuil.pristine">CUIL INVALIDO</label>
     </div>
    
+    <div class="divTipoAltaUsuarios" *ngIf="mostrarSegunAlta('tipo')">
+      <select class="listTipoAltaUsuarios" formControlName="tipo">
+        <option>MOZO</option>
+        <option>COCINERO</option>
+        <option>BAR TENDER</option>
+        <option>METRE</option>
+      </select>
+    </div>
+    
+    <button type="button" class="btnVolverAltaUsuarios" (click)="volverAltaUsuarios()">Volver</button>
     <button class="btnFotoAltaUsuarios" type="button" (click)="tomarFotoAltaUsuarios()">FOTO</button>
-
     <button class="btnSubmitAltaUsuarios" type="submit">ENVIAR</button>
   </form>
 

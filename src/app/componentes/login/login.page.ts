@@ -7,6 +7,7 @@ import * as $ from 'jquery';
 import { VibrationService } from 'src/app/servicios/vibration.service';
 // import { IfStmt } from '@angular/compiler';
 import { SpinnerRouterService } from 'src/app/servicios/spinner-router.service';
+import { SpinnerService } from 'src/app/servicios/spinner.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,7 @@ export class LoginPage implements OnInit
 
   esDuenio: boolean = false;
 
-  constructor(public router: Router, public db: AngularFirestore, public vibration : VibrationService, public spinnerRouter : SpinnerRouterService)
+  constructor(public router: Router, public db: AngularFirestore, public vibration : VibrationService, public spinnerRouter : SpinnerRouterService, public spinner : SpinnerService)
   {
     this.usuarios = db.collection('usuarios').valueChanges(); 
     this.usuarios.subscribe(usuarios => this.listaUsuarios = usuarios, error => console.log(error));
@@ -43,7 +44,8 @@ export class LoginPage implements OnInit
       {
         if (usuario.correo == this.correo && usuario.clave == this.clave)
         {
-          localStorage.setItem('tipoDeAlta', usuario.tipo);
+          //localStorage.setItem('tipoDeAlta', usuario.tipo);
+          localStorage.setItem('tipoDeAlta', 'anonimo');
           usuarioEncontrado = true;
           break;
         }
