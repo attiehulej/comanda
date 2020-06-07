@@ -1,10 +1,11 @@
-export default class Producto {
+export class Producto {
     public id?: string;
+    public codigo?: string;
     public nombre?: string;
     public descripcion?: string;
-    public fotos?: [];
-    public tiempo?: string;
-    public precio?: string;
+    public fotos?: string[];
+    public tiempo?: number;
+    public precio?: number;
     public fechaAlta: Date = new Date();
     public fechaModificado: Date = null;
     public fechaBaja: Date = null;
