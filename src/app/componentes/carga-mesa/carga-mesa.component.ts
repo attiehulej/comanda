@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { Mesa } from '../../clases/mesa';
 import { MesaService } from '../../servicios/mesa.service';
 import { ToastService } from '../../servicios/toast.service';
+import { EstadosMesa } from '../../enums/estados-mesa.enum';
 
 @Component({
   selector: 'app-carga-mesa',
@@ -95,6 +96,7 @@ export class CargaMesaComponent implements OnInit, OnDestroy {
         this.mesa.fechaBaja = null;
         this.mesa.fechaModificado = null;
         this.mesa.id = null;
+        this.mesa.estado = EstadosMesa[EstadosMesa.LIBRE];
 
         this.spinnerRouter.showSpinner(this.spinner, false);
         this.toast.presentToastOk('Mesa creada');
@@ -104,6 +106,9 @@ export class CargaMesaComponent implements OnInit, OnDestroy {
         this.toast.presentToast(error);
       });
     } else {
+      if (this.foto.length === 0) {
+        this.toast.presentToast('Debe adjuntar una foto de la mesa');
+      }
       // alert('Error en formulario');
       this.formMesa.markAllAsTouched();
     }

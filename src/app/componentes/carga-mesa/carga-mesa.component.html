@@ -22,7 +22,7 @@
     
     <label class="lblTitulo">Foto</label>
     <br>
-    <button (click)="tomarFoto()">
+    <button *ngIf="getFoto().length === 0" (click)="tomarFoto()">
       <ion-icon name="camera-outline"></ion-icon>
     </button>
     <button *ngIf="getFoto().length > 0" (click)="setMuestraModal(true)">

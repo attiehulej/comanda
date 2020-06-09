@@ -1,4 +1,5 @@
 import { TipoMesa } from '../enums/tipo-mesa.enum';
+import { EstadosMesa } from '../enums/estados-mesa.enum';
 
 export class Mesa {
     public id?: string;
@@ -9,4 +10,5 @@ export class Mesa {
     public fechaAlta: Date = new Date();
     public fechaModificado: Date = null;
     public fechaBaja: Date = null;
+    public estado: string = EstadosMesa[EstadosMesa.LIBRE];
 }
