@@ -9,12 +9,16 @@ export class SpinnerRouterService {
 
   constructor(public router: Router) { }
 
-  showSpinnerAndNavigate(route : string, idSpinner : string, time : number): void
-  {
+  showSpinnerAndNavigate(route: string, idSpinner: string, time: number): void {
     $(`#${idSpinner}`).attr('hidden', false);
     setTimeout(() => {
       $(`#${idSpinner}`).attr('hidden', true);
       this.router.navigate([route]);
     }, time);
+  }
+
+  // PATO
+  showSpinner(idSpinner: string, muestra: boolean): void {
+    $(`#${idSpinner}`).attr('hidden', !muestra);
   }
 }

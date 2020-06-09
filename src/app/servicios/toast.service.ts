@@ -21,6 +21,17 @@ export class ToastService {
       await this.showToast(toastData);
   }
 
+  async presentToastOk(text: string): Promise<void> {
+      const toastData = {
+          message: text,
+          duration: 3000,
+          color: 'success',
+          position: 'top'
+      };
+
+      await this.showToast(toastData);
+  }
+
   async presentClosableToast(text: string): Promise<void> {
       const toastData = {
           message: text,

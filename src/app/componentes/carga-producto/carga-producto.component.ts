@@ -34,7 +34,6 @@ export class CargaProductoComponent implements OnInit, OnDestroy {
       tiempoPromedio: ['', [Validators.required, Validators.min(0)]],
       precio: ['', [Validators.required, Validators.min(0)]],
       // foto: ['', [Validators.required]],
-      qr: ['', [Validators.required]]
     });
 
     this.qr.getResultado()
