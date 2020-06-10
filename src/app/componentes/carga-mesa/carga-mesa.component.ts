@@ -1,12 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SpinnerRouterService } from '../../servicios/spinner-router.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TipoMesa } from '../../enums/tipo-mesa.enum';
 import { CameraService } from '../../servicios/camera.service';
-import { QrService } from '../../servicios/qr.service';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { Router } from '@angular/router';
 import { Mesa } from '../../clases/mesa';
 import { MesaService } from '../../servicios/mesa.service';
 import { ToastService } from '../../servicios/toast.service';
@@ -17,13 +13,12 @@ import { EstadosMesa } from '../../enums/estados-mesa.enum';
   templateUrl: './carga-mesa.component.html',
   styleUrls: ['./carga-mesa.component.scss'],
 })
-export class CargaMesaComponent implements OnInit, OnDestroy {
+export class CargaMesaComponent implements OnInit {
   public formMesa: FormGroup;
 
   // https://stackoverflow.com/questions/56036446/typescript-enum-values-as-array
   // https://stackoverflow.com/questions/35546421/how-to-get-a-variable-type-in-typescript
   public tipoMesa = Object.values(TipoMesa).filter(unTipo => typeof unTipo === 'string');
-  private desuscribir = new Subject<void>();
   private mesa: Mesa = new Mesa();
   private foto = '';
   private muestraModal = false;
@@ -33,28 +28,16 @@ export class CargaMesaComponent implements OnInit, OnDestroy {
     public spinnerRouter: SpinnerRouterService,
     private fb: FormBuilder,
     public camara: CameraService,
-    private qr: QrService,
-    private router: Router,
     private mesas: MesaService,
     private toast: ToastService
   ) { }
 
   ngOnInit() {
     this.formMesa = this.fb.group({
-      numeroMesa: ['', [Validators.required, Validators.min(1)]],
-      cantidadComensales: ['', [Validators.required, Validators.min(2)]],
-      tipoMesa: ['', [Validators.required]]
+      numeroMesa: ['', Validators.compose([Validators.required, Validators.min(1)])],
+      cantidadComensales: ['', Validators.compose([Validators.required, Validators.min(2)])],
+      tipoMesa: ['', Validators.compose([Validators.required])]
     });
-
-    this.qr.getResultado()
-    .pipe(takeUntil(this.desuscribir))
-    .subscribe(nuevoQr => this.formMesa.controls.qr.setValue(nuevoQr));
-  }
-
-  ngOnDestroy() {
-    this.desuscribir.next();
-    this.desuscribir.complete();
-    // this.camara.limpiarFotos();
   }
 
   public volverHome(): void {
@@ -64,10 +47,6 @@ export class CargaMesaComponent implements OnInit, OnDestroy {
   public tomarFoto(): void {
     this.camara.tomarFoto()
     .then(unaFoto => this.foto = unaFoto);
-  }
-
-  public cargarQr(): void {
-    this.router.navigate(['qr']);
   }
 
   onSubmitMesa(): void {
