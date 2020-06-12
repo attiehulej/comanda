@@ -1,11 +1,10 @@
 import { AbstractControl } from '@angular/forms';
 
-export class CustomValidations{
+export class CustomValidations {
 
-    static cuilValido(dni: string)
-    {
+    static cuilValido(dni: string) {
         return (control: AbstractControl) => {
 
-        }
+        };
     }
 }

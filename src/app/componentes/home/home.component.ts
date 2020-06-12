@@ -8,12 +8,11 @@ import { SpinnerRouterService } from 'src/app/servicios/spinner-router.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(public spinnerRouter : SpinnerRouterService) { }
+  constructor(public spinnerRouter: SpinnerRouterService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
-  volverHome(): void
-  {
+  volverHome(): void {
     this.spinnerRouter.showSpinnerAndNavigate('login', 'loadingContainerHome', 2000);
   }
 
