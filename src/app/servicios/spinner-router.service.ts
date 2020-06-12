@@ -9,8 +9,7 @@ export class SpinnerRouterService {
 
   constructor(public router: Router) { }
 
-  showSpinnerAndNavigate(route : string, idSpinner : string, time : number): void
-  {
+  showSpinnerAndNavigate(route: string, idSpinner: string, time: number): void {
     $(`#${idSpinner}`).attr('hidden', false);
     setTimeout(() => {
       $(`#${idSpinner}`).attr('hidden', true);

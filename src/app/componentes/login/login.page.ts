@@ -8,7 +8,8 @@ import { VibrationService } from 'src/app/servicios/vibration.service';
 // import { IfStmt } from '@angular/compiler';
 import { SpinnerRouterService } from 'src/app/servicios/spinner-router.service';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
-import { Usuario, Perfil } from 'src/app/clases/usuario';
+import { Usuario } from 'src/app/clases/usuario';
+import { TipoUsuario } from 'src/app/enums/tipo-usuario.enum';
 
 @Component({
   selector: 'app-login',

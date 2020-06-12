@@ -1,12 +1,4 @@
-export enum Perfil {
-    DUEÑO = 'DUEÑO',
-    SUPERVISOR = 'SUPERVISOR',
-    MOZO = 'MOZO',
-    COCINERO = 'COCINERO',
-    BARTENDER = 'BARTENDER',
-    CLIENTE_REGISTRADO = 'CLIENTE_REGISTRADO',
-    CLIENTE_ANONIMO = 'CLIENTE_ANONIMO'
-}
+import { TipoUsuario } from '../enums/tipo-usuario.enum';
 
 export class Usuario {
     public id?: string;
@@ -17,7 +9,7 @@ export class Usuario {
     public correo?: string;
     public clave?: string;
     public foto?: string;
-    public perfil: Perfil;
+    public perfil: TipoUsuario;
     public estado?: string;
     public fechaAlta: Date = new Date();
     public fechaModificado: Date = null;

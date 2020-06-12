@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FirebaseService } from './firebase.service';
-import { Usuario, Perfil } from 'src/app/clases/usuario';
+import { Usuario } from 'src/app/clases/usuario';
 import { map } from 'rxjs/internal/operators/map';
 
 @Injectable({
