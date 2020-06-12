@@ -96,7 +96,7 @@ export class LoginPage implements OnInit {
   moveToHome(): void {
     this.limpiarErrores();
     this.limpiarInputs();
-    this.spinnerRouter.showSpinnerAndNavigate('home', 'loadingContainerLogin', 2000);
+    this.spinnerRouter.showSpinnerAndNavigate('alta-usuarios', 'loadingContainerLogin', 2000);
   }
 
   datosValidos(correo: string, clave: string): boolean {
@@ -163,5 +163,13 @@ export class LoginPage implements OnInit {
     // LIMPIAMOS LOS VALORES PORQUE A VECES QUEDAN CARGADOS
     this.correo = '';
     this.clave = '';
+  }
+
+  // PATO -> Borrar antes de pasar version
+  cargarUsuario(): void {
+    $('#inpCorreoLogin').val('lucas@lucas.com');
+    $('#inpClaveLogin').val('2706');
+    this.correo = 'lucas@lucas.com';
+    this.clave = '2706';
   }
 }

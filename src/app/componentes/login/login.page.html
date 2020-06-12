@@ -1,5 +1,5 @@
 <div class="fondoLogin">
-  <form  (ngSubmit) ="onSubmitLogin()">
+  <form (ngSubmit) ="onSubmitLogin()">
 
     <label class="lblCorreoLogin">Correo Electrónico</label>
     <ion-input type="text" class="inpCorreoLogin" id="inpCorreoLogin" name="inpCorreoLogin"></ion-input>
@@ -14,7 +14,10 @@
     <div id="errUsuarioLogin" class="errUsuarioLogin" hidden>USUARIO NO EXISTE</div>
 
     <button type="submit" class="btnSubmitLogin">Enviar</button>
-    <button type="button" (click)="limpiarInputs()" (click)="limpiarErrores()" class="btnResetLogin">Limpiar</button>
+    <!-- PATO -> Restaurar antes de pasar version -->
+    <!-- <button type="button" (click)="limpiarInputs()" (click)="limpiarErrores()" class="btnResetLogin">Limpiar</button> -->
+    <!-- PATO -> Borrar antes de pasar version -->
+    <button type="button" (click)="cargarUsuario()" class="btnResetLogin">Limpiar</button>
 
     
   </form>

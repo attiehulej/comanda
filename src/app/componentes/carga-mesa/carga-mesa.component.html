@@ -1,0 +1,43 @@
+<div class="fondoHome">
+  <button type="button" class="btnVolverHome" (click)="volverHome()">Volver</button>
+  
+  <form [formGroup]="formMesa" (ngSubmit) ="onSubmitMesa()">
+    <label class="lblTitulo">Número de mesa</label>
+    <ion-input type="number" [formControl]="formMesa.controls.numeroMesa"></ion-input>
+    <label class="lblError" *ngIf="formMesa.controls.numeroMesa.invalid && (formMesa.controls.numeroMesa.touched || formMesa.controls.numeroMesa.dirty)">{{ mostrarError('numeroMesa') }}</label>
+        
+    <label class="lblTitulo">Cantidad de comensales</label>
+    <ion-input type="number" [formControl]="formMesa.controls.cantidadComensales"></ion-input>
+    <label class="lblError" *ngIf="formMesa.controls.cantidadComensales.invalid && (formMesa.controls.cantidadComensales.touched || formMesa.controls.cantidadComensales.dirty)">{{ mostrarError('cantidadComensales') }}</label>
+    
+    <label class="lblTitulo">Tipo de mesa</label>
+    <ion-select [formControl]="formMesa.controls.tipoMesa">
+      <ion-select-option *ngFor="let tipo of tipoMesa">{{ tipo }}</ion-select-option>
+    </ion-select>
+    <label class="lblError" *ngIf="formMesa.controls.tipoMesa.invalid && (formMesa.controls.tipoMesa.touched || formMesa.controls.tipoMesa.dirty)">{{ mostrarError('tipoMesa') }}</label>
+    
+    <label class="lblTitulo">Foto</label>
+    <br>
+    <button (click)="tomarFoto()">
+      <ion-icon name="camera"></ion-icon>
+    </button>
+    <ion-grid>
+      <ion-row>
+      <ion-col size="6" *ngFor="let foto of camara.fotos">
+        <ion-img src="{{ foto.filepath }}"></ion-img>
+      </ion-col>
+      </ion-row>
+    </ion-grid>
+      <!-- <ion-input type="file" [formControl]="formMesa.controls.foto"></ion-input> -->
+    <br>
+
+    <button type="submit" class="btnSubmitLogin">Enviar</button>
+  </form>
+
+
+  <div class="loadingContainerMesa" id="loadingContainerMesa" hidden>
+    <div class="loadingMesa">
+      <img src="../../../assets/spinner.png">
+    </div>
+  </div>
+</div>
