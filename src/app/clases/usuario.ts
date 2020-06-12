@@ -1,4 +1,5 @@
 import { TipoUsuario } from '../enums/tipo-usuario.enum';
+import { EstadoUsuario } from '../enums/estado-usuario.enum';
 
 export class Usuario {
     public id?: string;
@@ -10,7 +11,7 @@ export class Usuario {
     public clave?: string;
     public foto?: string;
     public perfil: TipoUsuario;
-    public estado?: string;
+    public estado?: EstadoUsuario;
     public fechaAlta: Date = new Date();
     public fechaModificado: Date = null;
     public fechaBaja: Date = null;
