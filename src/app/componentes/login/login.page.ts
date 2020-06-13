@@ -86,6 +86,7 @@ export class LoginPage implements OnInit {
 
       if (usuarioEncontrado) {
         this.moveToHome();
+        localStorage.setItem('tipoDeAlta', 'anonimo');
       }
       else {
         this.vibration.vibrar(500);
