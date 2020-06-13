@@ -181,7 +181,6 @@ export class AltaUsuariosPage implements OnInit {
     let nombre = parsedData[2].toString();
     let apellido = parsedData[1].toString();
     let dni: number = parsedData[4];
-    alert(dni);
     this.formUsuario.get('nombre').setValue(nombre);
     this.formUsuario.get('apellido').setValue(apellido);
     this.formUsuario.get('dni').setValue(dni);
