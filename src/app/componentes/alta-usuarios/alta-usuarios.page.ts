@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { SpinnerRouterService } from 'src/app/servicios/spinner-router.service';
-import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormsModule, FormControl } from '@angular/forms';
 import { CameraService } from 'src/app/servicios/camera.service';
-import { Observable } from 'rxjs/internal/Observable'; //eliminar lucas
-import { AngularFirestore } from '@angular/fire/firestore'; //eliminar lucas
-import * as $ from 'jquery';
+import { Observable } from 'rxjs/internal/Observable';
+import { AngularFirestore } from '@angular/fire/firestore'; 
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { ToastService } from '../../servicios/toast.service';
 
 @Component({
   selector: 'app-alta-usuarios',
@@ -18,12 +19,17 @@ export class AltaUsuariosPage implements OnInit {
   
   usuarios: Observable<any[]>;
   listaUsuarios: any[];
+  captureDataUrl = new Array<string>();
+  datosEscaneados: any;
+  qrScan: any;
 
   constructor(
     public spinnerRouter : SpinnerRouterService, 
     private fb: FormBuilder,
     private camera : CameraService,
-    public db : AngularFirestore
+    public db : AngularFirestore,
+    public scanner : BarcodeScanner,
+    public toast : ToastService
   ) 
   {
     this.usuarios = db.collection('usuarios').valueChanges();
@@ -36,8 +42,8 @@ export class AltaUsuariosPage implements OnInit {
     ({
       correo: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(25), Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]],
       clave: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(6), Validators.pattern('[0-9]*')]],
-      nombre: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(12), Validators.pattern('[a-zA-Z]*')]],
-      apellido: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(12), Validators.pattern('[a-zA-Z]*')]],
+      nombre: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(12), Validators.pattern('[a-zA-Z ]*')]],
+      apellido: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(12), Validators.pattern('[a-zA-Z ]*')]],
       dni: ['', [Validators.required, Validators.min(0), Validators.minLength(7), Validators.maxLength(8), Validators.pattern('[0-9]*')]],
       cuil: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(11), Validators.pattern('[0-9]*')]],
       tipo: ['', [Validators.required]],
@@ -55,8 +61,16 @@ export class AltaUsuariosPage implements OnInit {
     }
     else
     {
-      alert("NO SE PUEDE ENVIAR UN SERVICIO CON ERRRORES");
+      this.toast.presentToast("Datos Invalidos");
+      this.markAllAsDirtyAltaUsuarios(this.formUsuario);
     }
+  }
+
+  private markAllAsDirtyAltaUsuarios(formGroup: FormGroup): void
+  {
+    (<any>Object).values(formGroup.controls).forEach(control => {
+      control.markAsDirty();
+    });
   }
 
   errorFomularioAltaUsarios(): boolean
@@ -151,18 +165,59 @@ export class AltaUsuariosPage implements OnInit {
     return retorno;
   }
 
+  scanQrAltaUsuarios(): void
+  {
+    this.scanner.scan({ "formats": "PDF_417" }).then((data) => {
+      this.datosEscaneados = data;
+      this.cargarDatosQr(this.datosEscaneados);
+    }, (err) => {
+      console.log("Error: " + err);
+    });
+  }
+
+  cargarDatosQr(datos : any): void
+  {
+    let parsedData = datos.text.split('@');
+    let nombre = parsedData[2].toString();
+    let apellido = parsedData[1].toString();
+    let dni: number = parsedData[4];
+    alert(dni);
+    this.formUsuario.get('nombre').setValue(nombre);
+    this.formUsuario.get('apellido').setValue(apellido);
+    this.formUsuario.get('dni').setValue(dni);
+  }
+
   tomarFotoAltaUsuarios(): void
   {
-    let foto: string = "";
-    foto = this.camera.tomarFoto();
-    this.db.collection('usuarios').add({
-        foto: foto, 
-    })
+    this.camera.tomarFoto().then(data => {
+      this.db.collection('usuarios').add({
+        foto: data, 
+      })
+    });
   }
   
   volverAltaUsuarios(): void
   {
     this.formUsuario.reset();
     this.spinnerRouter.showSpinnerAndNavigate('login', 'loadingContainerAltaUsuarios', 2000);
+  }
+
+  validacionAuxCuil(dni : string): boolean
+  {
+    let retorno : boolean = false;
+    console.log(dni);
+    if(this.formUsuario.controls.cuil.pristine)
+    {
+      retorno = true;
+    }
+    else
+    {
+      let cuil : string = this.formUsuario.controls.cuil.value;
+      if(cuil.includes(dni))
+      {
+        retorno = true;
+      }
+    }
+    return retorno;
   }
 }

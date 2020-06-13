@@ -27,6 +27,7 @@ export class CameraService {
 
     return this.camera.getPicture(options);
   }
+}
   /*
   private fotos: Foto[] = [];
 

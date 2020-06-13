@@ -28,14 +28,14 @@
 
     <div class="divDniAltaUsuarios" *ngIf="mostrarSegunAlta('dni')">
       <label class="lblDniAltaUsuarios">INGRESE DNI</label>
-      <input type="text" class="inpDniAltaUsuarios" formControlName="dni">
+      <input type="text" class="inpDniAltaUsuarios" formControlName="dni" name="dni">
       <label class="lblErrorDniAltaUsuarios" [hidden]="formUsuario.controls.dni.valid || formUsuario.controls.dni.pristine">DNI INVALIDO</label>
     </div>
 
     <div class="divCuilAltaUsuarios" *ngIf="mostrarSegunAlta('cuil')">
       <label class="lblCuilAltaUsuarios">INGRESE CUIL</label>
-      <input type="text" class="inpCuilAltaUsuarios" formControlName="cuil">
-      <label class="lblErrorCuilAltaUsuarios" [hidden]="formUsuario.controls.cuil.valid || formUsuario.controls.cuil.pristine">CUIL INVALIDO</label>
+      <input type="text" class="inpCuilAltaUsuarios" formControlName="cuil" name="cuil">
+      <label class="lblErrorCuilAltaUsuarios" [hidden]="(formUsuario.controls.cuil.valid && validacionAuxCuil(formUsuario.controls.dni.value)) || formUsuario.controls.cuil.pristine">CUIL INVALIDO</label>
     </div>
    
     <div class="divTipoAltaUsuarios" *ngIf="mostrarSegunAlta('tipo')">
@@ -48,6 +48,7 @@
     </div>
     
     <button type="button" class="btnVolverAltaUsuarios" (click)="volverAltaUsuarios()">Volver</button>
+    <button type="button" class="btnQrAltaUsuarios" (click)="scanQrAltaUsuarios()">QR</button>
     <button class="btnFotoAltaUsuarios" type="button" (click)="tomarFotoAltaUsuarios()">FOTO</button>
     <button class="btnSubmitAltaUsuarios" type="submit">ENVIAR</button>
   </form>

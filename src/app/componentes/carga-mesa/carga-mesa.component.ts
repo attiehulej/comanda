@@ -3,7 +3,7 @@ import { SpinnerRouterService } from '../../servicios/spinner-router.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TipoMesa } from '../../enums/tipo-mesa.enum';
 import { CameraService } from '../../servicios/camera.service';
-import { QrService } from '../../servicios/qr.service';
+//import { QrService } from '../../servicios/qr.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -27,7 +27,7 @@ export class CargaMesaComponent implements OnInit, OnDestroy {
     public spinnerRouter: SpinnerRouterService,
     private fb: FormBuilder,
     public camara: CameraService,
-    private qr: QrService,
+    //private qr: QrService,
     private router: Router
   ) { }
 
@@ -40,15 +40,17 @@ export class CargaMesaComponent implements OnInit, OnDestroy {
       qr: ['', [Validators.required]]
     });
 
+    /*
     this.qr.getResultado()
     .pipe(takeUntil(this.desuscribir))
     .subscribe(nuevoQr => this.formMesa.controls.qr.setValue(nuevoQr));
+    */
   }
 
   ngOnDestroy() {
     this.desuscribir.next();
     this.desuscribir.complete();
-    this.camara.limpiarFotos();
+    //this.camara.limpiarFotos(); //NO EXISTE EL METODO
   }
 
   public volverHome(): void {

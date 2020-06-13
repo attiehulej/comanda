@@ -19,7 +19,7 @@
   
 .btnVolverAltaUsuarios{
     position: absolute; 
-    width: 20vw; 
+    width: 25vw; 
     height: 4vh;
     top: 96vh;
     left: 0vw;
@@ -37,10 +37,10 @@
 
 .btnSubmitAltaUsuarios{
     position: absolute; 
-    width: 20vw; 
+    width: 25vw; 
     height: 4vh;
     top: 96vh;
-    left: 80vw;
+    left: 75vw;
     color: grey;
     background-color:  rgb(255,215,0);
     border-radius: 10px;
@@ -55,10 +55,10 @@
 
 .btnFotoAltaUsuarios{
     position: absolute; 
-    width: 40vw; 
+    width: 25vw; 
     height: 4vh;
     top: 96vh;
-    left: 30vw;
+    left: 50;
     color: grey;
     background-color:  rgb(255,215,0);
     border-radius: 10px;
@@ -71,9 +71,27 @@
     background-color: rgb(218,165,32);
 }
 
+.btnQrAltaUsuarios{
+    position: absolute; 
+    width: 25vw; 
+    height: 4vh;
+    top: 96vh;
+    left: 25vw;
+    color: grey;
+    background-color:  rgb(255,215,0);
+    border-radius: 10px;
+    font-size: 2vh;
+    font-family:Helvetica, sans-serif;
+    font-weight:bold;
+}
+
+.btnQrAltaUsuarios:active{
+    background-color: rgb(218,165,32);
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 
-.divCorreoAltaUsuarios{
+.divDniAltaUsuarios{
     position: absolute;
     width: 80vw;
     height: 15vh;
@@ -81,7 +99,7 @@
     left: 10vw;
 }
 
-.divClaveAltaUsuarios{
+.divCuilAltaUsuarios{
     position: absolute;
     width: 80vw;
     height: 15vh;
@@ -89,7 +107,7 @@
     left: 10vw;
 }
 
-.divNombreAltaUsuarios{
+.divCorreoAltaUsuarios{
     position: absolute;
     width: 80vw;
     height: 15vh;
@@ -97,7 +115,7 @@
     left: 10vw;
 }
 
-.divApellidoAltaUsuarios{
+.divClaveAltaUsuarios{
     position: absolute;
     width: 80vw;
     height: 15vh;
@@ -105,7 +123,7 @@
     left: 10vw;
 }
 
-.divDniAltaUsuarios{
+.divNombreAltaUsuarios{
     position: absolute;
     width: 80vw;
     height: 15vh;
@@ -113,7 +131,7 @@
     left: 10vw;
 }
 
-.divCuilAltaUsuarios{
+.divApellidoAltaUsuarios{
     position: absolute;
     width: 80vw;
     height: 15vh;
