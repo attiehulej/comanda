@@ -27,6 +27,11 @@ export class CameraService {
 
     return this.camera.getPicture(options);
   }
+
+  // PATO
+  public base64ToImg(base64: string): string {
+    return 'data:image/jpeg;base64,'.concat(base64);
+  }
   /*
   private fotos: Foto[] = [];
 
@@ -77,5 +82,5 @@ export class CameraService {
   public getFotos(): Foto[] {
     return this.fotos;
   }
+  */
 }
-*/

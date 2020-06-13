@@ -9,4 +9,5 @@ export class Producto {
     public fechaAlta: Date = new Date();
     public fechaModificado: Date = null;
     public fechaBaja: Date = null;
+    public sector: string;
 }

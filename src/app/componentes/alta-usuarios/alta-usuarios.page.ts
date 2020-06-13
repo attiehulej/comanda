@@ -154,7 +154,9 @@ export class AltaUsuariosPage implements OnInit {
   tomarFotoAltaUsuarios(): void
   {
     let foto: string = "";
-    foto = this.camera.tomarFoto();
+    // foto = this.camera.tomarFoto();
+    this.camera.tomarFoto()
+    .then(nuevaFoto => foto = nuevaFoto);
     this.db.collection('usuarios').add({
         foto: foto, 
     })
@@ -163,6 +165,7 @@ export class AltaUsuariosPage implements OnInit {
   volverAltaUsuarios(): void
   {
     this.formUsuario.reset();
-    this.spinnerRouter.showSpinnerAndNavigate('login', 'loadingContainerAltaUsuarios', 2000);
+    // this.spinnerRouter.showSpinnerAndNavigate('login', 'loadingContainerAltaUsuarios', 2000);
+    this.spinnerRouter.showSpinnerAndNavigate('home', 'loadingContainerAltaUsuarios', 2000);
   }
 }

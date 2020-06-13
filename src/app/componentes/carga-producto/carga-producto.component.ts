@@ -1,76 +1,103 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SpinnerRouterService } from '../../servicios/spinner-router.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CameraService } from '../../servicios/camera.service';
-import { QrService } from '../../servicios/qr.service';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { Router } from '@angular/router';
 import { Producto } from '../../clases/producto';
+import { ProductoService } from '../../servicios/producto.service';
+import { ToastService } from '../../servicios/toast.service';
+import { Sectores } from '../../enums/sectores.enum';
 
 @Component({
   selector: 'app-carga-producto',
   templateUrl: './carga-producto.component.html',
   styleUrls: ['./carga-producto.component.scss'],
 })
-export class CargaProductoComponent implements OnInit, OnDestroy {
+export class CargaProductoComponent implements OnInit {
   public formProducto: FormGroup;
-  private desuscribir = new Subject<void>();
+
+  // https://stackoverflow.com/questions/56036446/typescript-enum-values-as-array
+  // https://stackoverflow.com/questions/35546421/how-to-get-a-variable-type-in-typescript
+  public sector = Object.values(Sectores).filter(unTipo => typeof unTipo === 'string');
   private producto: Producto = new Producto();
+  private fotos: string[] = [];
+  private muestraModal = false;
+  private spinner = 'loadingContainerProducto';
+  private cantFotos = 3;
+  private fotoActual = 0;
 
   constructor(
     public spinnerRouter: SpinnerRouterService,
     private fb: FormBuilder,
     public camara: CameraService,
-    private qr: QrService,
-    private router: Router
+    private productos: ProductoService,
+    private toast: ToastService
   ) { }
 
   ngOnInit() {
     this.formProducto = this.fb.group({
-      codigo: ['', [Validators.required]],
-      nombre: ['', [Validators.required, Validators.minLength(3)]],
-      descripcion: ['', [Validators.required]],
-      tiempoPromedio: ['', [Validators.required, Validators.min(0)]],
-      precio: ['', [Validators.required, Validators.min(0)]],
-      // foto: ['', [Validators.required]],
-      qr: ['', [Validators.required]]
+      codigo: ['', Validators.compose([Validators.required])],
+      nombre: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
+      descripcion: ['', Validators.compose([Validators.required])],
+      sector: ['', Validators.compose([Validators.required])],
+      tiempoPromedio: ['', Validators.compose([Validators.required, Validators.min(0)])],
+      precio: ['', Validators.compose([Validators.required, Validators.min(0)])]
     });
-
-    this.qr.getResultado()
-    .pipe(takeUntil(this.desuscribir))
-    .subscribe(nuevoQr => this.formProducto.controls.qr.setValue(nuevoQr));
-  }
-
-  ngOnDestroy() {
-    this.desuscribir.next();
-    this.desuscribir.complete();
-    this.camara.limpiarFotos();
   }
 
   public volverHome(): void {
-    this.spinnerRouter.showSpinnerAndNavigate('home', 'loadingContainerProducto', 2000);
+    this.spinnerRouter.showSpinnerAndNavigate('home', this.spinner, 2000);
   }
 
   public tomarFoto(): void {
-    this.camara.tomarFoto();
-  }
-
-  public cargarQr(): void {
-    this.router.navigate(['qr']);
+    this.camara.tomarFoto()
+    .then(unaFoto => this.fotos.push(unaFoto));
   }
 
   onSubmitProducto(): void {
-    if (this.formProducto.valid) {
+    if (this.formProducto.valid && this.fotos.length === this.cantFotos) {
+      this.spinnerRouter.showSpinner(this.spinner, true);
+
       this.producto.codigo = this.formProducto.controls.codigo.value;
       this.producto.nombre = this.formProducto.controls.nombre.value;
       this.producto.descripcion = this.formProducto.controls.descripcion.value;
+      this.producto.sector = this.formProducto.controls.sector.value;
       this.producto.tiempo = this.formProducto.controls.tiempoPromedio.value;
       this.producto.precio = this.formProducto.controls.precio.value;
-      // this.producto.foto = ....
-      alert('Envío Producto');
+      this.producto.fotos = this.fotos;
+
+      this.productos.crearProducto(this.producto)
+      .then(nuevoProd => {
+        this.producto.id = nuevoProd.id;
+        this.producto.fechaAlta = new Date();
+        this.productos.actualizarProducto(nuevoProd.id, this.producto);
+
+        this.formProducto.reset();
+        this.fotos = [];
+
+        this.producto.codigo = null;
+        this.producto.descripcion = null;
+        this.producto.fechaAlta = new Date();
+        this.producto.fechaBaja = null;
+        this.producto.fechaModificado = null;
+        this.producto.fotos = null;
+        this.producto.id = null;
+        this.producto.nombre = null;
+        this.producto.precio = null;
+        this.producto.sector = null;
+        this.producto.tiempo = null;
+
+        this.spinnerRouter.showSpinner(this.spinner, false);
+        this.toast.presentToastOk('Producto creado');
+      })
+      .catch(error => {
+        this.spinnerRouter.showSpinner(this.spinner, false);
+        this.toast.presentToast(error);
+      });
     } else {
-      alert('Error en formulario');
+      if (this.fotos.length < this.cantFotos) {
+        this.toast.presentToast(`Debe adjuntar ${this.cantFotos} fotos del producto`);
+      }
+      // alert('Error en formulario');
       this.formProducto.markAllAsTouched();
     }
   }
@@ -120,8 +147,55 @@ export class CargaProductoComponent implements OnInit, OnDestroy {
           retorno = 'Error inesperado con el precio del producto';
         }
         break;
+      case 'sector':
+        if (this.formProducto.controls.sector.hasError('required')) {
+          retorno = 'Debe ingresar el sector';
+        } else {
+          retorno = 'Error inesperado con el sector';
+        }
+        break;
     }
 
     return retorno;
+  }
+
+  public getCantFotos(): number {
+    return this.cantFotos;
+  }
+
+  public base64ToImg(num: number): string {
+    return this.fotos[num] ? this.camara.base64ToImg(this.fotos[num]) : '';
+  }
+
+  public getFoto(num: number): string {
+    return this.fotos[num];
+  }
+
+  public getFotos(): string[] {
+    return this.fotos;
+  }
+
+  public getMuestraModal(): boolean {
+    return this.muestraModal;
+  }
+
+  public setMuestraModal(muestra: boolean): void {
+    this.muestraModal = muestra;
+  }
+
+  public getFotoActual(): number {
+    return this.fotoActual;
+  }
+
+  public irFotoAnt(): void {
+    if (this.fotoActual > 0) {
+      this.fotoActual--;
+    }
+  }
+
+  public irFotoSig(): void {
+    if (this.fotoActual < this.fotos.length - 1) {
+      this.fotoActual++;
+    }
   }
 }
