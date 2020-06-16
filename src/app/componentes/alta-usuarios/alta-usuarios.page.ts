@@ -6,6 +6,10 @@ import { Observable } from 'rxjs/internal/Observable';
 import { AngularFirestore } from '@angular/fire/firestore'; 
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { ToastService } from '../../servicios/toast.service';
+import { AuthService } from '../../servicios/auth.service';
+import { Usuario } from '../../clases/usuario';
+import { EstadoUsuario } from 'src/app/enums/estado-usuario.enum';
+import { TipoUsuario } from 'src/app/enums/tipo-usuario.enum';
 
 @Component({
   selector: 'app-alta-usuarios',
@@ -29,7 +33,8 @@ export class AltaUsuariosPage implements OnInit {
     private camera : CameraService,
     public db : AngularFirestore,
     public scanner : BarcodeScanner,
-    public toast : ToastService
+    public toast : ToastService,
+    public servicioAlta : AuthService
   ) 
   {
     this.usuarios = db.collection('usuarios').valueChanges();
@@ -41,23 +46,82 @@ export class AltaUsuariosPage implements OnInit {
     this.formUsuario = this.fb.group
     ({
       correo: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(25), Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]],
-      clave: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(6), Validators.pattern('[0-9]*')]],
+      clave: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(6), Validators.pattern('[0-9]*')]],
       nombre: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(12), Validators.pattern('[a-zA-Z ]*')]],
       apellido: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(12), Validators.pattern('[a-zA-Z ]*')]],
       dni: ['', [Validators.required, Validators.min(0), Validators.minLength(7), Validators.maxLength(8), Validators.pattern('[0-9]*')]],
       cuil: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(11), Validators.pattern('[0-9]*')]],
       tipo: ['', [Validators.required]],
       foto: ['', [Validators.required]],
-      limpiar: ['']
     });
+    
+    this.servicioAlta.currentUser().then((response : firebase.User) => {
+      let aux = this.servicioAlta.obtenerDetalle(response); 
+      aux.subscribe(datos => {alert(datos.correo)});
+    }).catch((reject : any) => {
+
+      console.log(reject);
+    });
+    
   }
 
 
   onSubmitUsuario(): void
   {
-    if(this.errorFomularioAltaUsarios() == false) //SI EL FORM NO TIENE ERRORES
+    if(this.errorFomularioAltaUsarios() == false) 
     {
-      //SE LLAMA AL SERVICIO DE ALTA
+      let nuevoUsuario = new Usuario();
+      nuevoUsuario.correo = this.formUsuario.controls.correo.value;
+      nuevoUsuario.clave = this.formUsuario.controls.clave.value;
+      nuevoUsuario.nombre = this.formUsuario.controls.nombre.value;
+      nuevoUsuario.apellido = this.formUsuario.controls.apellido.value;
+      nuevoUsuario.dni = this.formUsuario.controls.dni.value;
+      nuevoUsuario.cuil = this.formUsuario.controls.cuil.value;
+      nuevoUsuario.estado = EstadoUsuario.APROBADO;
+      nuevoUsuario.foto = this.formUsuario.controls.foto.value;
+      switch(localStorage.getItem('tipoDeAlta'))
+      {
+        case 'DUEÑO':
+          nuevoUsuario.perfil = TipoUsuario.DUEÑO;
+          break;
+        case 'SUPERVISOR':
+          nuevoUsuario.perfil = TipoUsuario.SUPERVISOR;
+          break;
+        case 'CLIENTE_ANONIMO':
+          nuevoUsuario.perfil = TipoUsuario.CLIENTE_REGISTRADO;
+          break;
+         case 'CLIENTE_REGISTRADO':
+          nuevoUsuario.perfil = TipoUsuario.CLIENTE_ANONIMO;
+          break;
+        case 'EMPLEADO':
+          switch(this.formUsuario.controls.tipo.value)
+          {
+            case 'MOZO':
+              nuevoUsuario.perfil = TipoUsuario.MOZO;
+              console.log("mozo");
+              break;
+            case 'METRE':
+              nuevoUsuario.perfil = TipoUsuario.METRE;
+              console.log("metre");
+              break;
+            case 'COCINERO':
+              nuevoUsuario.perfil = TipoUsuario.COCINERO;
+              console.log("cocinero");
+              break;
+            case 'BARTENDER':
+              nuevoUsuario.perfil = TipoUsuario.BARTENDER;
+              console.log("bartender");
+              break;
+          }
+          break;
+      }
+      this.servicioAlta.signUp(nuevoUsuario).then(datos =>{
+        console.log(datos);
+        this.volverAltaUsuarios();
+      },(err) => {
+        this.toast.presentToast("ERROR"); //por ejemplo mail ya utilizado
+        console.log("Error: " + err);
+      });
     }
     else
     {
@@ -79,15 +143,15 @@ export class AltaUsuariosPage implements OnInit {
 
     switch(localStorage.getItem('tipoDeAlta'))
     {
-      case 'dueño':
+      case 'DUEÑO':
         if(this.formUsuario.controls.correo.valid && this.formUsuario.controls.clave.valid && this.formUsuario.controls.nombre.valid && 
-          this.formUsuario.controls.apellido.valid && this.formUsuario.controls.dni.valid && this.formUsuario.controls.cuil.valid)
+          this.formUsuario.controls.apellido.valid && this.formUsuario.controls.dni.valid && this.formUsuario.controls.cuil.valid /*&& this.formUsuario.controls.foto.valid*/)
         {
           retorno = false;
         }
         break;
 
-      case 'supervisor':
+      case 'SUPERVISOR':
         if(this.formUsuario.controls.correo.valid && this.formUsuario.controls.clave.valid && this.formUsuario.controls.nombre.valid && 
           this.formUsuario.controls.apellido.valid && this.formUsuario.controls.dni.valid && this.formUsuario.controls.cuil.valid)
           {
@@ -95,15 +159,18 @@ export class AltaUsuariosPage implements OnInit {
           }
         break;
 
-      case 'empleado':
+      case 'EMPLEADO':
         if(this.formUsuario.controls.correo.valid && this.formUsuario.controls.clave.valid && this.formUsuario.controls.nombre.valid && 
           this.formUsuario.controls.apellido.valid && this.formUsuario.controls.dni.valid && this.formUsuario.controls.cuil.valid && this.formUsuario.controls.tipo)
         {
-          retorno = false;
+          if(this.formUsuario.controls.tipo.value == 'MOZO' || this.formUsuario.controls.tipo.value == 'METRE' || this.formUsuario.controls.tipo.value == 'COCINERO' || this.formUsuario.controls.tipo.value == 'BARTENDER') 
+          {
+            retorno = false;
+          }
         }
         break;
 
-      case 'cliente':
+      case 'CLIENTE_REGISTRADO':
         if(this.formUsuario.controls.correo.valid && this.formUsuario.controls.clave.valid && this.formUsuario.controls.nombre.valid && 
           this.formUsuario.controls.apellido.valid && this.formUsuario.controls.dni.valid)
         {
@@ -111,7 +178,7 @@ export class AltaUsuariosPage implements OnInit {
         }
         break;
 
-      case 'anonimo':
+      case 'CLIENTE_ANONIMO':
         if(this.formUsuario.controls.correo.valid && this.formUsuario.controls.clave.valid && this.formUsuario.controls.nombre.valid)
         {
           retorno = false;
@@ -127,35 +194,35 @@ export class AltaUsuariosPage implements OnInit {
     let retorno: boolean = false;
     switch(localStorage.getItem('tipoDeAlta'))
     {
-      case 'dueño':
+      case 'DUEÑO':
         if(elemento == 'correo' || elemento == 'clave' || elemento == 'nombre' || elemento == 'apellido' || elemento == 'dni' || elemento == 'cuil')
         {
           retorno = true;
         }
         break;
 
-      case 'supervisor':
+      case 'SUPERVISOR':
         if(elemento == 'correo' || elemento == 'clave' || elemento == 'nombre' || elemento == 'apellido' || elemento == 'dni' || elemento == 'cuil')
         {
           retorno = true;
         }
         break;
 
-      case 'empleado':
+      case 'EMPLEADO':
         if(elemento == 'correo' || elemento == 'clave' || elemento == 'nombre' || elemento == 'apellido' || elemento == 'dni' || elemento == 'cuil' || elemento == 'tipo')
         {
           retorno = true;
         }
         break;
 
-      case 'cliente':
+      case 'CLIENTE_REGISTRADO':
         if(elemento == 'correo' || elemento == 'clave' || elemento == 'nombre' || elemento == 'apellido' || elemento == 'dni')
         {
           retorno = true;
         }
         break;
 
-      case 'anonimo':
+      case 'CLIENTE_ANONIMO':
         if(elemento == 'correo' || elemento == 'clave' || elemento == 'nombre')
         {
           retorno = true;
@@ -189,23 +256,19 @@ export class AltaUsuariosPage implements OnInit {
   tomarFotoAltaUsuarios(): void
   {
     this.camera.tomarFoto().then(data => {
-      this.db.collection('usuarios').add({
-        foto: data, 
-      })
+      this.formUsuario.controls.foto.setValue(data);
     });
   }
   
   volverAltaUsuarios(): void
   {
     this.formUsuario.reset();
-    // this.spinnerRouter.showSpinnerAndNavigate('login', 'loadingContainerAltaUsuarios', 2000);
     this.spinnerRouter.showSpinnerAndNavigate('home', 'loadingContainerAltaUsuarios', 2000);
   }
 
   validacionAuxCuil(dni : string): boolean
   {
     let retorno : boolean = false;
-    console.log(dni);
     if(this.formUsuario.controls.cuil.pristine)
     {
       retorno = true;

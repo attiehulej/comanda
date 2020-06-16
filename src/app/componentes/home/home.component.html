@@ -1,10 +1,19 @@
 <div class="fondoHome">
 
-  <button type="button" class="btnVolverHome" (click)="volverHome()">Volver</button>
-  <button type="button" class="btnCargaMesa" (click)="abmMesa()">Abm Mesa</button>
+  <div class="headHome">
+    <button type="button" class="btnVolverHome" (click)="volverHome()"><</button>
+    <label class="lblHeadHome">{{perfilUsuarioHome}}</label>
+    <img class="imgHeadHome" [src]="imgUsuarioHome" alt="image">
+  </div>
+
+  <button type="button" class="btnDuenioHome" (click)="abmUsuario('DUEÑO')" *ngIf="mostrarSegunPerfil('altaDueño')">Abm Dueños</button>
+  <button type="button" class="btnSupervisorHome" (click)="abmUsuario('SUPERVISOR')"*ngIf="mostrarSegunPerfil('altaSupervisor')">Abm Supervisores</button>
+  <button type="button" class="btnEmpleadoHome" (click)="abmUsuario('EMPLEADO')"*ngIf="mostrarSegunPerfil('altaEmpleado')">Abm Empleados</button>
+  <button type="button" class="btnClienteAnonimoHome" (click)="abmUsuario('CLIENTE_ANONIMO')"*ngIf="mostrarSegunPerfil('altaClienteAnonimo')">Abm Cliente Anonimo</button>
+  <button type="button" class="btnClienteRegistradoHome" (click)="abmUsuario('CLIWNRW_REGISTRADO')"*ngIf="mostrarSegunPerfil('altaClienteRegistrado')">Abm Cliente Registrado</button>
+  <button type="button" class="btnCargaMesa" (click)="abmMesa()" >Abm Mesa</button>
   <button type="button" class="btnCargaProducto" (click)="abmProducto()">Abm Producto</button>
-  <button type="button" class="btnCargaUsuario" (click)="abmUsuario()">Abm Usuario</button>
-  
+
   <div class="loadingContainerHome" id="loadingContainerHome" hidden>
     <div class="loadingHome">
       <img src="../../../assets/spinner.png">

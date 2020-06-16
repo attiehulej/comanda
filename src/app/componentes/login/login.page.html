@@ -1,25 +1,17 @@
 <div class="fondoLogin">
-  <form (ngSubmit) ="onSubmitLogin()">
-
+  <form [formGroup]="formLogin" (ngSubmit) ="onSubmitLogin()">
+    
     <label class="lblCorreoLogin">Correo Electrónico</label>
-    <ion-input type="text" class="inpCorreoLogin" id="inpCorreoLogin" name="inpCorreoLogin"></ion-input>
-        
-    <div id="errCorreoLogin" class="errCorreoLogin" hidden>CORREO INVALIDO</div>
+    <input type="text" class="inpCorreoLogin" formControlName="correoLogin">
+    <div class="errCorreoLogin" [hidden]="!errorEnControlLogin('correoLogin')">CORREO INVALIDO</div>
 
     <label class="lblClaveLogin">Contraseña</label>
-    <ion-input type="password" class="inpClaveLogin" id="inpClaveLogin" name="inpClaveLogin"></ion-input>
-
-    <div id="errClaveLogin" class="errClaveLogin" hidden>CLAVE INVALIDA</div>
+    <input type="password" class="inpClaveLogin" formControlName="claveLogin">
+    <div class="errClaveLogin" [hidden]="!errorEnControlLogin('claveLogin')">CLAVE INVALIDA</div>
       
-    <div id="errUsuarioLogin" class="errUsuarioLogin" hidden>USUARIO NO EXISTE</div>
-
     <button type="submit" class="btnSubmitLogin">Enviar</button>
-    <!-- PATO -> Restaurar antes de pasar version -->
-    <!-- <button type="button" (click)="limpiarInputs()" (click)="limpiarErrores()" class="btnResetLogin">Limpiar</button> -->
-    <!-- PATO -> Borrar antes de pasar version -->
-    <button type="button" (click)="cargarUsuario()" class="btnResetLogin">Limpiar</button>
+    <button type="button" (click)="limpiarLogin()" class="btnResetLogin">Limpiar</button>
 
-    
   </form>
   <div class="loadingContainerLogin" id="loadingContainerLogin" hidden>
     <div class="loadingLogin">

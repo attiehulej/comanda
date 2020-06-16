@@ -17,11 +17,55 @@
   justify-content: center;
 }
 
-.btnVolverHome, .btnCargaMesa, .btnCargaProducto, .btnCargaUsuario {
+.headHome{
+  position: absolute;
+  top: 0vh;
+  left: 0vw;
+  height: 5vh;
+  width: 100vw;
+  background-color: rgb(255,215,0);
+}
+
+.lblHeadHome{
+  position: absolute;
+  top: 0%;
+  left: 15%;
+  width: 70%;
+  height: 100%;
+  background-color: rgb(255,215,0);
+  color: grey;
+  font-size: 2em;
+  line-height: 100%;
+}
+
+.imgHeadHome{
+  position: absolute;
+  top: 0%;
+  left: 85%;
+  width: 15%;
+  height: 100%;
+  border-radius: 100%;
+}
+
+.btnVolverHome{
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 15%;
+  height: 100%;
+  background-color: green;
+  color: grey;
+  font-size: 2em;
+  vertical-align: middle;
+} 
+
+////////////////////////////////////////////////////////////////////////////////////
+
+.btnDuenioHome, .btnSupervisorHome, .btnEmpleadoHome, .btnClienteAnonimoHome, .btnClienteRegistradoHome,.btnCargaMesa, .btnCargaProducto{
   position: absolute; 
-  width: 20vw; 
+  width: 50vw; 
+  left: 25vw;
   height: 10vh;
-  top: 5vh;
   color: grey;
   background-color:  rgb(255,215,0);
   border-radius: 10px;
@@ -31,27 +75,38 @@
   font-weight:bold;
 }
 
-.btnVolverHome {
-  left: 5vw;
+.btnDuenioHome{
+  top: 15vh;
+}
+
+.btnSupervisorHome{
+  top: 27vh;
+}
+
+.btnEmpleadoHome{
+  top: 39vh;
+}
+
+.btnClienteAnonimoHome{
+  top: 51vh;
+}
+
+.btnClienteRegistradoHome{
+  top: 63vh;
 }
 
 .btnCargaMesa {
-  left: 30vw;
+  top: 75vh;
 }
 
 .btnCargaProducto {
-  left: 55vw;
+  top: 87vh;
 }
 
-.btnCargaUsuario {
-  left: 80vw;
-}
-
-.btnVolverHome:active, .btnCargaMesa:active, .btnCargaProducto:active, .btnCargaUsuario:active {
+.btnCargaMesa:active, .btnCargaProducto:active{
   transform: translate(0px, 5px);
   box-shadow: 0 5px rgb(218,165,32);
 }
-
 
 .loadingContainerHome{
   width: 100vw;
