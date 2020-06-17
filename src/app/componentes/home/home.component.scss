@@ -61,7 +61,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-.btnDuenioHome, .btnSupervisorHome, .btnEmpleadoHome, .btnClienteAnonimoHome, .btnClienteRegistradoHome,.btnCargaMesa, .btnCargaProducto{
+.btnClientesPendientesHome, .btnDuenioHome, .btnSupervisorHome, .btnEmpleadoHome, .btnClienteAnonimoHome, .btnClienteRegistradoHome,.btnCargaMesa, .btnCargaProducto{
   position: absolute; 
   width: 50vw; 
   left: 25vw;
@@ -73,6 +73,10 @@
   font-size: 3vh;
   font-family:Helvetica, sans-serif;
   font-weight:bold;
+}
+
+.btnClientesPendientesHome{
+  top: 5vh;
 }
 
 .btnDuenioHome{

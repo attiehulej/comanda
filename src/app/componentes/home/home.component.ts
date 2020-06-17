@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit {
     switch(this.perfilUsuarioHome)
     {
       case 'DUEÑO':
-        if(elemento == 'altaDueño' || elemento == 'altaSupervisor' || elemento == 'altaEmpleado' || elemento == 'altaClienteRegistrado' || elemento == 'altaClienteAnonimo')
+        if(elemento == 'clientesPendientes' || elemento == 'altaDueño' || elemento == 'altaSupervisor' || elemento == 'altaEmpleado' || elemento == 'altaClienteRegistrado' || elemento == 'altaClienteAnonimo')
         {
           retorno = true;
         }
@@ -71,6 +71,49 @@ export class HomeComponent implements OnInit {
     return retorno;
   }
 
+  manejadoraHome(opcion: string): void
+  {
+    switch(opcion)
+    {
+      case 'DUEÑO':
+        localStorage.setItem('tipoDeAlta', opcion);
+        this.spinnerRouter.showSpinnerAndNavigate('alta-usuarios', 'loadingContainerHome', 2000);
+        break;
+
+      case 'SUPERVISOR':
+        localStorage.setItem('tipoDeAlta', opcion);
+        this.spinnerRouter.showSpinnerAndNavigate('alta-usuarios', 'loadingContainerHome', 2000);
+        break;
+
+      case 'EMPLEADO':
+        localStorage.setItem('tipoDeAlta', opcion);
+        this.spinnerRouter.showSpinnerAndNavigate('alta-usuarios', 'loadingContainerHome', 2000);
+        break;
+
+      case 'CLIENTE_ANONIMO':
+        localStorage.setItem('tipoDeAlta', opcion);
+        this.spinnerRouter.showSpinnerAndNavigate('alta-usuarios', 'loadingContainerHome', 2000);
+        break;
+
+      case 'CLIENTE_REGISTRADO':
+        localStorage.setItem('tipoDeAlta', opcion);
+        this.spinnerRouter.showSpinnerAndNavigate('alta-usuarios', 'loadingContainerHome', 2000);
+        break;
+
+      case 'PENDIENTE':
+        this.spinnerRouter.showSpinnerAndNavigate('clientes-pendientes', 'loadingContainerHome', 2000);
+        break;
+
+      case 'MESA':
+        this.spinnerRouter.showSpinnerAndNavigate('cargaMesa', 'loadingContainerHome', 2000);
+        break;
+
+      case 'PRODUCTO':
+        this.spinnerRouter.showSpinnerAndNavigate('cargaProducto', 'loadingContainerHome', 2000);
+        break;
+    }
+  }
+
   volverHome(): void
   {
     this.servicioAlta.logout();
@@ -79,12 +122,12 @@ export class HomeComponent implements OnInit {
 
   public abmMesa(): void 
   {
-    this.spinnerRouter.showSpinnerAndNavigate('cargaMesa', 'loadingContainerHome', 2000);
+    
   }
 
   public abmProducto(): void 
   {
-    this.spinnerRouter.showSpinnerAndNavigate('cargaProducto', 'loadingContainerHome', 2000);
+    
   }
 
   public abmUsuario(tipoDeAlta: string): void 

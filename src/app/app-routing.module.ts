@@ -14,6 +14,7 @@ const routes: Routes = [
   { path: 'splash', loadChildren: () => import('./app.component').then( m => m.AppComponent)},
   { path: 'login', loadChildren: () => import('./componentes/login/login.module').then( m => m.LoginPageModule)},
   { path: 'alta-usuarios', loadChildren: () => import('./componentes/alta-usuarios/alta-usuarios.module').then( m => m.AltaUsuariosPageModule)},
+  { path: 'clientes-pendientes', loadChildren: () => import('./componentes/clientes-pendientes/clientes-pendientes.module').then( m => m.ClientesPendientesPageModule)},
 ];
 
 @NgModule({
