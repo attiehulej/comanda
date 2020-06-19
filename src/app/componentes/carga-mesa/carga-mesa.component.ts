@@ -3,14 +3,14 @@ import { SpinnerRouterService } from '../../servicios/spinner-router.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TipoMesa } from '../../enums/tipo-mesa.enum';
 import { CameraService } from '../../servicios/camera.service';
-//import { QrService } from '../../servicios/qr.service';
+// import { QrService } from '../../servicios/qr.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Mesa } from '../../clases/mesa';
 import { MesaService } from '../../servicios/mesa.service';
 import { ToastService } from '../../servicios/toast.service';
-import { EstadosMesa } from '../../enums/estados-mesa.enum';
+import { EstadosMesa } from '../../enums/estado-mesa.enum';
 
 @Component({
   selector: 'app-carga-mesa',
