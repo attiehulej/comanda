@@ -14,7 +14,7 @@ import { Camera } from '@ionic-native/camera/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CommonModule } from '@angular/common';
-//import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+// import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AngularFireModule } from '@angular/fire'; // PATO
 // import { AngularFireModule } from 'angularfire2'; // AGREGO LUCAS
@@ -32,6 +32,7 @@ import { QrComponent } from './componentes/qr/qr.component';
 import { CargaMesaComponent } from './componentes/carga-mesa/carga-mesa.component';
 import { CargaProductoComponent } from './componentes/carga-producto/carga-producto.component';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
