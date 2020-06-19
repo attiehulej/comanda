@@ -8,7 +8,6 @@ export class Usuario {
     public dni?: string;
     public cuil?: string;
     public correo?: string;
-    public clave?: string;
     public foto?: string;
     public perfil: TipoUsuario;
     public estado?: EstadoUsuario;
