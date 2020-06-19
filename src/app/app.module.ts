@@ -1,4 +1,4 @@
-import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
+// import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -10,12 +10,11 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Vibration } from '@ionic-native/vibration/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
-import { QRScanner } from '@ionic-native/qr-scanner/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+//import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AngularFireModule } from '@angular/fire'; // PATO
 // import { AngularFireModule } from 'angularfire2'; // AGREGO LUCAS
@@ -32,6 +31,7 @@ import { HomeComponent } from './componentes/home/home.component';
 import { QrComponent } from './componentes/qr/qr.component';
 import { CargaMesaComponent } from './componentes/carga-mesa/carga-mesa.component';
 import { CargaProductoComponent } from './componentes/carga-producto/carga-producto.component';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 @NgModule({
   declarations: [
@@ -63,7 +63,7 @@ import { CargaProductoComponent } from './componentes/carga-producto/carga-produ
     Camera,
     WebView, // PATO
     DatePipe, // PATO
-    QRScanner // PATO
+    BarcodeScanner
   ],
   bootstrap: [AppComponent]
 })

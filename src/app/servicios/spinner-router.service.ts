@@ -16,4 +16,9 @@ export class SpinnerRouterService {
       this.router.navigate([route]);
     }, time);
   }
+
+  // PATO
+  showSpinner(idSpinner: string, muestra: boolean): void {
+    $(`#${idSpinner}`).attr('hidden', !muestra);
+  }
 }

@@ -86,6 +86,7 @@ export class LoginPage implements OnInit {
 
       if (usuarioEncontrado) {
         this.moveToHome();
+        localStorage.setItem('tipoDeAlta', 'anonimo');
       }
       else {
         this.vibration.vibrar(500);
@@ -97,7 +98,8 @@ export class LoginPage implements OnInit {
   moveToHome(): void {
     this.limpiarErrores();
     this.limpiarInputs();
-    this.spinnerRouter.showSpinnerAndNavigate('alta-usuarios', 'loadingContainerLogin', 2000);
+    // this.spinnerRouter.showSpinnerAndNavigate('alta-usuarios', 'loadingContainerLogin', 2000);
+    this.spinnerRouter.showSpinnerAndNavigate('home', 'loadingContainerLogin', 2000);
   }
 
   datosValidos(correo: string, clave: string): boolean {

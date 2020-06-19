@@ -17,7 +17,7 @@
   justify-content: center;
 }
 
-.btnVolverHome, .btnCargaMesa, .btnCargaProducto {
+.btnVolverHome, .btnCargaMesa, .btnCargaProducto, .btnCargaUsuario {
   position: absolute; 
   width: 20vw; 
   height: 10vh;
@@ -43,7 +43,11 @@
   left: 55vw;
 }
 
-.btnVolverHome:active, .btnCargaMesa:active, .btnCargaProducto:active {
+.btnCargaUsuario {
+  left: 80vw;
+}
+
+.btnVolverHome:active, .btnCargaMesa:active, .btnCargaProducto:active, .btnCargaUsuario:active {
   transform: translate(0px, 5px);
   box-shadow: 0 5px rgb(218,165,32);
 }
