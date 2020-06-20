@@ -77,23 +77,28 @@ export class AltaUsuariosPage implements OnInit {
       nuevoUsuario.apellido = this.formUsuario.controls.apellido.value;
       nuevoUsuario.dni = this.formUsuario.controls.dni.value;
       nuevoUsuario.cuil = this.formUsuario.controls.cuil.value;
-      nuevoUsuario.estado = EstadoUsuario.APROBADO;
+      //nuevoUsuario.estado = EstadoUsuario.APROBADO;
       nuevoUsuario.foto = this.formUsuario.controls.foto.value;
       switch(localStorage.getItem('tipoDeAlta'))
       {
         case 'DUEÑO':
           nuevoUsuario.perfil = TipoUsuario.DUEÑO;
+          nuevoUsuario.estado = EstadoUsuario.APROBADO;
           break;
         case 'SUPERVISOR':
           nuevoUsuario.perfil = TipoUsuario.SUPERVISOR;
+          nuevoUsuario.estado = EstadoUsuario.APROBADO;
           break;
         case 'CLIENTE_ANONIMO':
-          nuevoUsuario.perfil = TipoUsuario.CLIENTE_REGISTRADO;
+          nuevoUsuario.perfil = TipoUsuario.CLIENTE_ANONIMO;
+          nuevoUsuario.estado = EstadoUsuario.APROBADO;
           break;
          case 'CLIENTE_REGISTRADO':
-          nuevoUsuario.perfil = TipoUsuario.CLIENTE_ANONIMO;
+          nuevoUsuario.perfil = TipoUsuario.CLIENTE_REGISTRADO;
+          nuevoUsuario.estado = EstadoUsuario.PENDIENTE;
           break;
         case 'EMPLEADO':
+          nuevoUsuario.estado = EstadoUsuario.APROBADO;
           switch(this.formUsuario.controls.tipo.value)
           {
             case 'MOZO':

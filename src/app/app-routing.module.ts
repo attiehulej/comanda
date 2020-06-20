@@ -15,6 +15,9 @@ const routes: Routes = [
   { path: 'login', loadChildren: () => import('./componentes/login/login.module').then( m => m.LoginPageModule)},
   { path: 'alta-usuarios', loadChildren: () => import('./componentes/alta-usuarios/alta-usuarios.module').then( m => m.AltaUsuariosPageModule)},
   { path: 'clientes-pendientes', loadChildren: () => import('./componentes/clientes-pendientes/clientes-pendientes.module').then( m => m.ClientesPendientesPageModule)},
+  { path: 'pedir-productos', loadChildren: () => import('./componentes/pedir-productos/pedir-productos.module').then( m => m.PedirProductosPageModule)
+  },
+
 ];
 
 @NgModule({

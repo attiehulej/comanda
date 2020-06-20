@@ -32,7 +32,7 @@ export class AuthService {
         (response: any) => {
           if (response) {
             usuario.id = response.user.uid;
-            this.usuarioService.crearUsuario(usuario.id, usuario).then((usr: any) => resolve(this.obtenerDetalle(usr)));
+            this.usuarioService.crearUsuario(usuario.id, usuario).then((usr: any) => resolve("exito")); //ADENTRO DEL RESOLVE => this.obtenerDetalle(usr) 
           }
         },
         (error: any) => reject(error));

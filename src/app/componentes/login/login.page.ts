@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-// import { AngularFirestore } from 'angularfire2/firestore'; // PATO
 import { AngularFirestore } from '@angular/fire/firestore'; // PATO
-import * as $ from 'jquery';
 import { VibrationService } from 'src/app/servicios/vibration.service';
-// import { IfStmt } from '@angular/compiler';
 import { SpinnerRouterService } from 'src/app/servicios/spinner-router.service';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
 import { Usuario } from 'src/app/clases/usuario';
@@ -14,6 +11,7 @@ import { FormBuilder, FormGroup, Validators, FormsModule, FormControl, Form } fr
 import { ToastService } from '../../servicios/toast.service';
 import { AuthService } from '../../servicios/auth.service';
 import { rejects } from 'assert';
+import { EstadoUsuario } from 'src/app/enums/estado-usuario.enum';
 
 @Component({
   selector: 'app-login',
@@ -58,9 +56,21 @@ export class LoginPage implements OnInit {
       usuario.correo = this.formLogin.controls.correoLogin.value;
       usuario.clave = this.formLogin.controls.claveLogin.value;
       this.servicioAlta.signIn(usuario)
-      .then((response : any) => {
-        this.formLogin.reset();
-        this.moveToHome();
+      .then((response) => {
+        
+        response.subscribe(usuario => {
+          if(usuario.estado == EstadoUsuario.APROBADO)
+          {
+            this.formLogin.reset();
+            this.moveToHome();
+          }
+          else
+          {
+            this.toast.presentToast("SU PETICION AUN NO A SIDO ACEPTADA");
+          }
+        }),(err => 
+          {console.log(err);
+        });
       })
       .catch((reject : any) => {
         alert(reject);

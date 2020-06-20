@@ -2,6 +2,7 @@
   margin: 0%;
   padding: 0%;
   outline: none;
+  font-family: 'Libre Baskerville', serif;
 }
 
 .fondoHome{
@@ -32,10 +33,11 @@
   left: 15%;
   width: 70%;
   height: 100%;
-  background-color: rgb(255,215,0);
+  background-color: rgba(255, 255, 255, 0);
   color: grey;
-  font-size: 2em;
-  line-height: 100%;
+  font-size: 4vh;
+  line-height: 150%;
+  text-align: center;
 }
 
 .imgHeadHome{
@@ -53,7 +55,7 @@
   left: 0%;
   width: 15%;
   height: 100%;
-  background-color: green;
+  background-color: rgba(255, 255, 255, 0);
   color: grey;
   font-size: 2em;
   vertical-align: middle;
@@ -61,7 +63,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-.btnClientesPendientesHome, .btnDuenioHome, .btnSupervisorHome, .btnEmpleadoHome, .btnClienteAnonimoHome, .btnClienteRegistradoHome,.btnCargaMesa, .btnCargaProducto{
+.btnClientesPendientesHome, .btnDuenioHome, .btnSupervisorHome, .btnEmpleadoHome, .btnClienteAnonimoHome, .btnClienteRegistradoHome,.btnPedirProductosHome{
   position: absolute; 
   width: 50vw; 
   left: 25vw;
@@ -99,12 +101,8 @@
   top: 63vh;
 }
 
-.btnCargaMesa {
+.btnPedirProductosHome{
   top: 75vh;
-}
-
-.btnCargaProducto {
-  top: 87vh;
 }
 
 .btnCargaMesa:active, .btnCargaProducto:active{

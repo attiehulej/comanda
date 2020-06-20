@@ -4,9 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ClientesPendientesPageRoutingModule } from './clientes-pendientes-routing.module';
+import { PedirProductosPageRoutingModule } from './pedir-productos-routing.module';
 
-import { ClientesPendientesPage } from './clientes-pendientes.page';
+import { PedirProductosPage } from './pedir-productos.page';
 
 @NgModule({
   imports: [
@@ -14,8 +14,8 @@ import { ClientesPendientesPage } from './clientes-pendientes.page';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    ClientesPendientesPageRoutingModule
+    PedirProductosPageRoutingModule
   ],
-  declarations: [ClientesPendientesPage]
+  declarations: [PedirProductosPage]
 })
-export class ClientesPendientesPageModule {}
+export class PedirProductosPageModule {}
