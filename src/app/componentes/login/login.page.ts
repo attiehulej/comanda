@@ -170,9 +170,13 @@ export class LoginPage implements OnInit {
 
   // PATO -> Borrar antes de pasar version
   cargarUsuario(): void {
-    $('#inpCorreoLogin').val('lucas@lucas.com');
+    /*$('#inpCorreoLogin').val('lucas@lucas.com');
     $('#inpClaveLogin').val('2706');
     this.correo = 'lucas@lucas.com';
-    this.clave = '2706';
+    this.clave = '2706';*/
+    $('#inpCorreoLogin').val('soyflippi@gmail.com');
+    $('#inpClaveLogin').val('1234');
+    this.correo = 'soyflippi@gmail.com';
+    this.clave = '1234';
   }
 }
