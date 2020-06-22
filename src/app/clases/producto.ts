@@ -10,4 +10,5 @@ export class Producto {
     public fechaModificado: Date = null;
     public fechaBaja: Date = null;
     public sector: string;
+    public cantidad?:number = 0; //agregrego LUCAS para parte de pedir-productos
 }

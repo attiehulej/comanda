@@ -2,6 +2,7 @@
   margin: 0%;
   padding: 0%;
   outline: none;
+  font-family: 'Libre Baskerville', serif;
 }
 
 .fondoHome{
@@ -17,15 +18,56 @@
   justify-content: center;
 }
 
-.btnVolverHome,
-.btnCargaMesa,
-.btnCargaProducto,
-.btnCargaUsuario,
-.btnProductos {
+.headHome{
+  position: absolute;
+  top: 0vh;
+  left: 0vw;
+  height: 5vh;
+  width: 100vw;
+  background-color: rgb(255,215,0);
+}
+
+.lblHeadHome{
+  position: absolute;
+  top: 0%;
+  left: 15%;
+  width: 70%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0);
+  color: grey;
+  font-size: 4vh;
+  line-height: 150%;
+  text-align: center;
+}
+
+.imgHeadHome{
+  position: absolute;
+  top: 0%;
+  left: 85%;
+  width: 15%;
+  height: 100%;
+  border-radius: 100%;
+}
+
+.btnVolverHome{
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 15%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0);
+  color: grey;
+  font-size: 2em;
+  vertical-align: middle;
+} 
+
+////////////////////////////////////////////////////////////////////////////////////
+
+.btnClientesPendientesHome, .btnDuenioHome, .btnSupervisorHome, .btnEmpleadoHome, .btnClienteAnonimoHome, .btnClienteRegistradoHome,.btnPedirProductosHome{
   position: absolute; 
-  width: 20vw; 
+  width: 50vw; 
+  left: 25vw;
   height: 10vh;
-  top: 5vh;
   color: grey;
   background-color:  rgb(255,215,0);
   border-radius: 10px;
@@ -35,36 +77,38 @@
   font-weight:bold;
 }
 
-.btnVolverHome {
-  left: 5vw;
+.btnClientesPendientesHome{
+  top: 10vh;
 }
 
-.btnCargaMesa {
-  left: 30vw;
+.btnDuenioHome{
+  top: 22vh;
 }
 
-.btnCargaProducto {
-  left: 55vw;
+.btnSupervisorHome{
+  top: 34vh;
 }
 
-.btnCargaUsuario {
-  left: 80vw;
+.btnEmpleadoHome{
+  top: 46vh;
 }
 
-.btnProductos {
-  left: 30vw;
-  top: 20vh;
+.btnClienteAnonimoHome{
+  top: 58vh;
 }
 
-.btnVolverHome:active,
-.btnCargaMesa:active,
-.btnCargaProducto:active,
-.btnCargaUsuario:active,
-.btnProductos:active {
+.btnClienteRegistradoHome{
+  top: 70vh;
+}
+
+.btnPedirProductosHome{
+  top: 82vh;
+}
+
+.btnCargaMesa:active, .btnCargaProducto:active{
   transform: translate(0px, 5px);
   box-shadow: 0 5px rgb(218,165,32);
 }
-
 
 .loadingContainerHome{
   width: 100vw;
