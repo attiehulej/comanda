@@ -3,7 +3,7 @@
     <name>La Comanda</name>
     <description>PPS TP La Comanda 1er Cuatrimestre 2020</description>
     <author email="attiehulej@gmail.com" href="https://github.com/attiehulej/comanda">Lucas Hulej y Patricio Attie</author>
-    <content original-src="index.html" src="http://192.168.1.140:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

@@ -10,7 +10,7 @@ import { Router } from "@angular/router";
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
-  splash = false;
+  splash = true;
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,

@@ -1,0 +1,9 @@
+<div class="fondoHome">
+  <ion-label class="lblTitulo">{{ producto.nombre }}</ion-label>
+  <!-- <div id="myModal" class="modal"> -->
+     <img class="modal-content fade" id="img01" [src]="base64ToImg(fotoActual)">
+     <a class="prev" (click)="irFotoAnt()">&#10094;</a>
+     <a class="next" (click)="irFotoSig()">&#10095;</a>
+  <!-- </div> -->
+  <ion-label class="lblTitulo">{{ producto.descripcion }}</ion-label>
+</div>

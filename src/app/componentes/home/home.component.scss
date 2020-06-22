@@ -17,7 +17,11 @@
   justify-content: center;
 }
 
-.btnVolverHome, .btnCargaMesa, .btnCargaProducto, .btnCargaUsuario {
+.btnVolverHome,
+.btnCargaMesa,
+.btnCargaProducto,
+.btnCargaUsuario,
+.btnProductos {
   position: absolute; 
   width: 20vw; 
   height: 10vh;
@@ -47,7 +51,16 @@
   left: 80vw;
 }
 
-.btnVolverHome:active, .btnCargaMesa:active, .btnCargaProducto:active, .btnCargaUsuario:active {
+.btnProductos {
+  left: 30vw;
+  top: 20vh;
+}
+
+.btnVolverHome:active,
+.btnCargaMesa:active,
+.btnCargaProducto:active,
+.btnCargaUsuario:active,
+.btnProductos:active {
   transform: translate(0px, 5px);
   box-shadow: 0 5px rgb(218,165,32);
 }

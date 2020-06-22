@@ -27,4 +27,8 @@ export class HomeComponent implements OnInit {
   public abmUsuario(): void {
     this.spinnerRouter.showSpinnerAndNavigate('alta-usuarios', 'loadingContainerHome', 2000);
   }
+
+  public productos(): void {
+    this.spinnerRouter.showSpinnerAndNavigate('productos', 'loadingContainerHome', 2000);
+  }
 }

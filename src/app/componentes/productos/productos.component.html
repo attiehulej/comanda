@@ -1,0 +1,35 @@
+<div class="fondoHome">
+
+  <ion-list *ngIf="!producto && sector.length === 0">
+    <ion-list-header>
+      <ion-label class="lblTitulo">
+        Carta
+      </ion-label>
+    </ion-list-header>
+    <ion-item detail *ngFor="let unSector of sectores" (click)="sector = unSector">
+      <ion-label>{{ unSector }}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="!producto && sector.length > 0">
+    <ion-list-header>
+      <ion-label class="lblTitulo">
+        Carta - {{ sector }}
+      </ion-label>
+    </ion-list-header>
+    <ion-item detail *ngFor="let unProducto of getProductos()" (click)="producto = unProducto">
+      <ion-label>{{ unProducto.nombre }}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <app-detalle-producto *ngIf="producto" [producto]="producto"></app-detalle-producto>
+
+  <div class="loadingContainerProducto" id="loadingContainerProducto" hidden>
+    <div class="loadingProducto">
+      <img src="../../../assets/spinner.png">
+    </div>
+  </div>
+
+  <button *ngIf="sector.length === 0" type="button" class="btnVolverListaProductos" (click)="volverHome()">Volver</button>
+  <button *ngIf="sector.length > 0" type="button" class="btnVolverListaProductos" (click)="sector = ''">Volver</button>
+</div>
