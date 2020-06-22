@@ -45,12 +45,6 @@ export class ClientesPendientesPage implements OnInit
 
   ngOnInit() 
   {
-    /*
-    this.formClientesPendientes = this.fb.group
-    ({
-      listaClientesPendientes: ['']
-    });*/
-
     this.servicioAlta.currentUser().then((response : firebase.User) => {
       let aux = this.servicioAlta.obtenerDetalle(response); 
       aux.subscribe(datos => {
@@ -87,7 +81,8 @@ export class ClientesPendientesPage implements OnInit
 
   declinarUsuario(usuario): void
   {
-    //FALTA MEOTODO PARA ELIMINAR AL USUARIO
+    this.servicioAlta.gestionarUsuario(usuario, EstadoUsuario.RECHAZADO).then(datos=>(console.log(datos))).catch(err => console.log(err));
+    this.usuariosPendientes = [];
   }
 
   volverClientesPendientes(): void

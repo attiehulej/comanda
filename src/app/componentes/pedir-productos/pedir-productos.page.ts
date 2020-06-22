@@ -28,6 +28,10 @@ export class PedirProductosPage implements OnInit {
   listaPostres: any[] = [];
   listaBebidas: any[] = [];
 
+  listaPedido: any[] = [];
+  totalPedido: number = 0;
+  mostrarConfirmarPedido: boolean = false;
+
   constructor(
     public spinnerRouter: SpinnerRouterService,
     public servicioAlta : AuthService,
@@ -43,15 +47,12 @@ export class PedirProductosPage implements OnInit {
         switch(producto.sector)
         {
           case 'COMIDAS':
-            console.log(producto.codigo);
             this.listaPlatos.push(producto);
             break;
           case 'POSTRES':
-            console.log(producto.codigo);
             this.listaPostres.push(producto);
             break;
           case 'BEBIDAS':
-            console.log(producto.codigo);
             this.listaBebidas.push(producto);
             break;
         }
@@ -59,6 +60,11 @@ export class PedirProductosPage implements OnInit {
     }, error => console.log(error));
   }
 
+
+  cambiarVistaPedirProductos(): boolean
+  {
+    return this.mostrarConfirmarPedido;
+  }
 
   mostrarSegunTipoProducto(producto): boolean
   {
@@ -98,6 +104,12 @@ export class PedirProductosPage implements OnInit {
 
   ngOnInit() 
   {
+    this.formPedirProductos = this.fb.group
+    ({
+      totalPedido: ['$0'],
+    });
+
+
     this.servicioAlta.currentUser().then((response : firebase.User) => {
       let aux = this.servicioAlta.obtenerDetalle(response); 
       aux.subscribe(datos => {
@@ -148,10 +160,63 @@ export class PedirProductosPage implements OnInit {
     }
   }
 
+  agregarProducto(producto): void
+  {
+    for (const productoLista of this.lista) 
+    {
+      if(productoLista.codigo == producto.codigo)
+      {
+        productoLista.cantidad++;
+        break;
+      }  
+    }
+    this.mostrarTotal();
+  }
 
+  eliminarProducto(producto): void
+  {
+    for (const productoLista of this.lista) 
+    {
+      if(productoLista.codigo == producto.codigo)
+      {
+        if(productoLista.cantidad > 0)
+        {
+          productoLista.cantidad--;
+        }
+        break;
+      }  
+    }
+    this.mostrarTotal();
+  }
+
+  mostrarTotal(): void
+  {
+    let contador = 0;
+    for (const producto of this.lista) 
+    {
+      contador = contador + (producto.precio * producto.cantidad);
+    }
+    this.totalPedido = contador;
+    this.formPedirProductos.controls.totalPedido.setValue('$'+contador);
+  }
+
+  confirmarPedido(): void
+  {
+    this.mostrarConfirmarPedido = true;
+  }
 
   volverPedirProductos(): void
   {
     this.spinnerRouter.showSpinnerAndNavigate('home', 'loadingContainerPedirProductos', 2000);
+  }
+
+  cancelar(): void
+  {
+    this.mostrarConfirmarPedido = false;
+  }
+
+  ordenar(): void //ENVIAR NOTIFICACION A EMPLEADOS CORRESPONDIENTES
+  {
+
   }
 }
