@@ -3,47 +3,47 @@
   <form [formGroup]="formUsuario" (ngSubmit)="onSubmitUsuario()">
 
     <div class="divCorreoAltaUsuarios" *ngIf="mostrarSegunAlta('correo')">
-      <label class="lblCorreoAltaUsuarios" >INGRESE CORREO</label>
+      <label class="lblCorreoAltaUsuarios" >CORREO</label>
       <input type="email" class="inpCorreoAltaUsuarios" formControlName="correo">
       <label class="lblErrorCorreoAltaUsuarios" [hidden]="formUsuario.controls.correo.valid || formUsuario.controls.correo.pristine">CORREO INVALIDO</label>
     </div>
 
     <div class="divClaveAltaUsuarios" *ngIf="mostrarSegunAlta('clave')">
-      <label class="lblClaveAltaUsuarios">INGRESE CLAVE</label>
+      <label class="lblClaveAltaUsuarios">CLAVE</label>
       <input type="password" class="inpClaveAltaUsuarios" formControlName="clave">
       <label class="lblErrorClaveAltaUsuarios" [hidden]="formUsuario.controls.clave.valid || formUsuario.controls.clave.pristine">CLAVE INVALIDA</label>   
     </div>
   
     <div class="divNombreAltaUsuarios" *ngIf="mostrarSegunAlta('nombre')">
-      <label class="lblNombreAltaUsuarios">INGRESE NOMBRE</label>
+      <label class="lblNombreAltaUsuarios">NOMBRE</label>
       <input type="text" class="inpNombreAltaUsuarios" formControlName="nombre">
       <label class="lblErrorNombreAltaUsuarios" [hidden]="formUsuario.controls.nombre.valid || formUsuario.controls.nombre.pristine">NOMBRE INVALIDO</label>
     </div>
 
     <div class="divApellidoAltaUsuarios" *ngIf="mostrarSegunAlta('apellido')">
-      <label class="lblApellidoAltaUsuarios">INGRESE APELLIDO</label>
+      <label class="lblApellidoAltaUsuarios">APELLIDO</label>
       <input type="text" class="inpApellidoAltaUsuarios" formControlName="apellido">
       <label class="lblErrorApellidoAltaUsuarios" [hidden]="formUsuario.controls.apellido.valid || formUsuario.controls.apellido.pristine">APELLIDO INVALIDO</label>
     </div>
 
     <div class="divDniAltaUsuarios" *ngIf="mostrarSegunAlta('dni')">
-      <label class="lblDniAltaUsuarios">INGRESE DNI</label>
+      <label class="lblDniAltaUsuarios">DNI</label>
       <input type="text" class="inpDniAltaUsuarios" formControlName="dni" name="dni">
       <label class="lblErrorDniAltaUsuarios" [hidden]="formUsuario.controls.dni.valid || formUsuario.controls.dni.pristine">DNI INVALIDO</label>
     </div>
 
     <div class="divCuilAltaUsuarios" *ngIf="mostrarSegunAlta('cuil')">
-      <label class="lblCuilAltaUsuarios">INGRESE CUIL</label>
+      <label class="lblCuilAltaUsuarios">CUIL</label>
       <input type="text" class="inpCuilAltaUsuarios" formControlName="cuil" name="cuil">
       <label class="lblErrorCuilAltaUsuarios" [hidden]="(formUsuario.controls.cuil.valid && validacionAuxCuil(formUsuario.controls.dni.value)) || formUsuario.controls.cuil.pristine">CUIL INVALIDO</label>
     </div>
    
     <div class="divTipoAltaUsuarios" *ngIf="mostrarSegunAlta('tipo')">
       <select class="listTipoAltaUsuarios" formControlName="tipo">
-        <option>MOZO</option>
-        <option>COCINERO</option>
-        <option>BAR TENDER</option>
-        <option>METRE</option>
+        <option value="MOZO">MOZO</option>
+        <option value="COCINERO">COCINERO</option>
+        <option value="BARTENDER">BARTENDER</option>
+        <option value="METRE">METRE</option>
       </select>
     </div>
     

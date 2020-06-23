@@ -1,5 +1,6 @@
 export enum EstadoUsuario {
     ANONIMO = 'ANONIMO',
     PENDIENTE = 'PENDIENTE',
-    APROBADO = 'APROBADO'
+    APROBADO = 'APROBADO',
+    RECHAZADO = 'RECHAZADO'
 }
