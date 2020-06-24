@@ -31,17 +31,15 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { HomeComponent } from './componentes/home/home.component';
 import { CargaMesaComponent } from './componentes/carga-mesa/carga-mesa.component';
 import { CargaProductoComponent } from './componentes/carga-producto/carga-producto.component';
-// import { ProductosComponent } from './componentes/productos/productos.component';
-// import { DetalleProductoComponent } from './componentes/detalle-producto/detalle-producto.component';
+import { InicioComponent } from './componentes/inicio/inicio.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     CargaMesaComponent, // PATO
-    CargaProductoComponent // , // PATO
-    // ProductosComponent, // PATO
-    // DetalleProductoComponent // PATO
+    CargaProductoComponent, // PATO
+    InicioComponent // PATO
   ],
   entryComponents: [],
   imports: [

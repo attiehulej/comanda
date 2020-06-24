@@ -268,7 +268,8 @@ export class AltaUsuariosPage implements OnInit {
   volverAltaUsuarios(): void
   {
     this.formUsuario.reset();
-    this.spinnerRouter.showSpinnerAndNavigate('home', 'loadingContainerAltaUsuarios', 2000);
+    // this.spinnerRouter.showSpinnerAndNavigate('home', 'loadingContainerAltaUsuarios', 2000);
+    this.spinnerRouter.showSpinnerAndNavigate('inicio', 'loadingContainerAltaUsuarios', 2000); // PATO
   }
 
   validacionAuxCuil(dni : string): boolean
