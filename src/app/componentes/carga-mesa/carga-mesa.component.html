@@ -1,5 +1,4 @@
 <div class="fondoHome">
-  <button type="button" class="btnVolverHome" (click)="volverHome()">Volver</button>
   
   <div *ngIf="getMuestraModal()" id="myModal" class="modal">
      <img class="modal-content" id="img01" [src]="base64ToImg()" (click)="setMuestraModal(false)">
@@ -19,8 +18,8 @@
       <ion-select-option *ngFor="let tipo of tipoMesa">{{ tipo }}</ion-select-option>
     </ion-select>
     <label class="lblError" *ngIf="formMesa.controls.tipoMesa.invalid && (formMesa.controls.tipoMesa.touched || formMesa.controls.tipoMesa.dirty)">{{ mostrarError('tipoMesa') }}</label>
-    
-    <label class="lblTitulo">Foto</label>
+
+    <!-- <label class="lblTitulo">Foto</label>
     <br>
     <button *ngIf="getFoto().length === 0" (click)="tomarFoto()">
       <ion-icon name="camera-outline"></ion-icon>
@@ -28,9 +27,12 @@
     <button *ngIf="getFoto().length > 0" (click)="setMuestraModal(true)">
       <ion-icon name="image-outline"></ion-icon>
     </button>
-    <br>
+    <br> -->
     
-    <button type="submit" class="btnSubmitLogin">Enviar</button>
+    <button type="button" class="btnVolverAltaMesas" (click)="volverHome()">Volver</button>
+    <button type="button" *ngIf="getFoto().length === 0" class="btnFotoAltaMesas" (click)="tomarFoto()">FOTO</button>
+    <button type="button" *ngIf="getFoto().length > 0" class="btnFotoAltaMesas" (click)="setMuestraModal(true)">VER FOTO</button>
+    <button class="btnSubmitAltaMesas" type="submit">ENVIAR</button>
   </form>
   
   <div class="loadingContainerMesa" id="loadingContainerMesa" hidden>

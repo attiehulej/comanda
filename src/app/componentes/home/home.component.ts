@@ -127,4 +127,8 @@ export class HomeComponent implements OnInit {
     localStorage.setItem('tipoDeAlta', tipoDeAlta);
     this.spinnerRouter.showSpinnerAndNavigate('alta-usuarios', 'loadingContainerHome', 2000);
   }
+
+  public productos(): void {
+    this.spinnerRouter.showSpinnerAndNavigate('productos', 'loadingContainerHome', 2000);
+  }
 }

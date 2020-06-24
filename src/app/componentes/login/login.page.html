@@ -1,4 +1,8 @@
 <div class="fondoLogin">
+  <div class="headLogin">
+    <button type="button" class="btnVolverLogin" (click)="volverLogin()"><</button>
+  </div>
+
   <form [formGroup]="formLogin" (ngSubmit) ="onSubmitLogin()">
     
     <label class="lblCorreoLogin">Correo Electrónico</label>

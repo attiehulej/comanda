@@ -509,3 +509,24 @@
     from{transform: rotate(0deg);}
     to{transform: rotate(360deg);}
 }
+
+.headAltaUsuarios{
+  position: absolute;
+  top: 0vh;
+  left: 0vw;
+  height: 5vh;
+  width: 100vw;
+  background-color: rgb(255,215,0);
+}
+
+.btnVolverInicio{
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 15%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0);
+  color: grey;
+  font-size: 2em;
+  vertical-align: middle;
+} 

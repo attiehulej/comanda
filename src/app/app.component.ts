@@ -27,7 +27,8 @@ export class AppComponent {
 
       setTimeout(() => {
         this.splash = false;
-        this.router.navigate(['login']);
+        // this.router.navigate(['login']);
+        this.router.navigate(['inicio']); // PATO
       }, 4000);
     });
   }

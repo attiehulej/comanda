@@ -140,4 +140,9 @@ export class LoginPage implements OnInit {
   {
     this.formLogin.reset();
   }
+
+  volverLogin(): void
+  {
+    this.spinnerRouter.showSpinnerAndNavigate('inicio', 'loadingContainerLogin', 2000);
+  }
 }

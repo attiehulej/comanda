@@ -1,5 +1,4 @@
 <div class="fondoHome">
-  <button type="button" class="btnVolverHome" (click)="volverHome()">Volver</button>
   
   <div *ngIf="getMuestraModal()" id="myModal" class="modal">
      <img class="modal-content" id="img01" [src]="base64ToImg(getFotoActual())" (click)="setMuestraModal(false)">
@@ -34,7 +33,7 @@
     <ion-input type="number" [formControl]="formProducto.controls.precio"></ion-input>
     <label class="lblError" *ngIf="formProducto.controls.precio.invalid && (formProducto.controls.precio.touched || formProducto.controls.precio.dirty)">{{ mostrarError('precio') }}</label>
     
-    <label class="lblTitulo">Foto</label>
+    <!-- <label class="lblTitulo">Foto</label>
     <br>
     <button *ngIf="getFotos().length < getCantFotos()" (click)="tomarFoto()">
       <ion-icon name="camera-outline"></ion-icon>
@@ -42,9 +41,12 @@
     <button *ngIf="getFotos().length > 0" (click)="setMuestraModal(true)">
       <ion-icon name="image-outline"></ion-icon>
     </button>
-    <br>
+    <br> -->
 
-    <button type="submit" class="btnSubmitLogin">Enviar</button>
+    <button type="button" class="btnVolverAltaProductos" (click)="volverHome()">Volver</button>
+    <button type="button" *ngIf="getFotos().length < getCantFotos()" class="btnFotoAltaProductos" (click)="tomarFoto()">FOTO</button>
+    <button type="button" *ngIf="getFotos().length > 0" class="btnVerFotosAltaProductos" (click)="setMuestraModal(true)">VER FOTOS</button>
+    <button class="btnSubmitAltaProductos" type="submit">ENVIAR</button>
   </form>
 
 

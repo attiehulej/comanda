@@ -1,5 +1,9 @@
 <div class="fondoAltaUsuarios">
   
+  <div class="headAltaUsuarios">
+    <button type="button" class="btnVolverInicio" (click)="volverAltaUsuarios()"><</button>
+  </div>
+
   <form [formGroup]="formUsuario" (ngSubmit)="onSubmitUsuario()">
 
     <div class="divCorreoAltaUsuarios" *ngIf="mostrarSegunAlta('correo')">

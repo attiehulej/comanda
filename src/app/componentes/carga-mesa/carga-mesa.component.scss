@@ -66,7 +66,7 @@
   justify-content: center;
 }
 
-.btnVolverHome{
+/*.btnVolverHome{
   position: absolute; 
   width: 20vw; 
   height: 10vh;
@@ -84,7 +84,7 @@
 .btnVolverHome:active{
   transform: translate(0px, 5px);
   box-shadow: 0 5px rgb(218,165,32);
-}
+}*/
 
 
 .loadingContainerMesa{
@@ -148,7 +148,7 @@ ion-input, ion-select {
   font-weight:bold;
 }
 
-button {
+/*button {
   color: grey;
   background-color:  rgb(255,215,0);
   border-radius: 10px;
@@ -164,4 +164,58 @@ button {
 button:active {
   transform: translate(0px, 5px);
   box-shadow: 0 5px rgb(218,165,32);
+}*/
+
+.btnVolverAltaMesas{
+  position: absolute; 
+  width: 25vw; 
+  height: 4vh;
+  top: 96vh;
+  left: 0vw;
+  color: grey;
+  background-color:  rgb(255,215,0);
+  border-radius: 10px;
+  font-size: 2vh;
+  font-family:Helvetica, sans-serif;
+  font-weight:bold;
+}
+
+.btnFotoAltaMesas:active{
+  background-color: rgb(218,165,32);
+}
+
+.btnSubmitAltaMesas{
+  position: absolute; 
+  width: 25vw; 
+  height: 4vh;
+  top: 96vh;
+  left: 75vw;
+  color: grey;
+  background-color:  rgb(255,215,0);
+  border-radius: 10px;
+  font-size: 2vh;
+  font-family:Helvetica, sans-serif;
+  font-weight:bold;
+}
+
+.btnFotoAltaMesas:active{
+  background-color: rgb(218,165,32);
+}
+
+.btnFotoAltaMesas{
+  position: absolute; 
+  width: 25vw; 
+  height: 4vh;
+  top: 96vh;
+  left: 25vw;
+  color: grey;
+  background-color:  rgb(255,215,0);
+  border-radius: 10px;
+  font-size: 2vh;
+  font-family:Helvetica, sans-serif;
+  font-weight:bold;
+}
+
+.btnFotoAltaMesas:active{
+  background-color: rgb(218,165,32);
 }

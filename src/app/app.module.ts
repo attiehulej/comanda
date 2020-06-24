@@ -10,6 +10,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Vibration } from '@ionic-native/vibration/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -27,19 +28,19 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 
 import { HomeComponent } from './componentes/home/home.component';
-import { QrComponent } from './componentes/qr/qr.component';
 import { CargaMesaComponent } from './componentes/carga-mesa/carga-mesa.component';
 import { CargaProductoComponent } from './componentes/carga-producto/carga-producto.component';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { InicioComponent } from './componentes/inicio/inicio.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    QrComponent,
     CargaMesaComponent, // PATO
-    CargaProductoComponent // PATO
+    CargaProductoComponent, // PATO
+    InicioComponent // PATO
   ],
   entryComponents: [],
   imports: [
