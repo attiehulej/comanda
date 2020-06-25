@@ -1,47 +1,61 @@
-<div class="fondoAltaUsuarios">
-  
-  <div class="headAltaUsuarios">
-    <button type="button" class="btnVolverInicio" (click)="volverAltaUsuarios()"><</button>
-  </div>
+<ion-header>
+  <ion-toolbar color="warning">
+    <ion-button slot="start" fill="clear" (click)="volverAltaUsuarios()">
+      <ion-icon color="light" name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    <ion-title class="ion-text-center">
+      Usuarios
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
 
+<ion-content class="background">
   <form [formGroup]="formUsuario" (ngSubmit)="onSubmitUsuario()">
 
     <div class="divCorreoAltaUsuarios" *ngIf="mostrarSegunAlta('correo')">
-      <label class="lblCorreoAltaUsuarios" >CORREO</label>
+      <label class="lblCorreoAltaUsuarios">CORREO</label>
       <input type="email" class="inpCorreoAltaUsuarios" formControlName="correo">
-      <label class="lblErrorCorreoAltaUsuarios" [hidden]="formUsuario.controls.correo.valid || formUsuario.controls.correo.pristine">CORREO INVALIDO</label>
+      <label class="lblErrorCorreoAltaUsuarios"
+        [hidden]="formUsuario.controls.correo.valid || formUsuario.controls.correo.pristine">CORREO INVALIDO</label>
     </div>
 
     <div class="divClaveAltaUsuarios" *ngIf="mostrarSegunAlta('clave')">
       <label class="lblClaveAltaUsuarios">CLAVE</label>
       <input type="password" class="inpClaveAltaUsuarios" formControlName="clave">
-      <label class="lblErrorClaveAltaUsuarios" [hidden]="formUsuario.controls.clave.valid || formUsuario.controls.clave.pristine">CLAVE INVALIDA</label>   
+      <label class="lblErrorClaveAltaUsuarios"
+        [hidden]="formUsuario.controls.clave.valid || formUsuario.controls.clave.pristine">CLAVE INVALIDA</label>
     </div>
-  
+
     <div class="divNombreAltaUsuarios" *ngIf="mostrarSegunAlta('nombre')">
       <label class="lblNombreAltaUsuarios">NOMBRE</label>
       <input type="text" class="inpNombreAltaUsuarios" formControlName="nombre">
-      <label class="lblErrorNombreAltaUsuarios" [hidden]="formUsuario.controls.nombre.valid || formUsuario.controls.nombre.pristine">NOMBRE INVALIDO</label>
+      <label class="lblErrorNombreAltaUsuarios"
+        [hidden]="formUsuario.controls.nombre.valid || formUsuario.controls.nombre.pristine">NOMBRE INVALIDO</label>
     </div>
 
     <div class="divApellidoAltaUsuarios" *ngIf="mostrarSegunAlta('apellido')">
       <label class="lblApellidoAltaUsuarios">APELLIDO</label>
       <input type="text" class="inpApellidoAltaUsuarios" formControlName="apellido">
-      <label class="lblErrorApellidoAltaUsuarios" [hidden]="formUsuario.controls.apellido.valid || formUsuario.controls.apellido.pristine">APELLIDO INVALIDO</label>
+      <label class="lblErrorApellidoAltaUsuarios"
+        [hidden]="formUsuario.controls.apellido.valid || formUsuario.controls.apellido.pristine">APELLIDO
+        INVALIDO</label>
     </div>
 
     <div class="divDniAltaUsuarios" *ngIf="mostrarSegunAlta('dni')">
       <label class="lblDniAltaUsuarios">DNI</label>
       <input type="text" class="inpDniAltaUsuarios" formControlName="dni" name="dni">
-      <label class="lblErrorDniAltaUsuarios" [hidden]="formUsuario.controls.dni.valid || formUsuario.controls.dni.pristine">DNI INVALIDO</label>
+      <label class="lblErrorDniAltaUsuarios"
+        [hidden]="formUsuario.controls.dni.valid || formUsuario.controls.dni.pristine">DNI INVALIDO</label>
     </div>
 
     <div class="divCuilAltaUsuarios" *ngIf="mostrarSegunAlta('cuil')">
       <label class="lblCuilAltaUsuarios">CUIL</label>
       <input type="text" class="inpCuilAltaUsuarios" formControlName="cuil" name="cuil">
-      <label class="lblErrorCuilAltaUsuarios" [hidden]="(formUsuario.controls.cuil.valid && validacionAuxCuil(formUsuario.controls.dni.value)) || formUsuario.controls.cuil.pristine">CUIL INVALIDO</label>
+      <label class="lblErrorCuilAltaUsuarios"
+        [hidden]="(formUsuario.controls.cuil.valid && validacionAuxCuil(formUsuario.controls.dni.value)) || formUsuario.controls.cuil.pristine">CUIL
+        INVALIDO</label>
     </div>
-   
+
     <div class="divTipoAltaUsuarios" *ngIf="mostrarSegunAlta('tipo')">
       <select class="listTipoAltaUsuarios" formControlName="tipo">
         <option value="MOZO">MOZO</option>
@@ -50,7 +64,7 @@
         <option value="METRE">METRE</option>
       </select>
     </div>
-    
+
     <button type="button" class="btnVolverAltaUsuarios" (click)="volverAltaUsuarios()">Volver</button>
     <button type="button" class="btnQrAltaUsuarios" (click)="scanQrAltaUsuarios()">QR</button>
     <button class="btnFotoAltaUsuarios" type="button" (click)="tomarFotoAltaUsuarios()">FOTO</button>
@@ -63,4 +77,4 @@
     </div>
   </div>
 
-</div>
+</ion-content>

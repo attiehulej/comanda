@@ -103,7 +103,7 @@ export class HomeComponent implements OnInit {
         break;
 
       case 'PENDIENTE':
-        this.spinnerRouter.showSpinnerAndNavigate('clientes/clientes-pendientes', 'loadingContainerHome', 2000);
+        this.spinnerRouter.showSpinnerAndNavigate('clientes-pendientes', 'loadingContainerHome', 2000);
         break;
 
       case 'PEDIR_PRODUCTOS':

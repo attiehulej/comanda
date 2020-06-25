@@ -1,10 +1,16 @@
+<ion-header>
+  <ion-toolbar color="warning">
+    <ion-button slot="start" fill="clear" (click)="volverLogin()">
+      <ion-icon color="light" name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    <ion-title>
+      Inicia sesión
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
 <div class="fondoLogin">
-  <div class="headLogin">
-    <button type="button" class="btnVolverLogin" (click)="volverLogin()"><</button>
-  </div>
+  <form [formGroup]="formLogin" (ngSubmit)="onSubmitLogin()">
 
-  <form [formGroup]="formLogin" (ngSubmit) ="onSubmitLogin()">
-    
     <label class="lblCorreoLogin">Correo Electrónico</label>
     <input type="text" class="inpCorreoLogin" formControlName="correoLogin">
     <div class="errCorreoLogin" [hidden]="!errorEnControlLogin('correoLogin')">CORREO INVALIDO</div>
@@ -12,7 +18,7 @@
     <label class="lblClaveLogin">Contraseña</label>
     <input type="password" class="inpClaveLogin" formControlName="claveLogin">
     <div class="errClaveLogin" [hidden]="!errorEnControlLogin('claveLogin')">CLAVE INVALIDA</div>
-      
+
     <button type="submit" [disabled]="!formLogin.valid" class="btnSubmitLogin">Enviar</button>
     <button type="button" (click)="limpiarLogin()" class="btnResetLogin">Limpiar</button>
 
@@ -23,7 +29,7 @@
     </div>
   </div>
 </div>
-<ion-footer class="ion-text-center"> 
+<ion-footer class="ion-text-center">
   <ion-toolbar color="warning">
     <h5 expand="full" (click)="mockLogin()">Usuarios</h5>
   </ion-toolbar>

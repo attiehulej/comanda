@@ -2,22 +2,8 @@
     margin: 0%;
     padding: 0%;
     outline: none;
-    font-family: 'Libre Baskerville', serif;
 }
-  
-.fondoAltaUsuarios{
-    background-image: url("../../../assets/fondoLogin.jpg");
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-}
-  
+
 .btnVolverAltaUsuarios{
     position: absolute; 
     width: 25vw; 

@@ -6,14 +6,14 @@
     <ion-title class="ion-text-center">
       {{perfilUsuarioHome}}
     </ion-title>
-    <ion-avatar slot="end" style="height:40px; width: 40px; margin-right: 8px;">
-      <img [src]="imgUsuarioHome" (click)="logout()">
+    <ion-avatar slot="end" class="avatar">
+      <img [src]="imgUsuarioHome">
     </ion-avatar>
   </ion-toolbar>
 </ion-header>
 <div class="fondoHome">
   <button type="button" class="btnClientesPendientesHome" (click)="manejadoraHome('PENDIENTE')"
-    *ngIf="mostrarSegunPerfil('clientesPendientes')">Clientes Pendientes</button>
+    *ngIf="mostrarSegunPerfil('clientesPendientes')">Usuarios Pendientes</button>
   <button type="button" class="btnDuenioHome" (click)="manejadoraHome('DUEÑO')"
     *ngIf="mostrarSegunPerfil('altaDueño')">Abm Dueños</button>
   <button type="button" class="btnSupervisorHome" (click)="manejadoraHome('SUPERVISOR')"

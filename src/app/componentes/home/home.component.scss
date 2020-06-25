@@ -2,7 +2,13 @@
   margin: 0%;
   padding: 0%;
   outline: none;
-  font-family: 'Libre Baskerville', serif;
+}
+
+ion-avatar.avatar img {
+  height:40px;
+  width: 40px; 
+  margin-right: 8px;
+  margin-top: 10px;
 }
 
 .fondoHome{
