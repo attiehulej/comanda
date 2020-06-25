@@ -14,9 +14,8 @@ import { FormBuilder, FormGroup, Validators, FormsModule, FormControl } from '@a
   styleUrls: ['./clientes-pendientes.page.scss'],
 })
 
-export class ClientesPendientesPage implements OnInit 
-{
- 
+export class ClientesPendientesPage implements OnInit {
+
   usuarios: Observable<any[]>;
   lista: any[];
   perfilUsuarioClientesPendientes;
@@ -25,68 +24,57 @@ export class ClientesPendientesPage implements OnInit
 
   constructor(
     public spinnerRouter: SpinnerRouterService,
-    public servicioAlta : AuthService, 
+    public servicioAlta: AuthService,
     private fb: FormBuilder,
-    db : AngularFirestore,
-  ) 
-  {
+    db: AngularFirestore,
+  ) {
     this.usuarios = db.collection('usuarios').valueChanges();
     this.usuarios.subscribe(usuarios => {
       this.lista = usuarios;
-      for (const usuario of this.lista) 
-      {
-        if(usuario.estado == EstadoUsuario.PENDIENTE && usuario.perfil == TipoUsuario.CLIENTE_REGISTRADO)
-        {
+      for (const usuario of this.lista) {
+        if (usuario.estado === EstadoUsuario.PENDIENTE && usuario.perfil === TipoUsuario.CLIENTE_REGISTRADO) {
           this.usuariosPendientes.push(usuario);
         }
       }
     }, error => console.log(error));
   }
 
-  ngOnInit() 
-  {
-    this.servicioAlta.currentUser().then((response : firebase.User) => {
-      let aux = this.servicioAlta.obtenerDetalle(response); 
+  ngOnInit() {
+    this.servicioAlta.currentUser().then((response: firebase.User) => {
+      const aux = this.servicioAlta.obtenerDetalle(response);
       aux.subscribe(datos => {
         this.perfilUsuarioClientesPendientes = datos.perfil;
-        if(datos.foto != '')
-        {
+        if (datos.foto !== '') {
           this.imgUsuarioClientesPendientes = 'data:image/jpeg;base64,' + datos.foto;
         }
-        else
-        {
+        else {
           this.imgUsuarioClientesPendientes = '../../../assets/defaultFoto.png';
         }
       });
-    }).catch((reject : any) => {
+    }).catch((reject: any) => {
       console.log(reject);
     });
   }
 
-  usuarioEstaPendiente(usuario): boolean
-  {
-    let retorno: boolean = false;
-    if(usuario.estado == EstadoUsuario.PENDIENTE)
-    {
+  usuarioEstaPendiente(usuario): boolean {
+    let retorno = false;
+    if (usuario.estado === EstadoUsuario.PENDIENTE) {
       retorno = true;
     }
     return retorno;
   }
 
-  aprobarUsuario(usuario): void
-  {
-    this.servicioAlta.gestionarUsuario(usuario, EstadoUsuario.APROBADO).then(datos=>(console.log(datos))).catch(err => console.log(err));
+  aprobarUsuario(usuario): void {
+    this.servicioAlta.gestionarUsuario(usuario, EstadoUsuario.APROBADO).then(datos => (console.log(datos))).catch(err => console.log(err));
     this.usuariosPendientes = [];
   }
 
-  declinarUsuario(usuario): void
-  {
-    this.servicioAlta.gestionarUsuario(usuario, EstadoUsuario.RECHAZADO).then(datos=>(console.log(datos))).catch(err => console.log(err));
+  declinarUsuario(usuario): void {
+    this.servicioAlta.gestionarUsuario(usuario, EstadoUsuario.RECHAZADO).then(datos => (console.log(datos))).catch(err => console.log(err));
     this.usuariosPendientes = [];
   }
 
-  volverClientesPendientes(): void
-  {
+  volverClientesPendientes(): void {
     this.spinnerRouter.showSpinnerAndNavigate('home', 'loadingContainerClientesPendientes', 2000);
   }
 }
