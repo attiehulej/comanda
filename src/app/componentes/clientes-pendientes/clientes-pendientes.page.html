@@ -1,25 +1,23 @@
-<div class="fondoClientesPendientes">
+<ion-content class="background">
   <form>
-    
-  <div class="headClientesPendientes">
-    <button type="button" class="btnVolverClientesPendientes" (click)="volverClientesPendientes()"><</button>
-    <label class="lblHeadClientesPendientes">{{perfilUsuarioClientesPendientes}}</label>
-    <img class="imgHeadClientesPendientes" [src]="imgUsuarioClientesPendientes">
-  </div>
 
-  <div class="contenedorListaClientesPendientes">
-    <div class="contenedorOpciones"  *ngFor="let usuario of usuariosPendientes"> 
-      <div type="button" class="opcionListaClientesPendientes" disabled>{{usuario.correo}}</div>
-      <button type="button" class="btnAceptarClientesPendientes" (click)="aprobarUsuario(usuario)" *ngIf="usuarioEstaPendiente(usuario)">✔</button> 
-      <button type="button" class="btnCancelarClientesPendientes" (click)="declinarUsuario(usuario)" *ngIf="usuarioEstaPendiente(usuario)">✖</button> 
+    <div class="headClientesPendientes">
+      <button type="button" class="btnVolverClientesPendientes" (click)="volverClientesPendientes()">
+      </button>
+      <label class="lblHeadClientesPendientes">{{perfilUsuarioClientesPendientes}}</label>
+      <img class="imgHeadClientesPendientes" [src]="imgUsuarioClientesPendientes">
     </div>
-  </div>
 
-</form>
-  <div class="loadingContainerClientesPendientes" id="loadingContainerClientesPendientes" hidden>
-    <div class="loadingClientesPendientes">
-      <img src="../../../assets/spinner.png">
+    <div class="contenedorListaClientesPendientes">
+      <div class="contenedorOpciones" *ngFor="let usuario of usuariosPendientes">
+        <div type="button" class="opcionListaClientesPendientes" disabled>{{usuario.correo}}</div>
+        <button type="button" class="btnAceptarClientesPendientes" (click)="aprobarUsuario(usuario)"
+          *ngIf="usuarioEstaPendiente(usuario)">✔</button>
+        <button type="button" class="btnCancelarClientesPendientes" (click)="declinarUsuario(usuario)"
+          *ngIf="usuarioEstaPendiente(usuario)">✖</button>
+      </div>
     </div>
-  </div>
 
-</div>
+  </form>
+
+</ion-content>

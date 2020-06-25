@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { SpinnerRouterService } from 'src/app/servicios/spinner-router.service';
 import { AuthService } from '../../servicios/auth.service';
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { EstadoUsuario } from 'src/app/enums/estado-usuario.enum';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { TipoUsuario } from 'src/app/enums/tipo-usuario.enum';
-import { FormBuilder, FormGroup, Validators, FormsModule, FormControl } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
+import { UsuarioService } from 'src/app/servicios/usuario.service';
+import { UtilsService } from 'src/app/servicios/utils.service';
 
 @Component({
   selector: 'app-clientes-pendientes',
@@ -23,13 +23,12 @@ export class ClientesPendientesPage implements OnInit {
   usuariosPendientes: any[] = [];
 
   constructor(
-    public spinnerRouter: SpinnerRouterService,
-    public servicioAlta: AuthService,
+    public authService: AuthService,
     private fb: FormBuilder,
-    db: AngularFirestore,
+    private usuarioService: UsuarioService,
+    private utilsService: UtilsService
   ) {
-    this.usuarios = db.collection('usuarios').valueChanges();
-    this.usuarios.subscribe(usuarios => {
+    this.usuarioService.obtenerUsuarios().subscribe(usuarios => {
       this.lista = usuarios;
       for (const usuario of this.lista) {
         if (usuario.estado === EstadoUsuario.PENDIENTE && usuario.perfil === TipoUsuario.CLIENTE_REGISTRADO) {
@@ -40,8 +39,8 @@ export class ClientesPendientesPage implements OnInit {
   }
 
   ngOnInit() {
-    this.servicioAlta.currentUser().then((response: firebase.User) => {
-      const aux = this.servicioAlta.obtenerDetalle(response);
+    this.authService.currentUser().then((response: firebase.User) => {
+      const aux = this.authService.obtenerDetalle(response);
       aux.subscribe(datos => {
         this.perfilUsuarioClientesPendientes = datos.perfil;
         if (datos.foto !== '') {
@@ -65,16 +64,16 @@ export class ClientesPendientesPage implements OnInit {
   }
 
   aprobarUsuario(usuario): void {
-    this.servicioAlta.gestionarUsuario(usuario, EstadoUsuario.APROBADO).then(datos => (console.log(datos))).catch(err => console.log(err));
+    this.authService.gestionarUsuario(usuario, EstadoUsuario.APROBADO).then(datos => (console.log(datos))).catch(err => console.log(err));
     this.usuariosPendientes = [];
   }
 
   declinarUsuario(usuario): void {
-    this.servicioAlta.gestionarUsuario(usuario, EstadoUsuario.RECHAZADO).then(datos => (console.log(datos))).catch(err => console.log(err));
+    this.authService.gestionarUsuario(usuario, EstadoUsuario.RECHAZADO).then(datos => (console.log(datos))).catch(err => console.log(err));
     this.usuariosPendientes = [];
   }
 
   volverClientesPendientes(): void {
-    this.spinnerRouter.showSpinnerAndNavigate('home', 'loadingContainerClientesPendientes', 2000);
+    this.utilsService.showLoadingAndNavigate('home');
   }
 }

@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { SpinnerRouterService } from 'src/app/servicios/spinner-router.service';
 import { FormBuilder, FormGroup, Validators, FormsModule, FormControl } from '@angular/forms';
 import { CameraService } from 'src/app/servicios/camera.service';
 import { Observable } from 'rxjs/internal/Observable';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
-import { ToastService } from '../../servicios/toast.service';
 import { AuthService } from '../../servicios/auth.service';
 import { Usuario } from '../../clases/usuario';
 import { EstadoUsuario } from 'src/app/enums/estado-usuario.enum';
 import { TipoUsuario } from 'src/app/enums/tipo-usuario.enum';
+import { UtilsService } from 'src/app/servicios/utils.service';
 
 @Component({
   selector: 'app-alta-usuarios',
@@ -28,13 +27,12 @@ export class AltaUsuariosPage implements OnInit {
   qrScan: any;
 
   constructor(
-    public spinnerRouter: SpinnerRouterService,
+    public utilsService: UtilsService,
     private fb: FormBuilder,
     private camera: CameraService,
     public db: AngularFirestore,
     public scanner: BarcodeScanner,
-    public toast: ToastService,
-    public servicioAlta: AuthService
+    public authService: AuthService
   ) {
     this.usuarios = db.collection('usuarios').valueChanges();
     this.usuarios.subscribe(usuarios => this.listaUsuarios = usuarios, error => console.log(error));
@@ -53,8 +51,8 @@ export class AltaUsuariosPage implements OnInit {
         foto: ['', [Validators.required]],
       });
 
-    this.servicioAlta.currentUser().then((response: firebase.User) => {
-      const aux = this.servicioAlta.obtenerDetalle(response);
+    this.authService.currentUser().then((response: firebase.User) => {
+      const aux = this.authService.obtenerDetalle(response);
       aux.subscribe(datos => { alert(datos.correo); });
     }).catch((reject: any) => {
 
@@ -114,16 +112,16 @@ export class AltaUsuariosPage implements OnInit {
           }
           break;
       }
-      this.servicioAlta.signUp(nuevoUsuario).then(datos => {
+      this.authService.signUp(nuevoUsuario).then(datos => {
         console.log(datos);
         this.volverAltaUsuarios();
       }, (err) => {
-        this.toast.presentToast('ERROR'); // por ejemplo mail ya utilizado
+        this.utilsService.handleError(err);
         console.log('Error: ' + err);
       });
     }
     else {
-      this.toast.presentToast('Datos Invalidos');
+      this.utilsService.presentToast('Datos Invalidos', 'toast-error');
       this.markAllAsDirtyAltaUsuarios(this.formUsuario);
     }
   }
@@ -263,8 +261,7 @@ export class AltaUsuariosPage implements OnInit {
 
   volverAltaUsuarios(): void {
     this.formUsuario.reset();
-    // this.spinnerRouter.showSpinnerAndNavigate('home', 'loadingContainerAltaUsuarios', 2000);
-    this.spinnerRouter.showSpinnerAndNavigate('inicio', 'loadingContainerAltaUsuarios', 2000); // PATO
+    this.utilsService.showLoadingAndNavigate('inicio'); // PATO
   }
 
   validacionAuxCuil(dni: string): boolean {

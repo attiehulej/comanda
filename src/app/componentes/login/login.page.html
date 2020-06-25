@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="warning">
-    <ion-button slot="start" fill="clear" (click)="volverLogin()">
+    <ion-button slot="start" fill="clear" (click)="moveTo('inicio')">
       <ion-icon color="light" name="arrow-back-outline"></ion-icon>
     </ion-button>
     <ion-title>
@@ -8,9 +8,9 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-<div class="fondoLogin">
-  <form [formGroup]="formLogin" (ngSubmit)="onSubmitLogin()">
 
+<ion-content class="background">
+  <form [formGroup]="formLogin" (ngSubmit)="onSubmitLogin()">
     <label class="lblCorreoLogin">Correo Electrónico</label>
     <input type="text" class="inpCorreoLogin" formControlName="correoLogin">
     <div class="errCorreoLogin" [hidden]="!errorEnControlLogin('correoLogin')">CORREO INVALIDO</div>
@@ -21,14 +21,9 @@
 
     <button type="submit" [disabled]="!formLogin.valid" class="btnSubmitLogin">Enviar</button>
     <button type="button" (click)="limpiarLogin()" class="btnResetLogin">Limpiar</button>
-
   </form>
-  <div class="loadingContainerLogin" id="loadingContainerLogin" hidden>
-    <div class="loadingLogin">
-      <img src="../../../assets/spinner.png">
-    </div>
-  </div>
-</div>
+</ion-content>
+
 <ion-footer class="ion-text-center">
   <ion-toolbar color="warning">
     <h5 expand="full" (click)="mockLogin()">Usuarios</h5>

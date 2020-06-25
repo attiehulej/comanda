@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/servicios/auth.service';
-import { SpinnerRouterService } from 'src/app/servicios/spinner-router.service';
+import { UtilsService } from 'src/app/servicios/utils.service';
 
 @Component({
   selector: 'app-clientes',
@@ -11,7 +11,9 @@ export class ClientesPage implements OnInit {
   public perfilUsuarioHome: string;
   public imgUsuarioHome: string;
 
-  constructor(private authService: AuthService, private spinnerRouter: SpinnerRouterService) { }
+  constructor(
+    private authService: AuthService,
+    private utilsService: UtilsService) { }
 
   ngOnInit() {
     this.authService.currentUser().then((response: firebase.User) => {
@@ -36,7 +38,7 @@ export class ClientesPage implements OnInit {
 
   logOut(): void {
     this.authService.logout();
-    this.spinnerRouter.showSpinnerAndNavigate('inicio', 'loadingContainerHome', 2000);
+    this.utilsService.showLoadingAndNavigate('inicio');
   }
 
 }

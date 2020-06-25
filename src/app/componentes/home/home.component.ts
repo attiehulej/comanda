@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SpinnerRouterService } from 'src/app/servicios/spinner-router.service';
-import { FormBuilder, FormGroup, Validators, FormsModule, FormControl, Form } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from '../../servicios/auth.service';
-import { element } from 'protractor';
+import { UtilsService } from 'src/app/servicios/utils.service';
 
 @Component({
   selector: 'app-home',
@@ -15,14 +14,14 @@ export class HomeComponent implements OnInit {
   perfilUsuarioHome;
   imgUsuarioHome;
   constructor(
-    public spinnerRouter: SpinnerRouterService,
     public fb: FormBuilder,
-    public servicioAlta: AuthService
+    public authService: AuthService,
+    private utilsService: UtilsService,
   ) { }
 
   ngOnInit() {
-    this.servicioAlta.currentUser().then((response: firebase.User) => {
-      const aux = this.servicioAlta.obtenerDetalle(response);
+    this.authService.currentUser().then((response: firebase.User) => {
+      const aux = this.authService.obtenerDetalle(response);
       aux.subscribe(datos => {
         this.perfilUsuarioHome = datos.perfil;
         if (this.perfilUsuarioHome === 'CLIENTE_REGISTRADO') {
@@ -79,50 +78,50 @@ export class HomeComponent implements OnInit {
     switch (opcion) {
       case 'DUEÑO':
         localStorage.setItem('tipoDeAlta', opcion);
-        this.spinnerRouter.showSpinnerAndNavigate('alta-usuarios', 'loadingContainerHome', 2000);
+        this.utilsService.showLoadingAndNavigate('alta-usuarios');
         break;
 
       case 'SUPERVISOR':
         localStorage.setItem('tipoDeAlta', opcion);
-        this.spinnerRouter.showSpinnerAndNavigate('alta-usuarios', 'loadingContainerHome', 2000);
+        this.utilsService.showLoadingAndNavigate('alta-usuarios');
         break;
 
       case 'EMPLEADO':
         localStorage.setItem('tipoDeAlta', opcion);
-        this.spinnerRouter.showSpinnerAndNavigate('alta-usuarios', 'loadingContainerHome', 2000);
+        this.utilsService.showLoadingAndNavigate('alta-usuarios');
         break;
 
       case 'CLIENTE_ANONIMO':
         localStorage.setItem('tipoDeAlta', opcion);
-        this.spinnerRouter.showSpinnerAndNavigate('alta-usuarios', 'loadingContainerHome', 2000);
+        this.utilsService.showLoadingAndNavigate('alta-usuarios');
         break;
 
       case 'CLIENTE_REGISTRADO':
         localStorage.setItem('tipoDeAlta', opcion);
-        this.spinnerRouter.showSpinnerAndNavigate('alta-usuarios', 'loadingContainerHome', 2000);
+        this.utilsService.showLoadingAndNavigate('alta-usuarios');
         break;
 
       case 'PENDIENTE':
-        this.spinnerRouter.showSpinnerAndNavigate('clientes-pendientes', 'loadingContainerHome', 2000);
+        this.utilsService.showLoadingAndNavigate('clientes-pendientes');
         break;
 
       case 'PEDIR_PRODUCTOS':
-        this.spinnerRouter.showSpinnerAndNavigate('pedir-productos', 'loadingContainerHome', 2000);
+        this.utilsService.showLoadingAndNavigate('pedir-productos');
         break;
     }
   }
 
   logOut(): void {
-    this.servicioAlta.logout();
-    this.spinnerRouter.showSpinnerAndNavigate('inicio', 'loadingContainerHome', 2000);
+    this.authService.logout();
+    this.utilsService.showLoadingAndNavigate('inicio');
   }
 
   public abmUsuario(tipoDeAlta: string): void {
     localStorage.setItem('tipoDeAlta', tipoDeAlta);
-    this.spinnerRouter.showSpinnerAndNavigate('alta-usuarios', 'loadingContainerHome', 2000);
+    this.utilsService.showLoadingAndNavigate('alta-usuarios');
   }
 
   public productos(): void {
-    this.spinnerRouter.showSpinnerAndNavigate('productos', 'loadingContainerHome', 2000);
+    this.utilsService.showLoadingAndNavigate('productos');
   }
 }

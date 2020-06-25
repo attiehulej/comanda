@@ -3,16 +3,14 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore'; // PATO
 import { VibrationService } from 'src/app/servicios/vibration.service';
-import { SpinnerRouterService } from 'src/app/servicios/spinner-router.service';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
 import { Usuario } from 'src/app/clases/usuario';
 import { TipoUsuario } from 'src/app/enums/tipo-usuario.enum';
-import { FormBuilder, FormGroup, Validators, FormsModule, FormControl, Form } from '@angular/forms';
-import { ToastService } from '../../servicios/toast.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../servicios/auth.service';
-import { rejects } from 'assert';
 import { EstadoUsuario } from 'src/app/enums/estado-usuario.enum';
 import { ActionSheetController } from '@ionic/angular';
+import { UtilsService } from 'src/app/servicios/utils.service';
 
 @Component({
   selector: 'app-login',
@@ -32,12 +30,11 @@ export class LoginPage implements OnInit {
     public router: Router,
     public db: AngularFirestore,
     public vibration: VibrationService,
-    public spinnerRouter: SpinnerRouterService,
     public usuarioService: UsuarioService,
     public fb: FormBuilder,
-    public toast: ToastService,
-    public servicioAlta: AuthService,
-    public actionSheetCtrl: ActionSheetController
+    public authService: AuthService,
+    public actionSheetCtrl: ActionSheetController,
+    private utilsService: UtilsService
   ) { }
 
   ngOnInit() {
@@ -50,14 +47,15 @@ export class LoginPage implements OnInit {
 
   onSubmitLogin(): void {
     if (this.errorFomularioAltaUsarios() === false) {
+      this.utilsService.presentLoading();
       const usuario = new Usuario();
       usuario.correo = this.formLogin.controls.correoLogin.value;
       usuario.clave = this.formLogin.controls.claveLogin.value;
-      this.servicioAlta.signIn(usuario)
+      this.authService.signIn(usuario)
         .then((response) => {
-
           // tslint:disable-next-line:no-shadowed-variable
           response.subscribe((usuario: Usuario) => {  // Aprobado
+            this.utilsService.dismissLoading();
             this.formLogin.reset();
             if (usuario.estado === EstadoUsuario.APROBADO) {
               if (usuario.perfil === TipoUsuario.CLIENTE_REGISTRADO || usuario.perfil === TipoUsuario.CLIENTE_ANONIMO) { // Clientes
@@ -66,7 +64,7 @@ export class LoginPage implements OnInit {
                 this.moveTo('home');
               }
             } else { // No aprobado
-              this.toast.presentToast('Hola! Tu cuenta esta pendiente de aprobación.');
+              this.utilsService.presentToast('Hola! Tu cuenta esta pendiente de aprobación.', 'toast-info');
             }
           });
         })
@@ -75,7 +73,7 @@ export class LoginPage implements OnInit {
         });
     }
     else {
-      this.toast.presentToast('Datos Inválidos');
+      this.utilsService.presentToast('Datos inválidos', 'toast-error');
       this.markAllAsDirtyAltaUsuarios(this.formLogin);
     }
   }
@@ -120,19 +118,15 @@ export class LoginPage implements OnInit {
   }
 
   moveTo(to): void {
-    this.spinnerRouter.showSpinnerAndNavigate(to, 'loadingContainerLogin', 2000);
+    this.utilsService.showLoadingAndNavigate(to);
   }
 
   limpiarLogin(): void {
     this.formLogin.reset();
   }
 
-  volverLogin(): void {
-    this.spinnerRouter.showSpinnerAndNavigate('inicio', 'loadingContainerLogin', 2000);
-  }
-
-  async mockLogin() {
-    const actionSheet = await this.actionSheetCtrl.create({
+  mockLogin() {
+    this.utilsService.presentActionsheet({
       buttons: [{
         text: 'Dueño Lucas',
         handler: () => {
@@ -198,7 +192,6 @@ export class LoginPage implements OnInit {
         }
       }]
     });
-    await actionSheet.present();
   }
 
 }

@@ -19,25 +19,10 @@
     </ion-select>
     <label class="lblError" *ngIf="formMesa.controls.tipoMesa.invalid && (formMesa.controls.tipoMesa.touched || formMesa.controls.tipoMesa.dirty)">{{ mostrarError('tipoMesa') }}</label>
 
-    <!-- <label class="lblTitulo">Foto</label>
-    <br>
-    <button *ngIf="getFoto().length === 0" (click)="tomarFoto()">
-      <ion-icon name="camera-outline"></ion-icon>
-    </button>
-    <button *ngIf="getFoto().length > 0" (click)="setMuestraModal(true)">
-      <ion-icon name="image-outline"></ion-icon>
-    </button>
-    <br> -->
-    
     <button type="button" class="btnVolverAltaMesas" (click)="volverHome()">Volver</button>
     <button type="button" *ngIf="getFoto().length === 0" class="btnFotoAltaMesas" (click)="tomarFoto()">FOTO</button>
     <button type="button" *ngIf="getFoto().length > 0" class="btnFotoAltaMesas" (click)="setMuestraModal(true)">VER FOTO</button>
     <button class="btnSubmitAltaMesas" type="submit">ENVIAR</button>
   </form>
   
-  <div class="loadingContainerMesa" id="loadingContainerMesa" hidden>
-    <div class="loadingMesa">
-      <img src="../../../assets/spinner.png">
-    </div>
-  </div>
 </div>
