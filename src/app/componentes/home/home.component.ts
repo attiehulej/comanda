@@ -17,44 +17,42 @@ export class HomeComponent implements OnInit {
   constructor(
     public spinnerRouter: SpinnerRouterService,
     public fb: FormBuilder,
-    public servicioAlta : AuthService
-  ) 
-  {}
+    public servicioAlta: AuthService
+  ) { }
 
-  ngOnInit()
-  {
-    this.servicioAlta.currentUser().then((response : firebase.User) => {
-      let aux = this.servicioAlta.obtenerDetalle(response); 
+  ngOnInit() {
+    this.servicioAlta.currentUser().then((response: firebase.User) => {
+      const aux = this.servicioAlta.obtenerDetalle(response);
       aux.subscribe(datos => {
         this.perfilUsuarioHome = datos.perfil;
-        if(this.perfilUsuarioHome == "CLIENTE_REGISTRADO")
-        {
-          this.perfilUsuarioHome = "CLIENTE";
+        if (this.perfilUsuarioHome === 'CLIENTE_REGISTRADO') {
+          this.perfilUsuarioHome = 'CLIENTE';
         }
-        
-        if(datos.foto != '')
-        {
+
+        if (datos.foto !== '') {
           this.imgUsuarioHome = 'data:image/jpeg;base64,' + datos.foto;
         }
-        else
-        {
+        else {
           this.imgUsuarioHome = '../../../assets/defaultFoto.png';
         }
       });
-    }).catch((reject : any) => {
+    }).catch((reject: any) => {
       console.log(reject);
     });
   }
 
-  //COMPLETAR LUCAS
-  mostrarSegunPerfil(elemento : string): boolean
-  {
-    let retorno: boolean = false;
-    switch(this.perfilUsuarioHome)
-    {
+  // COMPLETAR LUCAS
+  mostrarSegunPerfil(elemento: string): boolean {
+    let retorno = false;
+    switch (this.perfilUsuarioHome) {
       case 'DUEÑO':
-        if(elemento == 'clientesPendientes' || elemento == 'altaDueño' || elemento == 'altaSupervisor' || elemento == 'altaEmpleado' || elemento == 'altaClienteRegistrado' || elemento == 'altaClienteAnonimo' || elemento == 'pedirProductos')
-        {
+        if (elemento === 'clientesPendientes' ||
+          elemento === 'altaDueño' ||
+          elemento === 'altaSupervisor' ||
+          elemento === 'altaEmpleado' ||
+          elemento === 'altaClienteRegistrado' ||
+          elemento === 'altaClienteAnonimo' ||
+          elemento === 'pedirProductos') {
           retorno = true;
         }
         break;
@@ -77,10 +75,8 @@ export class HomeComponent implements OnInit {
     return retorno;
   }
 
-  manejadoraHome(opcion: string): void
-  {
-    switch(opcion)
-    {
+  manejadoraHome(opcion: string): void {
+    switch (opcion) {
       case 'DUEÑO':
         localStorage.setItem('tipoDeAlta', opcion);
         this.spinnerRouter.showSpinnerAndNavigate('alta-usuarios', 'loadingContainerHome', 2000);
@@ -107,7 +103,7 @@ export class HomeComponent implements OnInit {
         break;
 
       case 'PENDIENTE':
-        this.spinnerRouter.showSpinnerAndNavigate('clientes-pendientes', 'loadingContainerHome', 2000);
+        this.spinnerRouter.showSpinnerAndNavigate('clientes/clientes-pendientes', 'loadingContainerHome', 2000);
         break;
 
       case 'PEDIR_PRODUCTOS':
@@ -116,14 +112,12 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  volverHome(): void
-  {
+  logOut(): void {
     this.servicioAlta.logout();
-    this.spinnerRouter.showSpinnerAndNavigate('login', 'loadingContainerHome', 2000);
+    this.spinnerRouter.showSpinnerAndNavigate('inicio', 'loadingContainerHome', 2000);
   }
 
-  public abmUsuario(tipoDeAlta: string): void 
-  {
+  public abmUsuario(tipoDeAlta: string): void {
     localStorage.setItem('tipoDeAlta', tipoDeAlta);
     this.spinnerRouter.showSpinnerAndNavigate('alta-usuarios', 'loadingContainerHome', 2000);
   }

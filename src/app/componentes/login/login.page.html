@@ -13,7 +13,7 @@
     <input type="password" class="inpClaveLogin" formControlName="claveLogin">
     <div class="errClaveLogin" [hidden]="!errorEnControlLogin('claveLogin')">CLAVE INVALIDA</div>
       
-    <button type="submit" class="btnSubmitLogin">Enviar</button>
+    <button type="submit" [disabled]="!formLogin.valid" class="btnSubmitLogin">Enviar</button>
     <button type="button" (click)="limpiarLogin()" class="btnResetLogin">Limpiar</button>
 
   </form>
@@ -23,3 +23,8 @@
     </div>
   </div>
 </div>
+<ion-footer class="ion-text-center"> 
+  <ion-toolbar color="warning">
+    <h5 expand="full" (click)="mockLogin()">Usuarios</h5>
+  </ion-toolbar>
+</ion-footer>

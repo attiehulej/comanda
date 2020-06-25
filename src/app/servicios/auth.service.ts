@@ -4,6 +4,7 @@ import 'firebase/auth';
 import { UsuarioService } from './usuario.service';
 import { Usuario } from '../clases/usuario';
 import { EstadoUsuario } from '../enums/estado-usuario.enum';
+import { first } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,10 @@ export class AuthService {
     public afAuth: AngularFireAuth,
     public usuarioService: UsuarioService,
   ) { }
+
+  isLoggedIn() {
+    return this.afAuth.authState.pipe(first()).toPromise();
+  }
 
   currentUser() {
     return this.afAuth.currentUser;
@@ -30,7 +35,7 @@ export class AuthService {
           if (response) {
             usuario.id = response.user.uid;
             this.usuarioService.crearUsuario(usuario.id, usuario)
-            .then((usr: any) => resolve('exito')); // ADENTRO DEL RESOLVE => this.obtenerDetalle(usr)
+              .then((usr: any) => resolve('exito')); // ADENTRO DEL RESOLVE => this.obtenerDetalle(usr)
           }
         },
         (error: any) => reject(error));

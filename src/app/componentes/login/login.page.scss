@@ -1,10 +1,3 @@
-*{
-    margin: 0%;
-    padding: 0%;
-    outline: none;
-    font-family: 'Libre Baskerville', serif;
-}
-
 .fondoLogin{
     background-image: url("../../../assets/fondoLogin.jpg");
     background-position: center center;
@@ -134,8 +127,8 @@
 .btnResetLogin{
     position: absolute; 
     width: 70vw; 
-    height: 10vh;
-    top: 80vh;
+    height: 6vh;
+    top: 75vh;
     left: 15vw;
     color: grey;
     background-color:  rgb(255,215,0);
