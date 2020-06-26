@@ -13,7 +13,7 @@ import { UsuarioService } from 'src/app/servicios/usuario.service';
 export class HomeComponent implements OnInit {
 
   public formHome: FormGroup;
-  usuario: Usuario;
+  usuario: Usuario = null;
 
   constructor(
     public fb: FormBuilder,
@@ -33,85 +33,13 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  // COMPLETAR LUCAS
-  mostrarSegunPerfil(elemento: string): boolean {
-    let retorno = false;
-    switch (this.perfilUsuarioHome) {
-      case 'DUEÑO':
-        if (elemento === 'clientesPendientes' ||
-          elemento === 'altaDueño' ||
-          elemento === 'altaSupervisor' ||
-          elemento === 'altaEmpleado' ||
-          elemento === 'altaClienteRegistrado' ||
-          elemento === 'altaClienteAnonimo' ||
-          elemento === 'pedirProductos') {
-          retorno = true;
-        }
-        break;
-
-      case 'SUPERVISOR':
-        break;
-      case 'MOZO':
-        break;
-      case 'METRE':
-        break;
-      case 'COCINERO':
-        break;
-      case 'BARTENDER':
-        break;
-      case 'CLIENTE_REGISTRADO':
-        break;
-      case 'CLIENTE_ANONIMO':
-        break;
-    }
-    return retorno;
-  }
-
-  manejadoraHome(opcion: string): void {
-    switch (opcion) {
-      case 'DUEÑO':
-        localStorage.setItem('tipoDeAlta', opcion);
-        this.utilsService.showLoadingAndNavigate('usuarios/alta-usuarios');
-        break;
-
-      case 'SUPERVISOR':
-        localStorage.setItem('tipoDeAlta', opcion);
-        this.utilsService.showLoadingAndNavigate('usuarios/alta-usuarios');
-        break;
-
-      case 'EMPLEADO':
-        localStorage.setItem('tipoDeAlta', opcion);
-        this.utilsService.showLoadingAndNavigate('usuarios/alta-usuarios');
-        break;
-
-      case 'CLIENTE_ANONIMO':
-        localStorage.setItem('tipoDeAlta', opcion);
-        this.utilsService.showLoadingAndNavigate('usuarios/alta-usuarios');
-        break;
-
-      case 'CLIENTE_REGISTRADO':
-        localStorage.setItem('tipoDeAlta', opcion);
-        this.utilsService.showLoadingAndNavigate('usuarios/alta-usuarios');
-        break;
-
-      case 'PENDIENTE':
-        this.utilsService.showLoadingAndNavigate('usuarios');
-        break;
-
-      case 'PEDIR_PRODUCTOS':
-        this.utilsService.showLoadingAndNavigate('pedir-productos');
-        break;
-    }
+  gestionarUsuarios(){
+    this.utilsService.showLoadingAndNavigate('usuarios');
   }
 
   logOut(): void {
     this.authService.logout();
     this.utilsService.showLoadingAndNavigate('inicio');
-  }
-
-  public abmUsuario(tipoDeAlta: string): void {
-    localStorage.setItem('tipoDeAlta', tipoDeAlta);
-    this.utilsService.showLoadingAndNavigate('usuarios/alta-usuarios');
   }
 
   public productos(): void {

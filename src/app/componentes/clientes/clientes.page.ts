@@ -10,7 +10,7 @@ import { UsuarioService } from 'src/app/servicios/usuario.service';
   styleUrls: ['./clientes.page.scss'],
 })
 export class ClientesPage implements OnInit {
-  public usuario: Usuario;
+  usuario: Usuario = null;
 
   constructor(
     private authService: AuthService,

@@ -63,4 +63,42 @@ export class UsuariosPage implements OnInit {
   altaUsuario(): void {
     this.utilsService.showLoadingAndNavigate('usuarios/alta-usuarios');
   }
+
+  manejadoraHome(opcion: string): void {
+    switch (opcion) {
+      case 'DUEÑO':
+        localStorage.setItem('tipoDeAlta', opcion);
+        this.utilsService.showLoadingAndNavigate('usuarios/alta-usuarios');
+        break;
+
+      case 'SUPERVISOR':
+        localStorage.setItem('tipoDeAlta', opcion);
+        this.utilsService.showLoadingAndNavigate('usuarios/alta-usuarios');
+        break;
+
+      case 'EMPLEADO':
+        localStorage.setItem('tipoDeAlta', opcion);
+        this.utilsService.showLoadingAndNavigate('usuarios/alta-usuarios');
+        break;
+
+      case 'CLIENTE_ANONIMO':
+        localStorage.setItem('tipoDeAlta', opcion);
+        this.utilsService.showLoadingAndNavigate('usuarios/alta-usuarios');
+        break;
+
+      case 'CLIENTE_REGISTRADO':
+        localStorage.setItem('tipoDeAlta', opcion);
+        this.utilsService.showLoadingAndNavigate('usuarios/alta-usuarios');
+        break;
+
+      case 'PENDIENTE':
+        this.utilsService.showLoadingAndNavigate('usuarios');
+        break;
+    }
+  }
+
+  public abmUsuario(tipoDeAlta: string): void {
+    localStorage.setItem('tipoDeAlta', tipoDeAlta);
+    this.utilsService.showLoadingAndNavigate('usuarios/alta-usuarios');
+  }
 }

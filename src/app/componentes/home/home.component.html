@@ -12,19 +12,34 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="background">
-  <button type="button" class="btnClientesPendientesHome" (click)="manejadoraHome('PENDIENTE')"
-    *ngIf="mostrarSegunPerfil('clientesPendientes')">Usuarios Pendientes</button>
-  <button type="button" class="btnDuenioHome" (click)="manejadoraHome('DUEÑO')"
-    *ngIf="mostrarSegunPerfil('altaDueño')">Abm Dueños</button>
-  <button type="button" class="btnSupervisorHome" (click)="manejadoraHome('SUPERVISOR')"
-    *ngIf="mostrarSegunPerfil('altaSupervisor')">Abm Supervisores</button>
-  <button type="button" class="btnEmpleadoHome" (click)="manejadoraHome('EMPLEADO')"
-    *ngIf="mostrarSegunPerfil('altaEmpleado')">Abm Empleados</button>
-  <button type="button" class="btnClienteAnonimoHome" (click)="manejadoraHome('CLIENTE_ANONIMO')"
-    *ngIf="mostrarSegunPerfil('altaClienteAnonimo')">Abm Cliente Anonimo</button>
-  <button type="button" class="btnClienteRegistradoHome" (click)="manejadoraHome('CLIENTE_REGISTRADO')"
-    *ngIf="mostrarSegunPerfil('altaClienteRegistrado')">Abm Cliente Registrado</button>
-  <button type="button" class="btnPedirProductosHome" (click)="manejadoraHome('PEDIR_PRODUCTOS')"
-    *ngIf="mostrarSegunPerfil('pedirProductos')">Pedir Productos</button>
+<ion-content class="background ion-padding">
+
+  <ion-card color="light">
+    <ion-text class="ion-text-center" color="dark">
+      <h2>Bienvenido <ion-label color="warning">{{usuario?.nombre}}</ion-label>!</h2>
+    </ion-text>
+  </ion-card>
+
+  <section class="opciones">
+    <ion-button size="large" expand="block" color="warning" (click)="gestionarUsuarios()">
+      <ion-icon slot="start" name="people"></ion-icon>
+      Gestionar Usuarios
+    </ion-button>
+
+    <ion-button size="large" expand="block" color="warning">
+      <ion-icon slot="start" name="tablet-landscape-outline"></ion-icon>
+      Gestionar Mesas
+    </ion-button>
+
+    <ion-button size="large" expand="block" color="warning">
+      <ion-icon slot="start" name="pizza-outline"></ion-icon>
+      Gestionar Productos
+    </ion-button>
+
+    <ion-button size="large" expand="block" color="warning">
+      <ion-icon slot="start" name="restaurant-outline"></ion-icon>
+      Listado Pedidos
+    </ion-button>
+  </section>
+
 </ion-content>

@@ -128,16 +128,23 @@ export class LoginPage implements OnInit {
   mockLogin() {
     this.utilsService.presentActionsheet({
       buttons: [{
-        text: 'Dueño Lucas',
+        text: 'DUEÑO Lucas',
         handler: () => {
           this.formLogin.controls.correoLogin.setValue('lucas@lucas.com');
           this.formLogin.controls.claveLogin.setValue('270699');
         }
-      }, {
-        text: 'Supervisor',
+      },
+      {
+        text: 'DUEÑO Pato',
         handler: () => {
-          this.formLogin.controls.correoLogin.setValue('tomas@supervisor.com');
-          this.formLogin.controls.claveLogin.setValue('tomaspass');
+          this.formLogin.controls.correoLogin.setValue('pato@pato.com');
+          this.formLogin.controls.claveLogin.setValue('123456');
+        }
+      }, {
+        text: 'SUPERVISOR Flippi',
+        handler: () => {
+          this.formLogin.controls.correoLogin.setValue('soyflippi@gmail.com');
+          this.formLogin.controls.claveLogin.setValue('123456');
         }
       }, {
         text: 'COCINERO',
@@ -146,16 +153,24 @@ export class LoginPage implements OnInit {
           this.formLogin.controls.claveLogin.setValue('123456');
         }
       }, {
-        text: 'Mozo',
+        text: 'BARTENDER',
         handler: () => {
-          this.formLogin.controls.correoLogin.setValue('luciano@mozo.com');
-          this.formLogin.controls.claveLogin.setValue('lucianopass');
+          this.formLogin.controls.correoLogin.setValue('bartender@bartender.com');
+          this.formLogin.controls.claveLogin.setValue('123456');
         }
-      }, {
-        text: 'Bartender',
+      },
+      {
+        text: 'Cliente 1',
         handler: () => {
-          this.formLogin.controls.correoLogin.setValue('alicia@bartender.com');
-          this.formLogin.controls.claveLogin.setValue('aliciapass');
+          this.formLogin.controls.correoLogin.setValue('cliente1@cliente1.com');
+          this.formLogin.controls.claveLogin.setValue('123456');
+        }
+      },
+      {
+        text: 'Cliente 2',
+        handler: () => {
+          this.formLogin.controls.correoLogin.setValue('cliente2@cliente2.com');
+          this.formLogin.controls.claveLogin.setValue('123456');
         }
       }, {
         text: 'Cliente 3',
