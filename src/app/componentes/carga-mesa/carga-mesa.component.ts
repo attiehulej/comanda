@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { SpinnerRouterService } from '../../servicios/spinner-router.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TipoMesa } from '../../enums/tipo-mesa.enum';
 import { CameraService } from '../../servicios/camera.service';
 import { Mesa } from '../../clases/mesa';
 import { MesaService } from '../../servicios/mesa.service';
-import { ToastService } from '../../servicios/toast.service';
-import { EstadosMesa } from '../../enums/estados-mesa.enum';
+import { EstadosMesa } from '../../enums/estado-mesa.enum';
+import { UtilsService } from 'src/app/servicios/utils.service';
 
 @Component({
   selector: 'app-carga-mesa',
@@ -22,14 +21,12 @@ export class CargaMesaComponent implements OnInit {
   private mesa: Mesa = new Mesa();
   private foto = '';
   private muestraModal = false;
-  private spinner = 'loadingContainerMesa';
 
   constructor(
-    public spinnerRouter: SpinnerRouterService,
     private fb: FormBuilder,
     public camara: CameraService,
     private mesas: MesaService,
-    private toast: ToastService
+    private utilsService: UtilsService
   ) { }
 
   ngOnInit() {
@@ -41,52 +38,51 @@ export class CargaMesaComponent implements OnInit {
   }
 
   public volverHome(): void {
-    this.spinnerRouter.showSpinnerAndNavigate('home', this.spinner, 2000);
+    this.utilsService.showLoadingAndNavigate('home');
   }
 
   public tomarFoto(): void {
     this.camara.tomarFoto()
-    .then(unaFoto => this.foto = unaFoto);
+      .then(unaFoto => this.foto = unaFoto);
   }
 
   onSubmitMesa(): void {
     if (this.formMesa.valid && this.foto.length > 0) {
-      this.spinnerRouter.showSpinner(this.spinner, true);
-
+      this.utilsService.presentLoading();
       this.mesa.numero = this.formMesa.controls.numeroMesa.value;
       this.mesa.cantidad = this.formMesa.controls.cantidadComensales.value;
       this.mesa.tipo = this.formMesa.controls.tipoMesa.value;
       this.mesa.foto = this.foto;
       // alert('Envío Mesa');
       this.mesas.crearMesa(this.mesa)
-      .then(nuevaMesa => {
-        this.mesa.id = nuevaMesa.id;
-        this.mesa.fechaAlta = new Date();
-        this.mesas.actualizarMesa(nuevaMesa.id, this.mesa);
+        .then(nuevaMesa => {
+          this.mesa.id = nuevaMesa.id;
+          this.mesa.fechaAlta = new Date();
+          this.mesas.actualizarMesa(nuevaMesa.id, this.mesa);
 
-        this.formMesa.reset();
-        this.foto = '';
+          this.formMesa.reset();
+          this.foto = '';
 
-        this.mesa.numero = null;
-        this.mesa.cantidad = null;
-        this.mesa.tipo = null;
-        this.mesa.foto = null;
-        this.mesa.fechaAlta = new Date();
-        this.mesa.fechaBaja = null;
-        this.mesa.fechaModificado = null;
-        this.mesa.id = null;
-        this.mesa.estado = EstadosMesa[EstadosMesa.LIBRE];
+          this.mesa.numero = null;
+          this.mesa.cantidad = null;
+          this.mesa.tipo = null;
+          this.mesa.foto = null;
+          this.mesa.fechaAlta = new Date();
+          this.mesa.fechaBaja = null;
+          this.mesa.fechaModificado = null;
+          this.mesa.id = null;
+          this.mesa.estado = EstadosMesa[EstadosMesa.LIBRE];
 
-        this.spinnerRouter.showSpinner(this.spinner, false);
-        this.toast.presentToastOk('Mesa creada');
-      })
-      .catch(error => {
-        this.spinnerRouter.showSpinner(this.spinner, false);
-        this.toast.presentToast(error);
-      });
+          this.utilsService.dismissLoading();
+          this.utilsService.presentToast('Mesa creada', 'toast-success');
+        })
+        .catch(error => {
+          this.utilsService.dismissLoading();
+          this.utilsService.handleError(error);
+        });
     } else {
       if (this.foto.length === 0) {
-        this.toast.presentToast('Debe adjuntar una foto de la mesa');
+        this.utilsService.presentToast('Debe adjuntar una foto de la mesa', 'toast-error');
       }
       // alert('Error en formulario');
       this.formMesa.markAllAsTouched();

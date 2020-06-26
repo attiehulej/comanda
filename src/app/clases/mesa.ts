@@ -1,4 +1,4 @@
-import { EstadosMesa } from '../enums/estados-mesa.enum';
+import { EstadosMesa } from '../enums/estado-mesa.enum';
 
 export class Mesa {
     public id?: string;

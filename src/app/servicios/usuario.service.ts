@@ -10,9 +10,16 @@ export class UsuarioService {
 
   constructor(private firebaseService: FirebaseService) { }
 
+  obtenerFoto(usuario: Usuario) {
+    let foto = '../../../assets/defaultFoto.png';
+    if (usuario.foto !== '') {
+      foto = 'data:image/jpeg;base64,' + usuario.foto;
+    }
+    return foto;
+  }
+
   // Obtiene todos los usuarios activos
-  obtenerUsuarios() 
-  {
+  obtenerUsuarios() {
     return this.firebaseService.getDocs('usuarios').pipe(
       map(users => {
         return users.map(a => {
@@ -25,8 +32,7 @@ export class UsuarioService {
   }
 
   // Obtener usuario por id (id)
-  obtenerUsuario(uid: string) 
-  {
+  obtenerUsuario(uid: string) {
     return this.firebaseService.getDoc('usuarios', uid).pipe(
       map((user: any) => {
         const data = user.payload.data() as Usuario;
@@ -37,20 +43,17 @@ export class UsuarioService {
   }
 
   // Crear usuario (Class Usuario)
-  crearUsuario(id: string, usr: Usuario) 
-  {
+  crearUsuario(id: string, usr: Usuario) {
     return this.firebaseService.addDoc2('usuarios', id, Object.assign({}, usr));
   }
 
   // Actualizar usuario (id y Class Usuario)
-  actualizarUsuario(id: string, usr: Usuario) 
-  {
+  actualizarUsuario(id: string, usr: Usuario) {
     return this.firebaseService.updateDoc('usuarios', id, Object.assign({}, usr));
   }
 
   // Borrar usuario (id)
-  borrarUsuario(id: string) 
-  {
+  borrarUsuario(id: string) {
     return this.firebaseService.deleteDoc('usuarios', id);
   }
 }

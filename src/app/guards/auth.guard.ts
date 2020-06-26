@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate {
 
     return this.AFauth.authState.pipe(map(auth => {
       if (isNullOrUndefined(auth)) {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/inicio']);
         return false;
       } else {
         return true;

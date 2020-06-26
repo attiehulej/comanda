@@ -16,13 +16,11 @@ export class FirebaseService {
     return this.firestore.collection(collection).doc(documentId).snapshotChanges();
   }
 
-  //addDoc(collection: string,doc: any) {
-  addDoc2(collection: string, documentId: string,doc: any) {
-    //return this.firestore.collection(collection).add(doc);
+  addDoc2(collection: string, documentId: string, doc: any) {
     return this.firestore.collection(collection).doc(documentId).set(doc);
   }
 
-  addDoc(collection: string,doc: any) {
+  addDoc(collection: string, doc: any) {
     return this.firestore.collection(collection).add(doc);
   }
 

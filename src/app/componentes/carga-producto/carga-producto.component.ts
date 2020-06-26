@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { SpinnerRouterService } from '../../servicios/spinner-router.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CameraService } from '../../servicios/camera.service';
 import { Producto } from '../../clases/producto';
 import { ProductoService } from '../../servicios/producto.service';
-import { ToastService } from '../../servicios/toast.service';
 import { Sectores } from '../../enums/sectores.enum';
+import { UtilsService } from 'src/app/servicios/utils.service';
 
 @Component({
   selector: 'app-carga-producto',
@@ -21,16 +20,14 @@ export class CargaProductoComponent implements OnInit {
   private producto: Producto = new Producto();
   private fotos: string[] = [];
   private muestraModal = false;
-  private spinner = 'loadingContainerProducto';
   private cantFotos = 3;
   private fotoActual = 0;
 
   constructor(
-    public spinnerRouter: SpinnerRouterService,
+    public utilsService: UtilsService,
     private fb: FormBuilder,
     public camara: CameraService,
     private productos: ProductoService,
-    private toast: ToastService
   ) { }
 
   ngOnInit() {
@@ -45,7 +42,7 @@ export class CargaProductoComponent implements OnInit {
   }
 
   public volverHome(): void {
-    this.spinnerRouter.showSpinnerAndNavigate('home', this.spinner, 2000);
+    this.utilsService.showLoadingAndNavigate('home');
   }
 
   public tomarFoto(): void {
@@ -55,7 +52,7 @@ export class CargaProductoComponent implements OnInit {
 
   onSubmitProducto(): void {
     if (this.formProducto.valid && this.fotos.length === this.cantFotos) {
-      this.spinnerRouter.showSpinner(this.spinner, true);
+      this.utilsService.presentLoading();
 
       this.producto.codigo = this.formProducto.controls.codigo.value;
       this.producto.nombre = this.formProducto.controls.nombre.value;
@@ -86,16 +83,16 @@ export class CargaProductoComponent implements OnInit {
         this.producto.sector = null;
         this.producto.tiempo = null;
 
-        this.spinnerRouter.showSpinner(this.spinner, false);
-        this.toast.presentToastOk('Producto creado');
+        this.utilsService.dismissLoading();
+        this.utilsService.presentToast('Producto creado', 'toast-success');
       })
       .catch(error => {
-        this.spinnerRouter.showSpinner(this.spinner, false);
-        this.toast.presentToast(error);
+        this.utilsService.dismissLoading();
+        this.utilsService.handleError(error);
       });
     } else {
       if (this.fotos.length < this.cantFotos) {
-        this.toast.presentToast(`Debe adjuntar ${this.cantFotos} fotos del producto`);
+        this.utilsService.presentToast(`Debe adjuntar ${this.cantFotos} fotos del producto`, 'toast-error');
       }
       // alert('Error en formulario');
       this.formProducto.markAllAsTouched();

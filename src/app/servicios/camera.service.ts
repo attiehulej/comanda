@@ -1,20 +1,19 @@
 import { Injectable } from '@angular/core';
-//import { DatePipe } from '@angular/common';
+// import { DatePipe } from '@angular/common';
 import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/camera/ngx';
 import { promise } from 'protractor';
-//import { WebView } from '@ionic-native/ionic-webview/ngx';
-//import { Foto } from '../clases/foto';
+// import { WebView } from '@ionic-native/ionic-webview/ngx';
+// import { Foto } from '../clases/foto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CameraService {
 
-  constructor(private camera: Camera) {}
+  constructor(private camera: Camera) { }
 
-  tomarFoto()
-  {
-    let retorno: string = "";
+  tomarFoto() {
+    const retorno = '';
 
     const options: CameraOptions = {
       quality: 25,
@@ -29,7 +28,7 @@ export class CameraService {
   }
 
   // PATO
-  public base64ToImg(base64: string): string {
+  base64ToImg(base64: string): string {
     return 'data:image/jpeg;base64,'.concat(base64);
   }
   /*
