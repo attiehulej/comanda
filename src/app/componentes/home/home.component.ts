@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from '../../servicios/auth.service';
 import { UtilsService } from 'src/app/servicios/utils.service';
+import { Usuario } from 'src/app/clases/usuario';
+import { UsuarioService } from 'src/app/servicios/usuario.service';
 
 @Component({
   selector: 'app-home',
@@ -11,29 +13,20 @@ import { UtilsService } from 'src/app/servicios/utils.service';
 export class HomeComponent implements OnInit {
 
   public formHome: FormGroup;
-  perfilUsuarioHome;
-  imgUsuarioHome;
+  usuario: Usuario;
+
   constructor(
     public fb: FormBuilder,
     public authService: AuthService,
     private utilsService: UtilsService,
+    private usuarioService: UsuarioService
   ) { }
 
   ngOnInit() {
     this.authService.currentUser().then((response: firebase.User) => {
       const aux = this.authService.obtenerDetalle(response);
       aux.subscribe(datos => {
-        this.perfilUsuarioHome = datos.perfil;
-        if (this.perfilUsuarioHome === 'CLIENTE_REGISTRADO') {
-          this.perfilUsuarioHome = 'CLIENTE';
-        }
-
-        if (datos.foto !== '') {
-          this.imgUsuarioHome = 'data:image/jpeg;base64,' + datos.foto;
-        }
-        else {
-          this.imgUsuarioHome = '../../../assets/defaultFoto.png';
-        }
+        this.usuario = datos;
       });
     }).catch((reject: any) => {
       console.log(reject);

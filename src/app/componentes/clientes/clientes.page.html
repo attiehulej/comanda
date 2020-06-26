@@ -6,11 +6,41 @@
     <ion-title class="ion-text-center">
       COHERENCE
     </ion-title>
-    <ion-avatar slot="end" class="avatar">
-      <img [src]="imgUsuarioHome">
+    <ion-avatar *ngIf="usuario" slot="end" class="avatar">
+      <img [src]="usuarioService.obtenerFoto(usuario)">
     </ion-avatar>
   </ion-toolbar>
 </ion-header>
 <ion-content class="background">
+  <ion-card class="welcome" color="transparent">
+    <ion-text class="ion-padding ion-padding-start" color="light">
+      <h1>Bienvenido {{usuario?.nombre}}!</h1>
+    </ion-text>
+  </ion-card>
+  <ion-card>
+    <img src="../../../../assets/mesa-qr.png" />
+    <ion-card-header>
+      <ion-card-subtitle></ion-card-subtitle>
+      <ion-card-title>Buscar una MESA <ion-icon class="ion-float-right" color="warning" name="arrow-forward-outline">
+        </ion-icon>
+      </ion-card-title>
+    </ion-card-header>
 
+    <ion-card-content>
+      Escaneá el código QR que se encuentra en la mesa para ingresar en la lista de espera.
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <img src="../../../../assets/platos.png" />
+    <ion-card-header>
+      <ion-card-subtitle></ion-card-subtitle>
+      <ion-card-title>Pedidos <ion-icon class="ion-float-right" color="warning" name="arrow-forward-outline"></ion-icon>
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      Tus pedidos confirmados y pendientes
+    </ion-card-content>
+  </ion-card>
 </ion-content>

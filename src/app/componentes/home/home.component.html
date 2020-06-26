@@ -4,14 +4,15 @@
       <ion-icon color="light" name="log-out-outline"></ion-icon>
     </ion-button>
     <ion-title class="ion-text-center">
-      {{perfilUsuarioHome}}
+      COHERENCE
     </ion-title>
-    <ion-avatar slot="end" class="avatar">
-      <img [src]="imgUsuarioHome">
+    <ion-avatar *ngIf="usuario" slot="end" class="avatar">
+      <img [src]="usuarioService.obtenerFoto(usuario)">
     </ion-avatar>
   </ion-toolbar>
 </ion-header>
-<div class="fondoHome">
+
+<ion-content class="background">
   <button type="button" class="btnClientesPendientesHome" (click)="manejadoraHome('PENDIENTE')"
     *ngIf="mostrarSegunPerfil('clientesPendientes')">Usuarios Pendientes</button>
   <button type="button" class="btnDuenioHome" (click)="manejadoraHome('DUEÑO')"
@@ -26,10 +27,4 @@
     *ngIf="mostrarSegunPerfil('altaClienteRegistrado')">Abm Cliente Registrado</button>
   <button type="button" class="btnPedirProductosHome" (click)="manejadoraHome('PEDIR_PRODUCTOS')"
     *ngIf="mostrarSegunPerfil('pedirProductos')">Pedir Productos</button>
-
-  <div class="loadingContainerHome" id="loadingContainerHome" hidden>
-    <div class="loadingHome">
-      <img src="../../../assets/spinner.png">
-    </div>
-  </div>
-</div>
+</ion-content>
