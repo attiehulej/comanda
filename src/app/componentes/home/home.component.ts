@@ -78,31 +78,31 @@ export class HomeComponent implements OnInit {
     switch (opcion) {
       case 'DUEÑO':
         localStorage.setItem('tipoDeAlta', opcion);
-        this.utilsService.showLoadingAndNavigate('alta-usuarios');
+        this.utilsService.showLoadingAndNavigate('usuarios/alta-usuarios');
         break;
 
       case 'SUPERVISOR':
         localStorage.setItem('tipoDeAlta', opcion);
-        this.utilsService.showLoadingAndNavigate('alta-usuarios');
+        this.utilsService.showLoadingAndNavigate('usuarios/alta-usuarios');
         break;
 
       case 'EMPLEADO':
         localStorage.setItem('tipoDeAlta', opcion);
-        this.utilsService.showLoadingAndNavigate('alta-usuarios');
+        this.utilsService.showLoadingAndNavigate('usuarios/alta-usuarios');
         break;
 
       case 'CLIENTE_ANONIMO':
         localStorage.setItem('tipoDeAlta', opcion);
-        this.utilsService.showLoadingAndNavigate('alta-usuarios');
+        this.utilsService.showLoadingAndNavigate('usuarios/alta-usuarios');
         break;
 
       case 'CLIENTE_REGISTRADO':
         localStorage.setItem('tipoDeAlta', opcion);
-        this.utilsService.showLoadingAndNavigate('alta-usuarios');
+        this.utilsService.showLoadingAndNavigate('usuarios/alta-usuarios');
         break;
 
       case 'PENDIENTE':
-        this.utilsService.showLoadingAndNavigate('clientes-pendientes');
+        this.utilsService.showLoadingAndNavigate('usuarios');
         break;
 
       case 'PEDIR_PRODUCTOS':
@@ -118,7 +118,7 @@ export class HomeComponent implements OnInit {
 
   public abmUsuario(tipoDeAlta: string): void {
     localStorage.setItem('tipoDeAlta', tipoDeAlta);
-    this.utilsService.showLoadingAndNavigate('alta-usuarios');
+    this.utilsService.showLoadingAndNavigate('usuarios/alta-usuarios');
   }
 
   public productos(): void {

@@ -4,8 +4,8 @@ import { CameraService } from 'src/app/servicios/camera.service';
 import { Observable } from 'rxjs/internal/Observable';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
-import { AuthService } from '../../servicios/auth.service';
-import { Usuario } from '../../clases/usuario';
+import { AuthService } from '../../../servicios/auth.service';
+import { Usuario } from '../../../clases/usuario';
 import { EstadoUsuario } from 'src/app/enums/estado-usuario.enum';
 import { TipoUsuario } from 'src/app/enums/tipo-usuario.enum';
 import { UtilsService } from 'src/app/servicios/utils.service';
@@ -53,7 +53,7 @@ export class AltaUsuariosPage implements OnInit {
 
     this.authService.currentUser().then((response: firebase.User) => {
       const aux = this.authService.obtenerDetalle(response);
-      aux.subscribe(datos => { alert(datos.correo); });
+      aux.subscribe(datos => { });
     }).catch((reject: any) => {
 
       console.log(reject);

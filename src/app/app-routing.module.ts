@@ -21,10 +21,6 @@ const routes: Routes = [
     loadChildren: () => import('./componentes/login/login.module').then(m => m.LoginPageModule)
   },
   {
-    path: 'alta-usuarios',
-    loadChildren: () => import('./componentes/alta-usuarios/alta-usuarios.module').then(m => m.AltaUsuariosPageModule)
-  },
-  {
     path: 'pedir-productos',
     loadChildren: () => import('./componentes/pedir-productos/pedir-productos.module').then(m => m.PedirProductosPageModule)
   },
@@ -34,9 +30,8 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'clientes-pendientes',
-    loadChildren: () => import('./componentes/clientes-pendientes/clientes-pendientes.module').then(m => m.ClientesPendientesPageModule),
-    canActivate: [AuthGuard]
+    path: 'usuarios',
+    loadChildren: () => import('./componentes/usuarios/usuarios.module').then( m => m.UsuariosPageModule)
   }
 ];
 

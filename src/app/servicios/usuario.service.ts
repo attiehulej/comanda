@@ -10,6 +10,14 @@ export class UsuarioService {
 
   constructor(private firebaseService: FirebaseService) { }
 
+  obtenerFoto(usuario: Usuario) {
+    let foto = '../../../assets/defaultFoto.png';
+    if (usuario.foto !== '') {
+      foto = 'data:image/jpeg;base64,' + usuario.foto;
+    }
+    return foto;
+  }
+
   // Obtiene todos los usuarios activos
   obtenerUsuarios() {
     return this.firebaseService.getDocs('usuarios').pipe(

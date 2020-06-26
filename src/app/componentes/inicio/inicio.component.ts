@@ -40,12 +40,12 @@ export class InicioComponent implements OnInit {
     switch (opcion) {
       case 'CLIENTE_ANONIMO':
         localStorage.setItem('tipoDeAlta', opcion);
-        this.utilsService.showLoadingAndNavigate('alta-usuarios');
+        this.utilsService.showLoadingAndNavigate('usuarios/alta-usuarios');
         break;
 
       case 'CLIENTE_REGISTRADO':
         localStorage.setItem('tipoDeAlta', opcion);
-        this.utilsService.showLoadingAndNavigate('alta-usuarios');
+        this.utilsService.showLoadingAndNavigate('usuarios/alta-usuarios');
         break;
 
       case 'LOGIN':

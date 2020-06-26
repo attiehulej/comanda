@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar color="warning">
+    <ion-button slot="start" fill="clear" (click)="volver()">
+      <ion-icon color="light" name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    <ion-title class="ion-text-center">
+      Usuarios
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="background">
+
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col>
+        <ion-button color="warning" (click)="altaUsuario()" size="block">
+          <ion-icon name="person-add-outline"></ion-icon> Nuevo Usuario
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-list color=“transparent”>
+    <ion-list-header color="light">
+      Usuarios pendientes
+    </ion-list-header>
+
+    <ion-item color="warning" *ngIf="listaPendientes && listaPendientes.length === 0">
+      <ion-label class="ion-text-wrap">
+        No hay usuarios pendientes para confirmar
+      </ion-label>
+    </ion-item>
+
+    <ion-item color="warning" *ngFor="let usuario of listaPendientes">
+      <ion-avatar slot="start">
+        <img src="{{usuarioService.obtenerFoto(usuario)}}">
+      </ion-avatar>
+      <ion-label color="light">
+        <h2 class="ion-text-capitalize">{{usuario.nombre}} {{usuario.apellido}}</h2>
+        <h3 *ngIf="usuario.dni">DNI {{usuario.dni}}</h3>
+        <p>{{usuario.perfil}}</p>
+        <ion-button color="light" (click)="aprobarUsuario(usuario)" size="small">
+          <ion-icon name="checkmark-outline"></ion-icon> Aprobar
+        </ion-button>
+        <ion-button color="dark" (click)="declinarUsuario(usuario)" size="small">
+          <ion-icon name="close-outline"></ion-icon> Rechazar
+        </ion-button>
+      </ion-label>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-list color=“transparent”>
+    <ion-list-header color="light">
+      Usuarios aprobados
+    </ion-list-header>
+
+    <ion-item color="warning" *ngIf="listaAprobados && listaAprobados.length === 0">
+      <ion-label class="ion-text-wrap">
+        No hay usuarios aprobados por el momento
+      </ion-label>
+    </ion-item>
+
+    <ion-item color="warning" *ngFor="let usuario of listaAprobados">
+      <ion-avatar slot="start">
+        <img src="{{usuarioService.obtenerFoto(usuario)}}">
+      </ion-avatar>
+      <ion-label color="light">
+        <h2 class="ion-text-capitalize">{{usuario.nombre}} {{usuario.apellido}}</h2>
+        <h3 *ngIf="usuario.dni">DNI {{usuario.dni}}</h3>
+        <p>
+          <ion-badge color="light">{{usuario.perfil}}</ion-badge>
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
