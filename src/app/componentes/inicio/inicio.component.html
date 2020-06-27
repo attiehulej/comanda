@@ -1,10 +1,11 @@
-<ion-content class="background">
+<div class="fondo">
 
-  <button type="button" class="btnClienteRegistradoInicio"
-    (click)="manejadoraInicio('CLIENTE_REGISTRADO')">Registrarme</button>
-  <button type="button" class="btnClienteAnonimoInicio" (click)="manejadoraInicio('CLIENTE_ANONIMO')">Ingreso sin
-    registro</button>
-  <button type="button" class="btnLoginInicio" (click)="manejadoraInicio('LOGIN')">Ya soy Cliente</button>
+  <ion-button type="button" color="warning" class="btnClienteRegistradoInicio"
+    (click)="manejadoraInicio('CLIENTE_REGISTRADO')">Registrarme</ion-button>
+  <ion-button type="button" color="warning" class="btnClienteAnonimoInicio" 
+    (click)="manejadoraInicio('CLIENTE_ANONIMO')">Ingreso<br>sin registro</ion-button>
+  <ion-button type="button" color="warning" class="btnLoginInicio" 
+    (click)="manejadoraInicio('LOGIN')">Ya soy Cliente</ion-button>
 
   <div class="logoSplash">
     <img src="../../../assets/spinner.png">
@@ -22,4 +23,4 @@
     </p>
   </label>
 
-</ion-content>
+</div>

@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
     public fb: FormBuilder,
     public authService: AuthService,
     private utilsService: UtilsService,
-    private usuarioService: UsuarioService
+    public usuarioService: UsuarioService
   ) { }
 
   ngOnInit() {

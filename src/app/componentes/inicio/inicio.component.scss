@@ -1,3 +1,17 @@
+.fondo{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  width: 100vw;
+  height: 100vh;
+  background: url("../../../assets/splash.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+}
+
 .logoSplash{
     height: 40vh;
     width: 40vw;
@@ -37,13 +51,13 @@
   width: 40vw; 
   top: 5vh;
   height: 10vh;
-  color: grey;
+  /*color: grey;
   background-color:  rgb(255,215,0);
   border-radius: 10px;
   box-shadow: 0 10px 	rgb(218,165,32);
   font-size: 3vh;
   font-family:Helvetica, sans-serif;
-  font-weight:bold;
+  font-weight:bold;*/
 }
 
 .btnClienteRegistradoInicio{
