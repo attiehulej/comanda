@@ -8,12 +8,15 @@ import { ClientesPageRoutingModule } from './clientes-routing.module';
 
 import { ClientesPage } from './clientes.page';
 
+import { ToolbarModule } from '../toolbar/toolbar.module';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ClientesPageRoutingModule
+    ClientesPageRoutingModule,
+    ToolbarModule // PATO
   ],
   declarations: [ClientesPage]
 })

@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar color="warning">
     <ion-button slot="start" fill="clear" (click)="volver()">
       <ion-icon color="light" name="arrow-back-outline"></ion-icon>
@@ -7,7 +7,13 @@
       Usuarios
     </ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
+
+<app-toolbar
+  [titulo]="'Usuarios'"
+  [backBtn]="'home'"
+  [usuario]="null">
+</app-toolbar>
 
 <ion-content class="background">
 

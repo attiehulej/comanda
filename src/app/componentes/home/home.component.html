@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar color="warning">
     <ion-button slot="start" fill="clear" (click)="logOut()">
       <ion-icon color="light" name="log-out-outline"></ion-icon>
@@ -10,7 +10,12 @@
       <img [src]="usuarioService.obtenerFoto(usuario)">
     </ion-avatar>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
+
+<app-toolbar
+  [titulo]="'COHERENCE'"
+  [usuario]="usuario">
+</app-toolbar>
 
 <ion-content class="background ion-padding">
 
@@ -26,12 +31,12 @@
       Gestionar Usuarios
     </ion-button>
 
-    <ion-button size="large" expand="block" color="warning">
+    <ion-button size="large" expand="block" color="warning" (click)="gestionarMesas()">
       <ion-icon slot="start" name="tablet-landscape-outline"></ion-icon>
       Gestionar Mesas
     </ion-button>
 
-    <ion-button size="large" expand="block" color="warning">
+    <ion-button size="large" expand="block" color="warning" (click)="productos()">
       <ion-icon slot="start" name="pizza-outline"></ion-icon>
       Gestionar Productos
     </ion-button>

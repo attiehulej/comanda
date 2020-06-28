@@ -8,12 +8,15 @@ import { UsuariosPageRoutingModule } from './usuarios-routing.module';
 
 import { UsuariosPage } from './usuarios.page';
 
+import { ToolbarModule } from '../toolbar/toolbar.module';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    UsuariosPageRoutingModule
+    UsuariosPageRoutingModule,
+    ToolbarModule // PATO
   ],
   declarations: [UsuariosPage]
 })

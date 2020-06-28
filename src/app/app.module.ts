@@ -32,6 +32,7 @@ import { CargaProductoComponent } from './componentes/carga-producto/carga-produ
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { InicioComponent } from './componentes/inicio/inicio.component';
+import { ToolbarModule } from './componentes/toolbar/toolbar.module';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { InicioComponent } from './componentes/inicio/inicio.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    ToolbarModule // PATO
   ],
   providers: [
     StatusBar,

@@ -154,8 +154,8 @@
   vertical-align: middle;
   line-height: 5vh; 
   font-size: 3vh;
-  font-family:Helvetica, sans-serif;
-  font-weight:bold;
+  /*font-family:Helvetica, sans-serif;
+  font-weight:bold;*/
 }
 
 .lblError {
@@ -175,8 +175,8 @@ ion-input, ion-select {
   color: grey;
   border-bottom: 3px solid grey;
   font-size: 3vh;
-  font-family:Helvetica, sans-serif;
-  font-weight:bold;
+  /*font-family:Helvetica, sans-serif;
+  font-weight:bold;*/
 }
 
 /*button {
@@ -207,8 +207,8 @@ button:active {
   background-color:  rgb(255,215,0);
   border-radius: 10px;
   font-size: 2vh;
-  font-family:Helvetica, sans-serif;
-  font-weight:bold;
+  /*font-family:Helvetica, sans-serif;
+  font-weight:bold;*/
 }
 
 .btnVolverAltaProductos:active{
@@ -217,7 +217,11 @@ button:active {
 
 .btnSubmitAltaProductos{
   position: absolute; 
-  width: 25vw; 
+  width: 90vw; 
+  height: 10vh;
+  top: 116vh;
+  left: 5vw;
+  /*width: 25vw; 
   height: 4vh;
   top: 96vh;
   left: 75vw;
@@ -226,7 +230,7 @@ button:active {
   border-radius: 10px;
   font-size: 2vh;
   font-family:Helvetica, sans-serif;
-  font-weight:bold;
+  font-weight:bold;*/
 }
 
 .btnSubmitAltaProductos:active{
@@ -243,8 +247,8 @@ button:active {
   background-color:  rgb(255,215,0);
   border-radius: 10px;
   font-size: 2vh;
-  font-family:Helvetica, sans-serif;
-  font-weight:bold;
+  /*font-family:Helvetica, sans-serif;
+  font-weight:bold;*/
 }
 
 .btnFotoAltaProductos:active{
@@ -261,8 +265,8 @@ button:active {
   background-color:  rgb(255,215,0);
   border-radius: 10px;
   font-size: 2vh;
-  font-family:Helvetica, sans-serif;
-  font-weight:bold;
+  /*font-family:Helvetica, sans-serif;
+  font-weight:bold;*/
 }
 
 .btnVerFotosAltaProductos:active{

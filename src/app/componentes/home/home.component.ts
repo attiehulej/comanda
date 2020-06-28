@@ -37,12 +37,17 @@ export class HomeComponent implements OnInit {
     this.utilsService.showLoadingAndNavigate('usuarios');
   }
 
-  logOut(): void {
-    this.authService.logout();
-    this.utilsService.showLoadingAndNavigate('inicio');
+  gestionarMesas(){
+    this.utilsService.showLoadingAndNavigate('cargaMesa');
   }
 
+  /*logOut(): void {
+    this.authService.logout();
+    this.utilsService.showLoadingAndNavigate('inicio');
+  }*/
+
   public productos(): void {
-    this.utilsService.showLoadingAndNavigate('productos');
+    // this.utilsService.showLoadingAndNavigate('productos');
+    this.utilsService.showLoadingAndNavigate('cargaProducto');
   }
 }

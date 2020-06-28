@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar color="warning">
     <ion-button slot="start" fill="clear" (click)="logOut()">
       <ion-icon color="light" name="log-out-outline"></ion-icon>
@@ -10,7 +10,13 @@
       <img [src]="usuarioService.obtenerFoto(usuario)">
     </ion-avatar>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
+
+<app-toolbar
+  [titulo]="'COHERENCE'"
+  [usuario]="usuario">
+</app-toolbar>
+
 <ion-content class="background">
   <ion-card color="light">
     <ion-text class="ion-text-center" color="dark">
