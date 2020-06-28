@@ -192,7 +192,8 @@ export class AltaUsuariosPage implements OnInit {
           elemento === 'clave' ||
           elemento === 'nombre' ||
           elemento === 'apellido' ||
-          elemento === 'dni' || elemento === 'cuil') {
+          elemento === 'dni' || elemento === 'cuil' ||
+          elemento === 'qr') {
           retorno = true;
         }
         break;
@@ -202,7 +203,8 @@ export class AltaUsuariosPage implements OnInit {
           elemento === 'clave' ||
           elemento === 'nombre' ||
           elemento === 'apellido' ||
-          elemento === 'dni' || elemento === 'cuil') {
+          elemento === 'dni' || elemento === 'cuil' ||
+          elemento === 'qr') {
           retorno = true;
         }
         break;
@@ -214,13 +216,14 @@ export class AltaUsuariosPage implements OnInit {
           elemento === 'apellido' ||
           elemento === 'dni' ||
           elemento === 'cuil' ||
-          elemento === 'tipo') {
+          elemento === 'tipo' ||
+          elemento === 'qr') {
           retorno = true;
         }
         break;
 
       case 'CLIENTE_REGISTRADO':
-        if (elemento === 'correo' || elemento === 'clave' || elemento === 'nombre' || elemento === 'apellido' || elemento === 'dni') {
+        if (elemento === 'correo' || elemento === 'clave' || elemento === 'nombre' || elemento === 'apellido' || elemento === 'dni' || elemento === 'qr') {
           retorno = true;
         }
         break;
