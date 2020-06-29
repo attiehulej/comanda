@@ -8,13 +8,16 @@ import { AltaUsuariosPageRoutingModule } from './alta-usuarios-routing.module';
 
 import { AltaUsuariosPage } from './alta-usuarios.page';
 
+import { ToolbarModule } from '../../toolbar/toolbar.module';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    AltaUsuariosPageRoutingModule
+    AltaUsuariosPageRoutingModule,
+    ToolbarModule // PATO
   ],
   declarations: [AltaUsuariosPage]
 })

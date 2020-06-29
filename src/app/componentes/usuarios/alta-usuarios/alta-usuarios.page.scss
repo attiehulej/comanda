@@ -24,7 +24,11 @@
 
 .btnSubmitAltaUsuarios{
     position: absolute; 
-    width: 25vw; 
+    width: 90vw; 
+    height: 10vh;
+    top: 96vh;
+    left: 5vw;
+    /*width: 25vw; 
     height: 4vh;
     top: 96vh;
     left: 75vw;
@@ -33,7 +37,7 @@
     border-radius: 10px;
     font-size: 2vh;
     font-family:Helvetica, sans-serif;
-    font-weight:bold;
+    font-weight:bold;*/
 }
   
 .btnFotoAltaUsuarios:active{
@@ -149,8 +153,8 @@
     vertical-align: middle;
     line-height: 5vh; 
     font-size: 3vh;
-    font-family:Helvetica, sans-serif;
-    font-weight:bold;
+    /*font-family:Helvetica, sans-serif;
+    font-weight:bold;*/
 }
 
 .inpCorreoAltaUsuarios{
@@ -165,8 +169,8 @@
     border: 0px;
     border-bottom: 3px solid grey;
     font-size: 3vh;
-    font-family:Helvetica, sans-serif;
-    font-weight:bold;
+    /*font-family:Helvetica, sans-serif;
+    font-weight:bold;*/
 }
 
 .lblErrorCorreoAltaUsuarios{
@@ -182,8 +186,8 @@
     vertical-align: middle;
     line-height: 4vh; 
     font-size: 2vh;
-    font-family:Helvetica, sans-serif;
-    font-weight:bold;
+    /*font-family:Helvetica, sans-serif;
+    font-weight:bold;*/
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -201,8 +205,8 @@
     vertical-align: middle;
     line-height: 5vh; 
     font-size: 3vh;
-    font-family:Helvetica, sans-serif;
-    font-weight:bold;
+    /*font-family:Helvetica, sans-serif;
+    font-weight:bold;*/
 }
 
 .inpClaveAltaUsuarios{
@@ -217,8 +221,8 @@
     border: 0px;
     border-bottom: 3px solid grey;
     font-size: 3vh;
-    font-family:Helvetica, sans-serif;
-    font-weight:bold;
+    /*font-family:Helvetica, sans-serif;
+    font-weight:bold;*/
 }
 
 .lblErrorClaveAltaUsuarios{
@@ -234,8 +238,8 @@
     vertical-align: middle;
     line-height: 4vh; 
     font-size: 2vh;
-    font-family:Helvetica, sans-serif;
-    font-weight:bold;
+    /*font-family:Helvetica, sans-serif;
+    font-weight:bold;*/
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -253,8 +257,8 @@
     vertical-align: middle;
     line-height: 5vh; 
     font-size: 3vh;
-    font-family:Helvetica, sans-serif;
-    font-weight:bold;
+    /*font-family:Helvetica, sans-serif;
+    font-weight:bold;*/
 }
 
 .inpNombreAltaUsuarios{
@@ -269,8 +273,8 @@
     border: 0px;
     border-bottom: 3px solid grey;
     font-size: 3vh;
-    font-family:Helvetica, sans-serif;
-    font-weight:bold;
+    /*font-family:Helvetica, sans-serif;
+    font-weight:bold;*/
 }
 
 .lblErrorNombreAltaUsuarios{
@@ -286,8 +290,8 @@
     vertical-align: middle;
     line-height: 4vh; 
     font-size: 2vh;
-    font-family:Helvetica, sans-serif;
-    font-weight:bold;
+    /*font-family:Helvetica, sans-serif;
+    font-weight:bold;*/
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -305,8 +309,8 @@
     vertical-align: middle;
     line-height: 5vh; 
     font-size: 3vh;
-    font-family:Helvetica, sans-serif;
-    font-weight:bold;
+    /*font-family:Helvetica, sans-serif;
+    font-weight:bold;*/
 }
 
 .inpApellidoAltaUsuarios{
@@ -321,8 +325,8 @@
     border: 0px;
     border-bottom: 3px solid grey;
     font-size: 3vh;
-    font-family:Helvetica, sans-serif;
-    font-weight:bold;
+    /*font-family:Helvetica, sans-serif;
+    font-weight:bold;*/
 }
 
 .lblErrorApellidoAltaUsuarios{
@@ -338,8 +342,8 @@
     vertical-align: middle;
     line-height: 4vh; 
     font-size: 2vh;
-    font-family:Helvetica, sans-serif;
-    font-weight:bold;
+    /*font-family:Helvetica, sans-serif;
+    font-weight:bold;*/
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -357,8 +361,8 @@
     vertical-align: middle;
     line-height: 5vh; 
     font-size: 3vh;
-    font-family:Helvetica, sans-serif;
-    font-weight:bold;
+    /*font-family:Helvetica, sans-serif;
+    font-weight:bold;*/
 }
 
 .inpDniAltaUsuarios{
@@ -373,8 +377,8 @@
     border: 0px;
     border-bottom: 3px solid grey;
     font-size: 3vh;
-    font-family:Helvetica, sans-serif;
-    font-weight:bold;
+    /*font-family:Helvetica, sans-serif;
+    font-weight:bold;*/
 }
 
 .lblErrorDniAltaUsuarios{
@@ -390,8 +394,8 @@
     vertical-align: middle;
     line-height: 4vh; 
     font-size: 2vh;
-    font-family:Helvetica, sans-serif;
-    font-weight:bold;
+    /*font-family:Helvetica, sans-serif;
+    font-weight:bold;*/
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -409,8 +413,8 @@
     vertical-align: middle;
     line-height: 5vh; 
     font-size: 3vh;
-    font-family:Helvetica, sans-serif;
-    font-weight:bold;
+    /*font-family:Helvetica, sans-serif;
+    font-weight:bold;*/
 }
 
 .inpCuilAltaUsuarios{
@@ -425,8 +429,8 @@
     border: 0px;
     border-bottom: 3px solid grey;
     font-size: 3vh;
-    font-family:Helvetica, sans-serif;
-    font-weight:bold;
+    /*font-family:Helvetica, sans-serif;
+    font-weight:bold;*/
 }
 
 .lblErrorCuilAltaUsuarios{
@@ -442,8 +446,8 @@
     vertical-align: middle;
     line-height: 4vh; 
     font-size: 2vh;
-    font-family:Helvetica, sans-serif;
-    font-weight:bold;
+    /*font-family:Helvetica, sans-serif;
+    font-weight:bold;*/
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -462,8 +466,8 @@
     vertical-align: middle;
     line-height: 5vh; 
     font-size: 3vh;
-    font-family:Helvetica, sans-serif;
-    font-weight:bold;
+    /*font-family:Helvetica, sans-serif;
+    font-weight:bold;*/
 }
 
 ////////////////////////////////////////////////////////////////////////////////

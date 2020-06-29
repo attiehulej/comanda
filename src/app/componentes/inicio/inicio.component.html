@@ -1,25 +1,28 @@
-<ion-content class="background">
-
-  <button type="button" class="btnClienteRegistradoInicio"
-    (click)="manejadoraInicio('CLIENTE_REGISTRADO')">Registrarme</button>
-  <button type="button" class="btnClienteAnonimoInicio" (click)="manejadoraInicio('CLIENTE_ANONIMO')">Ingreso sin
-    registro</button>
-  <button type="button" class="btnLoginInicio" (click)="manejadoraInicio('LOGIN')">Ya soy Cliente</button>
-
-  <div class="logoSplash">
-    <img src="../../../assets/spinner.png">
+<ion-content>
+  <div class="fondo">
+  
+    <ion-button type="button" color="warning" class="btnClienteRegistradoInicio"
+      (click)="manejadoraInicio('CLIENTE_REGISTRADO')">Registrarme</ion-button>
+    <ion-button type="button" color="warning" class="btnClienteAnonimoInicio" 
+      (click)="manejadoraInicio('CLIENTE_ANONIMO')">Ingreso<br>sin registro</ion-button>
+    <ion-button type="button" color="warning" class="btnLoginInicio" 
+      (click)="manejadoraInicio('LOGIN')">Ya soy Cliente</ion-button>
+  
+    <div class="logoSplash">
+      <img src="../../../assets/spinner.png">
+    </div>
+    <label class="divTitulo">COHERENCE</label>
+    <label class="divNombres">
+      <p>
+        <ion-badge color="warning">ATTIE PATRICIO</ion-badge>
+      </p>
+      <p>
+        <ion-badge color="warning">HULEJ LUCAS</ion-badge>
+      </p>
+      <p>
+        <ion-badge color="warning">LIPPI FRANCO</ion-badge>
+      </p>
+    </label>
+  
   </div>
-  <label class="divTitulo">COHERENCE</label>
-  <label class="divNombres">
-    <p>
-      <ion-badge color="warning">ATTIE PATRICIO</ion-badge>
-    </p>
-    <p>
-      <ion-badge color="warning">HULEJ LUCAS</ion-badge>
-    </p>
-    <p>
-      <ion-badge color="warning">LIPPI FRANCO</ion-badge>
-    </p>
-  </label>
-
 </ion-content>

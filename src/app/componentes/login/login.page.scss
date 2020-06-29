@@ -99,17 +99,17 @@
     height: 10vh;
     top: 60vh;
     left: 15vw;
-    color: grey;
+    /*color: grey;
     background-color:  rgb(255,215,0);
     border-radius: 10px;
     box-shadow: 0 10px 	rgb(218,165,32);
-    font-size: 5vh;
+    font-size: 5vh;*/
 }
 
-.btnSubmitLogin:active{
+/*.btnSubmitLogin:active{
     transform: translate(0px, 5px);
     box-shadow: 0 5px rgb(218,165,32);
-}
+}*/
 
 .btnResetLogin{
     position: absolute; 
@@ -117,17 +117,17 @@
     height: 6vh;
     top: 75vh;
     left: 15vw;
-    color: grey;
+    /*color: grey;
     background-color:  rgb(255,215,0);
     border-radius: 10px;
     box-shadow: 0 10px 	rgb(218,165,32);
-    font-size: 5vh;
+    font-size: 5vh;*/
 }
 
-.btnResetLogin:active{
+/*.btnResetLogin:active{
     transform: translate(0px, 5px);
     box-shadow: 0 5px rgb(218,165,32);
-}
+}*/
 
 @keyframes showErrorLogin{
     from {transform: scale(0.5, 0.5);}
