@@ -43,6 +43,7 @@ export class AltaUsuariosPage implements OnInit {
       ({
         correo: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(25), Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]],
         clave: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(6), Validators.pattern('[0-9]*')]],
+        clave2: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(6), Validators.pattern('[0-9]*')]],
         nombre: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(12), Validators.pattern('[a-zA-Z ]*')]],
         apellido: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(12), Validators.pattern('[a-zA-Z ]*')]],
         dni: ['', [Validators.required, Validators.min(0), Validators.minLength(7), Validators.maxLength(8), Validators.pattern('[0-9]*')]],
@@ -139,6 +140,7 @@ export class AltaUsuariosPage implements OnInit {
       case 'DUEÑO':
         if (this.formUsuario.controls.correo.valid &&
           this.formUsuario.controls.clave.valid &&
+          this.formUsuario.controls.clave.value === this.formUsuario.controls.clave2.value &&
           this.formUsuario.controls.nombre.valid &&
           this.formUsuario.controls.apellido.valid &&
           this.formUsuario.controls.dni.valid && this.formUsuario.controls.cuil.valid /*&& this.formUsuario.controls.foto.valid*/) {
@@ -147,7 +149,10 @@ export class AltaUsuariosPage implements OnInit {
         break;
 
       case 'SUPERVISOR':
-        if (this.formUsuario.controls.correo.valid && this.formUsuario.controls.clave.valid && this.formUsuario.controls.nombre.valid &&
+        if (this.formUsuario.controls.correo.valid &&
+          this.formUsuario.controls.clave.valid &&
+          this.formUsuario.controls.clave.value === this.formUsuario.controls.clave2.value &&
+          this.formUsuario.controls.nombre.valid &&
           this.formUsuario.controls.apellido.valid && this.formUsuario.controls.dni.valid && this.formUsuario.controls.cuil.valid) {
           retorno = false;
         }
@@ -155,7 +160,9 @@ export class AltaUsuariosPage implements OnInit {
 
       case 'EMPLEADO':
         if (this.formUsuario.controls.correo.valid &&
-          this.formUsuario.controls.clave.valid && this.formUsuario.controls.nombre.valid &&
+          this.formUsuario.controls.clave.valid &&
+          this.formUsuario.controls.clave.value === this.formUsuario.controls.clave2.value &&
+          this.formUsuario.controls.nombre.valid &&
           this.formUsuario.controls.apellido.valid &&
           this.formUsuario.controls.dni.valid &&
           this.formUsuario.controls.cuil.valid && this.formUsuario.controls.tipo) {
@@ -168,14 +175,20 @@ export class AltaUsuariosPage implements OnInit {
         break;
 
       case 'CLIENTE_REGISTRADO':
-        if (this.formUsuario.controls.correo.valid && this.formUsuario.controls.clave.valid && this.formUsuario.controls.nombre.valid &&
+        if (this.formUsuario.controls.correo.valid &&
+          this.formUsuario.controls.clave.valid &&
+          this.formUsuario.controls.clave.value === this.formUsuario.controls.clave2.value &&
+          this.formUsuario.controls.nombre.valid &&
           this.formUsuario.controls.apellido.valid && this.formUsuario.controls.dni.valid) {
           retorno = false;
         }
         break;
 
       case 'CLIENTE_ANONIMO':
-        if (this.formUsuario.controls.correo.valid && this.formUsuario.controls.clave.valid && this.formUsuario.controls.nombre.valid) {
+        if (this.formUsuario.controls.correo.valid &&
+          this.formUsuario.controls.clave.valid &&
+          this.formUsuario.controls.clave.value === this.formUsuario.controls.clave2.value &&
+          this.formUsuario.controls.nombre.valid) {
           retorno = false;
         }
         break;
@@ -190,9 +203,11 @@ export class AltaUsuariosPage implements OnInit {
       case 'DUEÑO':
         if (elemento === 'correo' ||
           elemento === 'clave' ||
+          elemento === 'clave2' ||
           elemento === 'nombre' ||
           elemento === 'apellido' ||
-          elemento === 'dni' || elemento === 'cuil' ||
+          elemento === 'dni' ||
+          elemento === 'cuil' ||
           elemento === 'qr') {
           retorno = true;
         }
@@ -201,9 +216,11 @@ export class AltaUsuariosPage implements OnInit {
       case 'SUPERVISOR':
         if (elemento === 'correo' ||
           elemento === 'clave' ||
+          elemento === 'clave2' ||
           elemento === 'nombre' ||
           elemento === 'apellido' ||
-          elemento === 'dni' || elemento === 'cuil' ||
+          elemento === 'dni' ||
+          elemento === 'cuil' ||
           elemento === 'qr') {
           retorno = true;
         }
@@ -212,6 +229,7 @@ export class AltaUsuariosPage implements OnInit {
       case 'EMPLEADO':
         if (elemento === 'correo' ||
           elemento === 'clave' ||
+          elemento === 'clave2' ||
           elemento === 'nombre' ||
           elemento === 'apellido' ||
           elemento === 'dni' ||
@@ -223,13 +241,22 @@ export class AltaUsuariosPage implements OnInit {
         break;
 
       case 'CLIENTE_REGISTRADO':
-        if (elemento === 'correo' || elemento === 'clave' || elemento === 'nombre' || elemento === 'apellido' || elemento === 'dni' || elemento === 'qr') {
+        if (elemento === 'correo' ||
+          elemento === 'clave' ||
+          elemento === 'clave2' ||
+          elemento === 'nombre' ||
+          elemento === 'apellido' ||
+          elemento === 'dni' ||
+          elemento === 'qr') {
           retorno = true;
         }
         break;
 
       case 'CLIENTE_ANONIMO':
-        if (elemento === 'correo' || elemento === 'clave' || elemento === 'nombre') {
+        if (elemento === 'correo' ||
+        elemento === 'clave' ||
+        elemento === 'clave2' ||
+        elemento === 'nombre') {
           retorno = true;
         }
         break;
@@ -279,5 +306,9 @@ export class AltaUsuariosPage implements OnInit {
       }
     }
     return retorno;
+  }
+
+  public getTipoAlta(): string { // PATO
+    return localStorage.getItem('tipoDeAlta');
   }
 }

@@ -26,7 +26,7 @@
     position: absolute; 
     width: 90vw; 
     height: 10vh;
-    top: 96vh;
+    top: 126vh;
     left: 5vw;
     /*width: 25vw; 
     height: 4vh;
@@ -86,7 +86,7 @@
     position: absolute;
     width: 80vw;
     height: 15vh;
-    top: 0vh;
+    top: 15vh;
     left: 10vw;
 }
 
@@ -94,7 +94,7 @@
     position: absolute;
     width: 80vw;
     height: 15vh;
-    top: 15vh;
+    top: 30vh;
     left: 10vw;
 }
 
@@ -102,7 +102,7 @@
     position: absolute;
     width: 80vw;
     height: 15vh;
-    top: 30vh;
+    top: 45vh;
     left: 10vw;
 }
 
@@ -110,19 +110,11 @@
     position: absolute;
     width: 80vw;
     height: 15vh;
-    top: 45vh;
-    left: 10vw;
-}
-
-.divNombreAltaUsuarios{
-    position: absolute;
-    width: 80vw;
-    height: 15vh;
     top: 60vh;
     left: 10vw;
 }
 
-.divApellidoAltaUsuarios{
+.divClave2AltaUsuarios{
     position: absolute;
     width: 80vw;
     height: 15vh;
@@ -130,11 +122,27 @@
     left: 10vw;
 }
 
+.divNombreAltaUsuarios{
+    position: absolute;
+    width: 80vw;
+    height: 15vh;
+    top: 90vh;
+    left: 10vw;
+}
+
+.divApellidoAltaUsuarios{
+    position: absolute;
+    width: 80vw;
+    height: 15vh;
+    top: 105vh;
+    left: 10vw;
+}
+
 .divTipoAltaUsuarios{
     position: absolute;
     width: 80vw;
     height: 5vh;
-    top: 90vh;
+    top: 120vh;
     left: 10vw;
 }
 
@@ -209,6 +217,23 @@
     font-weight:bold;*/
 }
 
+.lblClave2AltaUsuarios{
+    position: absolute;
+    width: 100%; 
+    height: 40%;
+    top: 0%;
+    left: 0%;
+    border-radius: 10px;
+    background-color: rgb(255,215,0);
+    color:  grey;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 5vh; 
+    font-size: 3vh;
+    /*font-family:Helvetica, sans-serif;
+    font-weight:bold;*/
+}
+
 .inpClaveAltaUsuarios{
     position: absolute;
     width: 100%; 
@@ -225,7 +250,40 @@
     font-weight:bold;*/
 }
 
+.inpClave2AltaUsuarios{
+    position: absolute;
+    width: 100%; 
+    height: 40%;
+    top: 40%;
+    left: 0%;
+    color: grey;
+    background-color: rgba(255, 255, 255, 0);
+    text-align: center;
+    border: 0px;
+    border-bottom: 3px solid grey;
+    font-size: 3vh;
+    /*font-family:Helvetica, sans-serif;
+    font-weight:bold;*/
+}
+
 .lblErrorClaveAltaUsuarios{
+    position: absolute;
+    width: 100%; 
+    height: 20%;
+    top: 80%;
+    left: 0%;
+    border-radius: 10px;
+    background-color: rgb(255, 0, 0);
+    color:  grey;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 4vh; 
+    font-size: 2vh;
+    /*font-family:Helvetica, sans-serif;
+    font-weight:bold;*/
+}
+
+.lblErrorClave2AltaUsuarios{
     position: absolute;
     width: 100%; 
     height: 20%;

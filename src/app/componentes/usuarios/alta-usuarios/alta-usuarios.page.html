@@ -10,7 +10,7 @@
 </ion-header> -->
 
 <app-toolbar
-  [titulo]="'Nuevo Usuario'"
+  [titulo]="'Nuevo '.concat(getTipoAlta())"
   [backBtn]="'inicio'"
   [usuario]="null">
 </app-toolbar>
@@ -38,6 +38,13 @@
       <input type="password" class="inpClaveAltaUsuarios" formControlName="clave">
       <label class="lblErrorClaveAltaUsuarios"
         [hidden]="formUsuario.controls.clave.valid || formUsuario.controls.clave.pristine">CLAVE INVALIDA</label>
+    </div>
+
+    <div class="divClave2AltaUsuarios" *ngIf="mostrarSegunAlta('clave2')">
+      <label class="lblClave2AltaUsuarios">Confirme Contraseña</label>
+      <input type="password" class="inpClave2AltaUsuarios" formControlName="clave2">
+      <label class="lblErrorClave2AltaUsuarios"
+        [hidden]="formUsuario.controls.clave2.pristine || formUsuario.controls.clave.value === formUsuario.controls.clave2.value">NO COINCIDE CON LA CLAVE INGRESADA</label>
     </div>
 
     <div class="divNombreAltaUsuarios" *ngIf="mostrarSegunAlta('nombre')">
