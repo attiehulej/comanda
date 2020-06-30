@@ -58,6 +58,7 @@ export class LoginPage implements OnInit {
             this.utilsService.dismissLoading();
             this.formLogin.reset();
             if (usuario.estado === EstadoUsuario.APROBADO) {
+              localStorage.setItem('perfil', usuario.perfil); // PATO
               if (usuario.perfil === TipoUsuario.CLIENTE_REGISTRADO || usuario.perfil === TipoUsuario.CLIENTE_ANONIMO) { // Clientes
                 this.moveTo('clientes');
               } else { // Personal

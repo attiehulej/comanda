@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
 import { UtilsService } from 'src/app/servicios/utils.service';
-import { Usuario } from 'src/app/clases/usuario';
+// import { Usuario } from 'src/app/clases/usuario';
 import { EstadoUsuario } from 'src/app/enums/estado-usuario.enum';
 import { AuthService } from 'src/app/servicios/auth.service';
 
@@ -16,7 +16,7 @@ export class UsuariosPage implements OnInit {
   listaPendientes: any;
 
   constructor(
-    private usuarioService: UsuarioService,
+    public usuarioService: UsuarioService,
     private utilsService: UtilsService,
     private authService: AuthService) { }
 
@@ -100,5 +100,9 @@ export class UsuariosPage implements OnInit {
   public abmUsuario(tipoDeAlta: string): void {
     localStorage.setItem('tipoDeAlta', tipoDeAlta);
     this.utilsService.showLoadingAndNavigate('usuarios/alta-usuarios');
+  }
+
+  public getPerfil(): string { // PATO
+    return localStorage.getItem('perfil');
   }
 }

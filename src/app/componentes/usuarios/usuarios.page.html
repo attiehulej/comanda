@@ -18,13 +18,41 @@
 <ion-content class="background">
 
   <ion-grid class="ion-no-padding">
-    <ion-row>
+    <ion-row *ngIf="getPerfil() === 'DUEÑO'">
       <ion-col>
-        <ion-button color="warning" (click)="altaUsuario()" size="block">
-          <ion-icon name="person-add-outline"></ion-icon> Nuevo Usuario
+        <ion-button color="warning" (click)="abmUsuario('DUEÑO')" size="block">
+          <ion-icon name="person-add-outline"></ion-icon> Nuevo DUEÑO
         </ion-button>
       </ion-col>
     </ion-row>
+    <ion-row *ngIf="getPerfil() === 'DUEÑO' || getPerfil() === 'SUPERVISOR'">
+      <ion-col>
+        <ion-button color="warning" (click)="abmUsuario('SUPERVISOR')" size="block">
+          <ion-icon name="person-add-outline"></ion-icon> Nuevo SUPERVISOR
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="getPerfil() === 'DUEÑO' || getPerfil() === 'SUPERVISOR'">
+      <ion-col>
+        <ion-button color="warning" (click)="abmUsuario('EMPLEADO')" size="block">
+          <ion-icon name="person-add-outline"></ion-icon> Nuevo EMPLEADO
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <!-- <ion-row *ngIf="getPerfil() === 'METRE'">
+      <ion-col>
+        <ion-button color="warning" (click)="abmUsuario('CLIENTE_REGISTRADO')" size="block">
+          <ion-icon name="person-add-outline"></ion-icon> Nuevo CLIENTE_REGISTRADO
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="getPerfil() === 'METRE'">
+      <ion-col>
+        <ion-button color="warning" (click)="abmUsuario('CLIENTE_ANONIMO')" size="block">
+          <ion-icon name="person-add-outline"></ion-icon> Nuevo CLIENTE_ANONIMO
+        </ion-button>
+      </ion-col>
+    </ion-row> -->
   </ion-grid>
 
   <ion-list color=“transparent”>

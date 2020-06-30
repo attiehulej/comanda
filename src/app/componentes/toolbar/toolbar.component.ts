@@ -24,6 +24,7 @@ export class ToolbarComponent implements OnInit {
 
   logOut(): void {
     this.authService.logout();
+    localStorage.removeItem('perfil');
     this.utilsService.showLoadingAndNavigate('inicio');
   }
 }
