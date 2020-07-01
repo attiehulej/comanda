@@ -1,5 +1,5 @@
 export enum Sectores {
-    COMIDAS,
-    BEBIDAS,
-    POSTRES
+    COMIDAS = 'COMIDAS',
+    BEBIDAS = 'BEBIDAS',
+    POSTRES = 'POSTRES'
 }
