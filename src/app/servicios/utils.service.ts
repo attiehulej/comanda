@@ -6,6 +6,7 @@ import {
   ActionSheetController
 } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { FIREBASE_MENSAJES } from '../enums/firebase-errores';
 
 @Injectable({
   providedIn: 'root'
@@ -95,7 +96,8 @@ export class UtilsService {
   // FIN Loadings
 
   // Errors
-  async handleError(error): Promise<void> {
+  async handleError(error, isFirebase = false): Promise<void> {
+    if (isFirebase) { this.localizeErrorMap(error); }
     console.log(error);
     const alert = await this.alertCtrl.create({
       message: error.message,
@@ -114,4 +116,12 @@ export class UtilsService {
     await actionSheet.present();
   }
   // FIN ActionSheets
+
+  // Firebase errores
+  localizeErrorMap(e?: Error & { code?: string }): Error {
+    if (typeof e === 'object' && typeof e.code === 'string' && e.code in FIREBASE_MENSAJES) {
+      e.message = (FIREBASE_MENSAJES as any)[e.code];
+    }
+    return e;
+  }
 }
