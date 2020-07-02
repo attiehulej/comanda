@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
 import { UtilsService } from 'src/app/servicios/utils.service';
-// import { Usuario } from 'src/app/clases/usuario';
 import { EstadoUsuario } from 'src/app/enums/estado-usuario.enum';
+import { TipoUsuario } from 'src/app/enums/tipo-usuario.enum';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { Usuario } from 'src/app/clases/usuario';
 import { EditarUsuarioPage } from './editar-usuario/editar-usuario.page';
@@ -37,11 +37,17 @@ export class UsuariosPage implements OnInit {
   }
 
   filtrarPendientes() {
-    return this.listaUsuarios.filter(usuario => usuario.estado === EstadoUsuario.PENDIENTE);
+    return this.listaUsuarios.filter(usuario => usuario.estado === EstadoUsuario.PENDIENTE
+      && (this.getPerfil() === 'METRE'
+        ? (usuario.perfil === TipoUsuario.CLIENTE_ANONIMO || usuario.perfil === TipoUsuario.CLIENTE_REGISTRADO)
+        : true));
   }
 
   filtrarAprobados() {
-    return this.listaUsuarios.filter(usuario => usuario.estado === EstadoUsuario.APROBADO);
+    return this.listaUsuarios.filter(usuario => usuario.estado === EstadoUsuario.APROBADO
+      && (this.getPerfil() === 'METRE'
+        ? (usuario.perfil === TipoUsuario.CLIENTE_ANONIMO || usuario.perfil === TipoUsuario.CLIENTE_REGISTRADO)
+        : true));
   }
 
   aprobarUsuario(usuario): void {

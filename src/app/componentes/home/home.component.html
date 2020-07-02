@@ -30,6 +30,10 @@
       <ion-icon slot="start" name="people"></ion-icon>
       Gestionar Usuarios
     </ion-button>
+    <ion-button *ngIf="usuario && usuario.perfil === 'METRE'" size="large" expand="block" color="warning" (click)="gestionarUsuarios()">
+      <ion-icon slot="start" name="people"></ion-icon>
+      Gestionar Clientes
+    </ion-button>
 
     <ion-button *ngIf="usuario && (usuario.perfil === 'DUEÑO' || usuario.perfil === 'SUPERVISOR')" size="large" expand="block" color="warning" (click)="gestionarMesas()">
       <ion-icon slot="start" name="tablet-landscape-outline"></ion-icon>
