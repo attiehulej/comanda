@@ -12,9 +12,18 @@ export class MesaService {
 
   // Obtiene foto de la mesa o una default
   obtenerFoto(mesa: Mesa) {
-    let foto = '../../../assets/defaultFoto.png';
+    let foto = '../../../assets/defaultFotoMesa.png';
     if (mesa.foto) {
       foto = 'data:image/jpeg;base64,' + mesa.foto;
+    }
+    return foto;
+  }
+
+  // Muestra una foto codificada en base 64 o una default
+  mostrarFoto(fotoBase64: string) {
+    let foto = '../../../assets/defaultFotoMesa.png';
+    if (fotoBase64 !== '') {
+      foto = 'data:image/jpeg;base64,' + fotoBase64;
     }
     return foto;
   }

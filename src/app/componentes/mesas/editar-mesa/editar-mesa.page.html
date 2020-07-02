@@ -20,8 +20,8 @@
             <h2 class="lblNombreAltaUsuarios">Foto mesa </h2>
           </ion-text>
         </ion-list-header>
-        <ion-avatar class="ion-margin-start">
-          <img src="{{mesaService.obtenerFoto(mesa)}}">
+        <ion-avatar class="ion-margin-start" (click)="tomarFotoAltaMesas()">
+          <img src="{{mesaService.mostrarFoto(formMesa.controls.foto.value)}}">
         </ion-avatar>
       </ion-col>
     </ion-row>
