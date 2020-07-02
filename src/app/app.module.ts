@@ -27,8 +27,6 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 
 import { HomeComponent } from './componentes/home/home.component';
-import { CargaMesaComponent } from './componentes/carga-mesa/carga-mesa.component';
-import { CargaProductoComponent } from './componentes/carga-producto/carga-producto.component';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { InicioComponent } from './componentes/inicio/inicio.component';
@@ -38,8 +36,6 @@ import { ToolbarModule } from './componentes/toolbar/toolbar.module';
   declarations: [
     AppComponent,
     HomeComponent,
-    CargaMesaComponent, // PATO
-    CargaProductoComponent, // PATO
     InicioComponent // PATO
   ],
   entryComponents: [],

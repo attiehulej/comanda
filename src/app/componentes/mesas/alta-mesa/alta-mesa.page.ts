@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TipoMesa } from '../../enums/tipo-mesa.enum';
-import { CameraService } from '../../servicios/camera.service';
-import { Mesa } from '../../clases/mesa';
-import { MesaService } from '../../servicios/mesa.service';
-import { EstadosMesa } from '../../enums/estado-mesa.enum';
+import { TipoMesa } from 'src/app/enums/tipo-mesa.enum';
+import { CameraService } from 'src/app/servicios/camera.service';
+import { Mesa } from 'src/app/clases/mesa';
+import { MesaService } from 'src/app/servicios/mesa.service';
+import { EstadosMesa } from 'src/app/enums/estado-mesa.enum';
 import { UtilsService } from 'src/app/servicios/utils.service';
 
 @Component({
-  selector: 'app-carga-mesa',
-  templateUrl: './carga-mesa.component.html',
-  styleUrls: ['./carga-mesa.component.scss'],
+  selector: 'app-alta-mesa',
+  templateUrl: './alta-mesa.page.html',
+  styleUrls: ['./alta-mesa.page.scss'],
 })
-export class CargaMesaComponent implements OnInit {
+export class AltaMesaPage implements OnInit {
   public formMesa: FormGroup;
 
   // https://stackoverflow.com/questions/56036446/typescript-enum-values-as-array
@@ -56,22 +56,10 @@ export class CargaMesaComponent implements OnInit {
       // alert('Envío Mesa');
       this.mesas.crearMesa(this.mesa)
         .then(nuevaMesa => {
-          this.mesa.id = nuevaMesa.id;
-          this.mesa.fechaAlta = new Date();
-          this.mesas.actualizarMesa(nuevaMesa.id, this.mesa);
-
           this.formMesa.reset();
           this.foto = '';
 
-          this.mesa.numero = null;
-          this.mesa.cantidad = null;
-          this.mesa.tipo = null;
-          this.mesa.foto = null;
-          this.mesa.fechaAlta = new Date();
-          this.mesa.fechaBaja = null;
-          this.mesa.fechaModificado = null;
-          this.mesa.id = null;
-          this.mesa.estado = EstadosMesa[EstadosMesa.LIBRE];
+          this.mesa = new Mesa();
 
           this.utilsService.dismissLoading();
           this.utilsService.presentToast('Mesa creada', 'toast-success');

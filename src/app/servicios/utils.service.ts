@@ -3,9 +3,11 @@ import {
   ToastController,
   LoadingController,
   AlertController,
-  ActionSheetController
+  ActionSheetController,
+  ModalController
 } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { FIREBASE_MENSAJES } from '../enums/firebase-errores';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +21,7 @@ export class UtilsService {
     private toastCtrl: ToastController,
     private loadingCtrl: LoadingController,
     private actionSheetCtrl: ActionSheetController,
+    private modalCtrl: ModalController,
     private router: Router
   ) { }
 
@@ -82,6 +85,28 @@ export class UtilsService {
     });
   }
 
+  async presentAlertConfirm(title: string, msg: string, callback: any) {
+    const alert = await this.alertCtrl.create({
+      header: title,
+      message: msg,
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => { }
+        }, {
+          text: 'Si',
+          handler: () => {
+            callback();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
   async showLoadingAndNavigate(route: string) {
     await this.presentLoadingAuto();
     this.router.navigate([route]);
@@ -95,7 +120,8 @@ export class UtilsService {
   // FIN Loadings
 
   // Errors
-  async handleError(error): Promise<void> {
+  async handleError(error, isFirebase = false): Promise<void> {
+    if (isFirebase) { this.localizeErrorMap(error); }
     console.log(error);
     const alert = await this.alertCtrl.create({
       message: error.message,
@@ -114,4 +140,21 @@ export class UtilsService {
     await actionSheet.present();
   }
   // FIN ActionSheets
+
+  // Firebase errores
+  localizeErrorMap(e?: Error & { code?: string }): Error {
+    if (typeof e === 'object' && typeof e.code === 'string' && e.code in FIREBASE_MENSAJES) {
+      e.message = (FIREBASE_MENSAJES as any)[e.code];
+    }
+    return e;
+  }
+
+  // MODAL
+  async presentModal(page, data?) {
+    const modal = await this.modalCtrl.create({
+      component: page,
+      componentProps: data
+    });
+    return await modal.present();
+  }
 }

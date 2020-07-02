@@ -1,16 +1,12 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './componentes/home/home.component';
-import { CargaMesaComponent } from './componentes/carga-mesa/carga-mesa.component';
-import { CargaProductoComponent } from './componentes/carga-producto/carga-producto.component';
 import { InicioComponent } from './componentes/inicio/inicio.component';
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   { path: 'home', component: HomeComponent , canActivate: [AuthGuard]},
-  { path: 'cargaMesa', component: CargaMesaComponent }, // PATO
-  { path: 'cargaProducto', component: CargaProductoComponent }, // PATO
   { path: 'inicio', component: InicioComponent }, // PATO
   {
     path: 'splash',
@@ -32,6 +28,14 @@ const routes: Routes = [
   {
     path: 'usuarios',
     loadChildren: () => import('./componentes/usuarios/usuarios.module').then( m => m.UsuariosPageModule)
+  },
+  {
+    path: 'mesas',
+    loadChildren: () => import('./componentes/mesas/mesas.module').then( m => m.MesasPageModule)
+  },
+  {
+    path: 'productos',
+    loadChildren: () => import('./componentes/productos/productos.module').then( m => m.ProductosPageModule)
   }
 ];
 

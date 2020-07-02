@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CameraService } from '../../servicios/camera.service';
-import { Producto } from '../../clases/producto';
-import { ProductoService } from '../../servicios/producto.service';
-import { Sectores } from '../../enums/sectores.enum';
+import { CameraService } from 'src/app/servicios/camera.service';
+import { Producto } from 'src/app/clases/producto';
+import { ProductoService } from 'src/app/servicios/producto.service';
+import { Sectores } from 'src/app/enums/sectores.enum';
 import { UtilsService } from 'src/app/servicios/utils.service';
 
 @Component({
-  selector: 'app-carga-producto',
-  templateUrl: './carga-producto.component.html',
-  styleUrls: ['./carga-producto.component.scss'],
+  selector: 'app-alta-producto',
+  templateUrl: './alta-producto.page.html',
+  styleUrls: ['./alta-producto.page.scss'],
 })
-export class CargaProductoComponent implements OnInit {
+export class AltaProductoPage implements OnInit {
   public formProducto: FormGroup;
 
   // https://stackoverflow.com/questions/56036446/typescript-enum-values-as-array
@@ -47,7 +47,7 @@ export class CargaProductoComponent implements OnInit {
 
   public tomarFoto(): void {
     this.camara.tomarFoto()
-    .then(unaFoto => this.fotos.push(unaFoto));
+      .then(unaFoto => this.fotos.push(unaFoto));
   }
 
   onSubmitProducto(): void {
@@ -63,33 +63,19 @@ export class CargaProductoComponent implements OnInit {
       this.producto.fotos = this.fotos;
 
       this.productos.crearProducto(this.producto)
-      .then(nuevoProd => {
-        this.producto.id = nuevoProd.id;
-        this.producto.fechaAlta = new Date();
-        this.productos.actualizarProducto(nuevoProd.id, this.producto);
+        .then(nuevoProd => {
+          console.log('Producto creado ' + nuevoProd);
+          this.formProducto.reset();
+          this.fotos = [];
+          this.producto = new Producto();
 
-        this.formProducto.reset();
-        this.fotos = [];
-
-        this.producto.codigo = null;
-        this.producto.descripcion = null;
-        this.producto.fechaAlta = new Date();
-        this.producto.fechaBaja = null;
-        this.producto.fechaModificado = null;
-        this.producto.fotos = null;
-        this.producto.id = null;
-        this.producto.nombre = null;
-        this.producto.precio = null;
-        this.producto.sector = null;
-        this.producto.tiempo = null;
-
-        this.utilsService.dismissLoading();
-        this.utilsService.presentToast('Producto creado', 'toast-success');
-      })
-      .catch(error => {
-        this.utilsService.dismissLoading();
-        this.utilsService.handleError(error);
-      });
+          this.utilsService.dismissLoading();
+          this.utilsService.presentToast('Producto creado', 'toast-success');
+        })
+        .catch(error => {
+          this.utilsService.dismissLoading();
+          this.utilsService.handleError(error);
+        });
     } else {
       if (this.fotos.length < this.cantFotos) {
         this.utilsService.presentToast(`Debe adjuntar ${this.cantFotos} fotos del producto`, 'toast-error');

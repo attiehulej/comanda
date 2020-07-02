@@ -10,6 +10,7 @@ export class UsuarioService {
 
   constructor(private firebaseService: FirebaseService) { }
 
+  // Obtiene foto del usuario o una default
   obtenerFoto(usuario: Usuario) {
     let foto = '../../../assets/defaultFoto.png';
     if (usuario.foto !== '') {
@@ -22,7 +23,8 @@ export class UsuarioService {
   obtenerUsuarios() {
     return this.firebaseService.getDocs('usuarios').pipe(
       map(users => {
-        return users.map(a => {
+        // Solo usuarios que no esten dados de baja
+        return users.filter((u) => (u.payload.doc.data() as Usuario).fechaBaja === null).map(a => {
           const data = a.payload.doc.data() as Usuario;
           const id = a.payload.doc.id;
           return { id, ...data };
@@ -44,16 +46,20 @@ export class UsuarioService {
 
   // Crear usuario (Class Usuario)
   crearUsuario(id: string, usr: Usuario) {
+    usr.fechaAlta = new Date();
     return this.firebaseService.addDoc2('usuarios', id, Object.assign({}, usr));
   }
 
-  // Actualizar usuario (id y Class Usuario)
-  actualizarUsuario(id: string, usr: Usuario) {
-    return this.firebaseService.updateDoc('usuarios', id, Object.assign({}, usr));
+  // Actualizar usuario (Class Usuario)
+  actualizarUsuario(usr: Usuario) {
+    usr.fechaModificado = new Date();
+    return this.firebaseService.updateDoc('usuarios', usr.id, Object.assign({}, usr));
   }
 
-  // Borrar usuario (id)
-  borrarUsuario(id: string) {
-    return this.firebaseService.deleteDoc('usuarios', id);
+  // Borrar usuario
+  // Realizamos baja logica del usuario
+  borrarUsuario(usr: Usuario) {
+    usr.fechaBaja = new Date();
+    return this.firebaseService.updateDoc('usuarios', usr.id, Object.assign({}, usr));
   }
 }

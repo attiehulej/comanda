@@ -65,6 +65,7 @@ export class AltaUsuariosPage implements OnInit {
 
   onSubmitUsuario(): void {
     if (this.errorFomularioAltaUsarios() === false) {
+      this.utilsService.presentLoading();
       const nuevoUsuario = new Usuario();
       nuevoUsuario.correo = this.formUsuario.controls.correo.value;
       nuevoUsuario.clave = this.formUsuario.controls.clave.value;
@@ -114,10 +115,12 @@ export class AltaUsuariosPage implements OnInit {
           break;
       }
       this.authService.signUp(nuevoUsuario).then(datos => {
+        this.utilsService.dismissLoading();
         console.log(datos);
         this.volverAltaUsuarios();
       }, (err) => {
-        this.utilsService.handleError(err);
+        this.utilsService.dismissLoading();
+        this.utilsService.handleError(err, true);
         console.log('Error: ' + err);
       });
     }

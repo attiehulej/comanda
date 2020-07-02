@@ -10,11 +10,21 @@ export class ProductoService {
 
   constructor(private firebaseService: FirebaseService) { }
 
+  // Obtiene foto del producto o una default
+  obtenerFoto(producto: Producto) {
+    let foto = '../../../assets/defaultFoto.png';
+    if (producto.fotos && producto.fotos.length > 0) {
+      foto = 'data:image/jpeg;base64,' + producto.fotos[0];
+    }
+    return foto;
+  }
+
   // Obtiene todos los productos
   obtenerProductos() {
     return this.firebaseService.getDocs('productos').pipe(
       map(prod => {
-        return prod.map(a => {
+        // Solo productos que no esten dados de baja
+        return prod.filter((p) => (p.payload.doc.data() as Producto).fechaBaja === null).map(a => {
           const data = a.payload.doc.data() as Producto;
           const id = a.payload.doc.id;
           return { id, ...data };
@@ -36,16 +46,20 @@ export class ProductoService {
 
   // Crear producto (Class Producto)
   crearProducto(prod: Producto) {
+    prod.fechaAlta = new Date();
     return this.firebaseService.addDoc('productos', Object.assign({}, prod));
   }
 
-  // Actualizar productos (id y Class Producto)
-  actualizarProducto(id: string, prod: Producto) {
-    return this.firebaseService.updateDoc('productos', id, Object.assign({}, prod));
+  // Actualizar productos (Class Producto)
+  actualizarProducto(prod: Producto) {
+    prod.fechaModificado = new Date();
+    return this.firebaseService.updateDoc('productos', prod.id, Object.assign({}, prod));
   }
 
   // Borrar producto (id)
-  borrarProducto(id: string) {
-    return this.firebaseService.deleteDoc('productos', id);
+  // Realizamos baja logica del producto
+  borrarProducto(prod: Producto) {
+    prod.fechaBaja = new Date();
+    return this.firebaseService.updateDoc('productos', prod.id, Object.assign({}, prod));
   }
 }
