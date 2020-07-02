@@ -5,6 +5,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Producto } from 'src/app/clases/producto';
 import { Sectores } from 'src/app/enums/sectores.enum';
 import { UtilsService } from 'src/app/servicios/utils.service';
+import { CameraService } from 'src/app/servicios/camera.service';
 
 @Component({
   selector: 'app-editar-producto',
@@ -24,11 +25,13 @@ export class EditarProductoPage implements OnInit {
   };
   formProducto: any;
   public sector = Object.values(Sectores).filter(unTipo => typeof unTipo === 'string');
+  public fotos: string[] = [];
 
   constructor(
     private modalCtrl: ModalController,
     private fb: FormBuilder,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private camera: CameraService
   ) {
     this.slider =
     {
@@ -55,44 +58,47 @@ export class EditarProductoPage implements OnInit {
     this.formProducto.controls.sector.setValue(this.producto.sector);
     this.formProducto.controls.tiempoPromedio.setValue(this.producto.tiempo);
     this.formProducto.controls.precio.setValue(this.producto.precio);
+
+    this.producto.fotos.forEach(unaFoto => this.fotos.push(unaFoto));
   }
 
   dismiss() {
+    this.fotos = [];
     this.modalCtrl.dismiss();
   }
 
   // Slider
   // Move to Next slide
-  slideNext(object, slideView) {
+  slideNext(object: any, slideView: IonSlides) {
     slideView.slideNext(500).then(() => {
       this.checkIfNavDisabled(object, slideView);
     });
   }
 
   // Move to previous slide
-  slidePrev(object, slideView) {
+  slidePrev(object: any, slideView: IonSlides) {
     slideView.slidePrev(500).then(() => {
       this.checkIfNavDisabled(object, slideView);
     });
   }
 
   // Method called when slide is changed by drag or navigation
-  SlideDidChange(object, slideView) {
+  SlideDidChange(object: any, slideView: IonSlides) {
     this.checkIfNavDisabled(object, slideView);
   }
 
   // Call methods to check if slide is first or last to enable disbale navigation
-  checkIfNavDisabled(object, slideView) {
+  checkIfNavDisabled(object: any, slideView: IonSlides) {
     this.checkisBeginning(object, slideView);
     this.checkisEnd(object, slideView);
   }
 
-  checkisBeginning(object, slideView) {
+  checkisBeginning(object: any, slideView: IonSlides) {
     slideView.isBeginning().then((istrue) => {
       object.isBeginningSlide = istrue;
     });
   }
-  checkisEnd(object, slideView) {
+  checkisEnd(object: any, slideView: IonSlides) {
     slideView.isEnd().then((istrue) => {
       object.isEndSlide = istrue;
     });
@@ -110,6 +116,8 @@ export class EditarProductoPage implements OnInit {
       this.producto.sector = this.formProducto.controls.sector.value;
       this.producto.tiempo = this.formProducto.controls.tiempoPromedio.value;
       this.producto.precio = this.formProducto.controls.precio.value;
+
+      this.fotos.forEach((unaFoto, indice) => this.producto.fotos[indice] = unaFoto);
 
       this.callback(this.producto)
         .then(prod => {
@@ -184,5 +192,15 @@ export class EditarProductoPage implements OnInit {
     return retorno;
   }
 
+  slideUpdate(slideView: IonSlides) {
+    slideView.update();
+  }
 
+  tomarFotoAltaProductos(): void {
+    this.camera.tomarFoto().then(data => {
+      this.slideFotos.getActiveIndex().then(indice => {
+        this.fotos[indice] = data;
+      });
+    });
+  }
 }
