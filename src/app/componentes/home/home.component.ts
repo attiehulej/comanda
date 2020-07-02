@@ -33,12 +33,12 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  gestionarUsuarios(){
+  gestionarUsuarios() {
     this.utilsService.showLoadingAndNavigate('usuarios');
   }
 
-  gestionarMesas(){
-    this.utilsService.showLoadingAndNavigate('cargaMesa');
+  gestionarMesas() {
+    this.utilsService.showLoadingAndNavigate('mesas');
   }
 
   /*logOut(): void {
@@ -47,7 +47,6 @@ export class HomeComponent implements OnInit {
   }*/
 
   public productos(): void {
-    // this.utilsService.showLoadingAndNavigate('productos');
-    this.utilsService.showLoadingAndNavigate('cargaProducto');
+    this.utilsService.showLoadingAndNavigate('productos');
   }
 }

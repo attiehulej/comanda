@@ -4,6 +4,8 @@ import { UtilsService } from 'src/app/servicios/utils.service';
 // import { Usuario } from 'src/app/clases/usuario';
 import { EstadoUsuario } from 'src/app/enums/estado-usuario.enum';
 import { AuthService } from 'src/app/servicios/auth.service';
+import { Usuario } from 'src/app/clases/usuario';
+import { EditarUsuarioPage } from './editar-usuario/editar-usuario.page';
 
 @Component({
   selector: 'app-usuarios',
@@ -62,6 +64,16 @@ export class UsuariosPage implements OnInit {
 
   altaUsuario(): void {
     this.utilsService.showLoadingAndNavigate('usuarios/alta-usuarios');
+  }
+
+  editarUsuario(usuario: Usuario) {
+    const callback = (u: Usuario) => this.usuarioService.actualizarUsuario(u);
+    this.utilsService.presentModal(EditarUsuarioPage, { usuario, callback });
+  }
+
+  eliminarUsuario(usuario: Usuario) {
+    const callback = () => this.usuarioService.borrarUsuario(usuario);
+    this.utilsService.presentAlertConfirm('Atención', '¿Estás seguro que deseas borrar este usuario?', callback);
   }
 
   manejadoraHome(opcion: string): void {

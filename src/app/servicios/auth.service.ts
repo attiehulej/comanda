@@ -72,7 +72,7 @@ export class AuthService {
   gestionarUsuario(usuario: Usuario, action: EstadoUsuario) {
     usuario.estado = action;
 
-    return this.usuarioService.actualizarUsuario(usuario.id, usuario).then((usr) => {
+    return this.usuarioService.actualizarUsuario(usuario).then((usr) => {
       console.log('Documento actualizado exitósamente!' + usr);
     }, error => console.log(error));
   }

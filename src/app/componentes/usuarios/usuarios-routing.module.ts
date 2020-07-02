@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'alta-usuarios',
     loadChildren: () => import('./alta-usuarios/alta-usuarios.module').then(m => m.AltaUsuariosPageModule)
+  },
+  {
+    path: 'editar-usuario',
+    loadChildren: () => import('./editar-usuario/editar-usuario.module').then( m => m.EditarUsuarioPageModule)
   }
 ];
 

@@ -65,16 +65,20 @@ export class LoginPage implements OnInit {
                 this.moveTo('home');
               }
             } else { // No aprobado
-              this.utilsService.presentToast('Hola! Tu cuenta esta pendiente de aprobación.', 'toast-info');
+              this.utilsService.presentAlert('Hola!',
+                'Pronto vas a poder disfrutar de COHERENCE',
+                'Tu cuenta esta pendiente de aprobación.');
             }
           });
         })
-        .catch((reject: any) => {
-          console.log(reject);
+        .catch((err: any) => {
+          this.utilsService.dismissLoading();
+          this.utilsService.handleError(err, true);
+          console.log(err);
         });
     }
     else {
-      this.utilsService.presentToast('Datos inválidos', 'toast-error');
+      this.utilsService.presentAlert('Atención', 'Datos inválidos', 'Por favor verificá los datos ingresados');
       this.markAllAsDirtyAltaUsuarios(this.formLogin);
     }
   }
