@@ -5,6 +5,7 @@ import { UsuarioService } from 'src/app/servicios/usuario.service';
 import { UtilsService } from 'src/app/servicios/utils.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { TipoUsuario } from 'src/app/enums/tipo-usuario.enum';
+import { CameraService } from 'src/app/servicios/camera.service';
 
 @Component({
   selector: 'app-editar-usuario',
@@ -20,9 +21,10 @@ export class EditarUsuarioPage implements OnInit {
 
   constructor(
     private modalCtrl: ModalController,
-    private usuarioService: UsuarioService,
+    public usuarioService: UsuarioService,
     public utilsService: UtilsService,
     private fb: FormBuilder,
+    private camera: CameraService
   ) {
     this.formUsuario = this.fb.group
       ({
@@ -56,7 +58,7 @@ export class EditarUsuarioPage implements OnInit {
       this.usuario.cuil = this.formUsuario.controls.cuil.value;
       this.usuario.perfil = this.formUsuario.controls.tipo.value;
 
-      // this.usuario.foto = this.formUsuario.controls.foto.value;
+      this.usuario.foto = this.formUsuario.controls.foto.value;
 
       this.callback(this.usuario)
         .then(usr => {
@@ -92,5 +94,11 @@ export class EditarUsuarioPage implements OnInit {
 
   dismiss() {
     this.modalCtrl.dismiss();
+  }
+
+  tomarFotoAltaUsuarios(): void {
+    this.camera.tomarFoto().then(data => {
+      this.formUsuario.controls.foto.setValue(data);
+    });
   }
 }

@@ -20,13 +20,13 @@
             <h2 class="lblNombreAltaUsuarios">Foto perfil </h2>
           </ion-text>
         </ion-list-header>
-        <ion-avatar class="ion-margin-start">
-          <img src="{{usuarioService.obtenerFoto(usuario)}}">
+        <ion-avatar class="ion-margin-start" (click)="tomarFotoAltaUsuarios()">
+          <img src="{{usuarioService.mostrarFoto(formUsuario.controls.foto.value)}}">
         </ion-avatar>
       </ion-col>
     </ion-row>
   </ion-grid>
-
+  
   <form [formGroup]="formUsuario" (ngSubmit)="onSubmitUsuario()">
 
     <div class="divNombreAltaUsuarios">
