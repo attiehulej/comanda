@@ -1,6 +1,4 @@
-<app-toolbar
-  [titulo]="'COHERENCE'"
-  [usuario]="usuario">
+<app-toolbar [titulo]="'COHERENCE'" [usuario]="usuario">
 </app-toolbar>
 
 <ion-content class="background">
@@ -9,7 +7,7 @@
       <h2>Bienvenido <ion-label color="warning">{{usuario?.nombre}}</ion-label>!</h2>
     </ion-text>
   </ion-card>
-  <ion-card (click)="irListaEspera()">
+  <ion-card (click)="irListaEspera()" >
     <img src="../../../../assets/mesa-qr.png" />
     <ion-card-header>
       <ion-card-subtitle></ion-card-subtitle>
@@ -23,16 +21,32 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card>
-    <img src="../../../../assets/platos.png" />
+  <ion-card (click)="irListaEspera()" *ngIf="false">
+    <img src="../../../../assets/mesa-qr.png" />
     <ion-card-header>
       <ion-card-subtitle></ion-card-subtitle>
-      <ion-card-title>Pedidos <ion-icon class="ion-float-right" color="warning" name="arrow-forward-outline"></ion-icon>
+      <ion-card-title>Tu pedido actual <ion-icon class="ion-float-right" color="warning" name="arrow-forward-outline">
+        </ion-icon>
       </ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
-      Tus pedidos activos y finalizados.
+      Detalles de tu pedido en curso. Podrás agregar comida, consultar al mozo, pagar y realizar una encuesta de
+      satisfaccion.
+    </ion-card-content>
+  </ion-card>
+
+
+  <ion-card>
+    <img src="../../../../assets/platos.png" />
+    <ion-card-header>
+      <ion-card-subtitle></ion-card-subtitle>
+      <ion-card-title>Pedidos anteriores<ion-icon class="ion-float-right" color="warning" name="arrow-forward-outline"></ion-icon>
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      Tus pedidos finalizados.
     </ion-card-content>
   </ion-card>
 </ion-content>
