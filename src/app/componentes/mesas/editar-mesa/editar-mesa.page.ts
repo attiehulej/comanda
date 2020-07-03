@@ -5,6 +5,7 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { TipoMesa } from 'src/app/enums/tipo-mesa.enum';
 import { UtilsService } from 'src/app/servicios/utils.service';
 import { MesaService } from 'src/app/servicios/mesa.service';
+import { CameraService } from 'src/app/servicios/camera.service';
 
 @Component({
   selector: 'app-editar-mesa',
@@ -22,12 +23,14 @@ export class EditarMesaPage implements OnInit {
     private modalCtrl: ModalController,
     private fb: FormBuilder,
     private utilsService: UtilsService,
-    private mesaService: MesaService
+    public mesaService: MesaService,
+    private camera: CameraService
   ) {
     this.formMesa = this.fb.group({
       numeroMesa: ['', Validators.compose([Validators.required, Validators.min(1)])],
       cantidadComensales: ['', Validators.compose([Validators.required, Validators.min(2)])],
-      tipoMesa: ['', Validators.compose([Validators.required])]
+      tipoMesa: ['', Validators.compose([Validators.required])],
+      foto: ['']
     });
   }
 
@@ -36,6 +39,7 @@ export class EditarMesaPage implements OnInit {
     this.formMesa.controls.numeroMesa.setValue(this.mesa.numero);
     this.formMesa.controls.cantidadComensales.setValue(this.mesa.cantidad);
     this.formMesa.controls.tipoMesa.setValue(this.mesa.tipo);
+    this.formMesa.controls.foto.setValue(this.mesa.foto);
   }
 
   dismiss() {
@@ -49,6 +53,8 @@ export class EditarMesaPage implements OnInit {
       this.mesa.numero = this.formMesa.controls.numeroMesa.value;
       this.mesa.cantidad = this.formMesa.controls.cantidadComensales.value;
       this.mesa.tipo = this.formMesa.controls.tipoMesa.value;
+
+      this.mesa.foto = this.formMesa.controls.foto.value;
 
       this.callback(this.mesa)
         .then(mesa => {
@@ -101,4 +107,9 @@ export class EditarMesaPage implements OnInit {
     return retorno;
   }
 
+  tomarFotoAltaMesas(): void {
+    this.camera.tomarFoto().then(data => {
+      this.formMesa.controls.foto.setValue(data);
+    });
+  }
 }

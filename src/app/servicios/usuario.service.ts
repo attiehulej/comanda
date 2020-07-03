@@ -19,6 +19,15 @@ export class UsuarioService {
     return foto;
   }
 
+  // Muestra una foto codificada en base 64 o una default
+  mostrarFoto(fotoBase64: string) {
+    let foto = '../../../assets/defaultFoto.png';
+    if (fotoBase64 !== '') {
+      foto = 'data:image/jpeg;base64,' + fotoBase64;
+    }
+    return foto;
+  }
+
   // Obtiene todos los usuarios activos
   obtenerUsuarios() {
     return this.firebaseService.getDocs('usuarios').pipe(

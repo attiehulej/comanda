@@ -17,8 +17,10 @@
       <ion-col size="12">
 
         <ion-slides color="warning" pager="true" [options]="slideOpts" #slideFotos
-          (ionSlideDidChange)="SlideDidChange(slider,slideFotos)">
-          <ion-slide *ngFor="let f of producto?.fotos">
+          (ionSlideDidChange)="SlideDidChange(slider,slideFotos)"
+          (ionSlidesDidLoad)="slideUpdate(slideFotos)"
+          (ionSlideTap)="tomarFotoAltaProductos()">
+          <ion-slide *ngFor="let f of fotos">
             <img src="{{'data:image/jpeg;base64,' + f}}">
           </ion-slide>
         </ion-slides>

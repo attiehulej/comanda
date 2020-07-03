@@ -47,7 +47,7 @@ export class AltaMesaPage implements OnInit {
   }
 
   onSubmitMesa(): void {
-    if (this.formMesa.valid && this.foto.length > 0) {
+    if (this.formMesa.valid) {
       this.utilsService.presentLoading();
       this.mesa.numero = this.formMesa.controls.numeroMesa.value;
       this.mesa.cantidad = this.formMesa.controls.cantidadComensales.value;
@@ -69,9 +69,6 @@ export class AltaMesaPage implements OnInit {
           this.utilsService.handleError(error);
         });
     } else {
-      if (this.foto.length === 0) {
-        this.utilsService.presentToast('Debe adjuntar una foto de la mesa', 'toast-error');
-      }
       // alert('Error en formulario');
       this.formMesa.markAllAsTouched();
     }
