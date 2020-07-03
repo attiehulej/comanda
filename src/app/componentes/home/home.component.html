@@ -40,6 +40,11 @@
       Gestionar Mesas
     </ion-button>
 
+    <ion-button *ngIf="usuario && (usuario.perfil === 'DUEÑO' || usuario.perfil === 'SUPERVISOR')" size="large" expand="block" color="warning" (click)="gestionarPropinas()">
+      <ion-icon slot="start" name="wallet-outline"></ion-icon>
+      Gestionar Propinas
+    </ion-button>
+
     <ion-button *ngIf="usuario && (usuario.perfil === 'COCINERO' || usuario.perfil === 'BARTENDER')" size="large" expand="block" color="warning" (click)="productos()">
       <ion-icon slot="start" name="pizza-outline"></ion-icon>
       Gestionar Productos

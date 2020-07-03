@@ -41,6 +41,10 @@ export class HomeComponent implements OnInit {
     this.utilsService.showLoadingAndNavigate('mesas');
   }
 
+  gestionarPropinas() {
+    this.utilsService.showLoadingAndNavigate('propinas');
+  }
+
   /*logOut(): void {
     this.authService.logout();
     this.utilsService.showLoadingAndNavigate('inicio');

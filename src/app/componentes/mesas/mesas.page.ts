@@ -13,7 +13,7 @@ export class MesasPage implements OnInit {
   listaMesas: any;
 
   constructor(
-    private mesaService: MesaService,
+    public mesaService: MesaService,
     private utilsService: UtilsService
   ) { }
 

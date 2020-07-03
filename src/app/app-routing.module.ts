@@ -36,6 +36,10 @@ const routes: Routes = [
   {
     path: 'productos',
     loadChildren: () => import('./componentes/productos/productos.module').then( m => m.ProductosPageModule)
+  },
+  {
+    path: 'propinas',
+    loadChildren: () => import('./componentes/propinas/propinas.module').then( m => m.PropinasPageModule)
   }
 ];
 
