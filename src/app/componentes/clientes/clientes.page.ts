@@ -33,4 +33,8 @@ export class ClientesPage implements OnInit {
     this.utilsService.showLoadingAndNavigate('inicio');
   }
 
+  irListaEspera(): void {
+    this.utilsService.showLoadingAndNavigate('clientes/lista-espera');
+  }
+
 }

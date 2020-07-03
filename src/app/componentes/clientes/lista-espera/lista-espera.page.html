@@ -1,9 +1,38 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>lista-espera</ion-title>
+  <ion-toolbar color="warning">
+    <ion-buttons slot="start">
+      <ion-button (click)="atras()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">
+      Buscar mesa
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="background">
+
+  <ion-card color="light">
+    <ion-spinner color="warning" name="crescent"></ion-spinner>
+    <ion-text class="ion-text-center" color="dark">
+      <h1>Lista <ion-label color="warning">de espera</ion-label>
+      </h1>
+    </ion-text>
+
+    <ion-text class="ion-text-center" color="dark">
+      <h3>Actualmente te encuentras en la lista de espera, en breve estarás disfrutando de nuestra cocina de autor.</h3>
+    </ion-text>
+  </ion-card>
+
+  <ion-card class="ion-text-center"  color="light">
+    <ion-icon class="feed" color="warning" name="checkbox-outline"></ion-icon>
+    <ion-text color="dark">
+      <h1>Mesa <ion-label color="warning">preparada!</ion-label></h1>
+    </ion-text>
+    <ion-text color="dark">
+      <h3>La mesa te esta esperando, acercate y escaneá el código QR con tu celular para comenzar a pedir.</h3>
+    </ion-text>
+  </ion-card>
 
 </ion-content>

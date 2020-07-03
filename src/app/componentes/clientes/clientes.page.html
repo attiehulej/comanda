@@ -1,17 +1,3 @@
-<!-- <ion-header>
-  <ion-toolbar color="warning">
-    <ion-button slot="start" fill="clear" (click)="logOut()">
-      <ion-icon color="light" name="log-out-outline"></ion-icon>
-    </ion-button>
-    <ion-title class="ion-text-center">
-      COHERENCE
-    </ion-title>
-    <ion-avatar *ngIf="usuario" slot="end" class="avatar">
-      <img [src]="usuarioService.obtenerFoto(usuario)">
-    </ion-avatar>
-  </ion-toolbar>
-</ion-header> -->
-
 <app-toolbar
   [titulo]="'COHERENCE'"
   [usuario]="usuario">
@@ -23,7 +9,7 @@
       <h2>Bienvenido <ion-label color="warning">{{usuario?.nombre}}</ion-label>!</h2>
     </ion-text>
   </ion-card>
-  <ion-card>
+  <ion-card (click)="irListaEspera()">
     <img src="../../../../assets/mesa-qr.png" />
     <ion-card-header>
       <ion-card-subtitle></ion-card-subtitle>
@@ -46,7 +32,7 @@
     </ion-card-header>
 
     <ion-card-content>
-      Tus pedidos confirmados y pendientes
+      Tus pedidos activos y finalizados.
     </ion-card-content>
   </ion-card>
 </ion-content>

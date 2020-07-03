@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UtilsService } from 'src/app/servicios/utils.service';
 
 @Component({
   selector: 'app-lista-espera',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListaEsperaPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private utilsService: UtilsService
+  ) { }
 
   ngOnInit() {
+  }
+
+  atras(): void {
+    this.utilsService.showLoadingAndNavigate('clientes');
   }
 
 }
