@@ -13,7 +13,7 @@
 
 <ion-content class="background">
   <!--ESPERANDO MESA-->
-  <ion-card class="ion-text-center" color="light">
+  <ion-card class="ion-text-center" *ngIf="!pedido" color="light">
     <img src="../../../../../assets/mesa-qr.png" />
     <ion-spinner color="warning" name="crescent"></ion-spinner>
     <ion-text color="dark">
@@ -28,7 +28,7 @@
   </ion-card>
 
   <!--MESA LISTA-->
-  <ion-card class="ion-text-center" *ngIf='false' color="light">
+  <ion-card class="ion-text-center" *ngIf="pedido" color="light">
     <img src="../../../../../assets/mesa-qr.png" />
     <ion-icon class="feed" color="warning" name="checkbox-outline"></ion-icon>
     <ion-text color="dark">

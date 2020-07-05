@@ -36,6 +36,10 @@ const routes: Routes = [
   {
     path: 'productos',
     loadChildren: () => import('./componentes/productos/productos.module').then( m => m.ProductosPageModule)
+  },
+  {
+    path: 'clientes-espera',
+    loadChildren: () => import('./componentes/home/clientes-espera/clientes-espera.module').then( m => m.ClientesEsperaPageModule)
   }
 ];
 
