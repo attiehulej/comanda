@@ -31,6 +31,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { InicioComponent } from './componentes/inicio/inicio.component';
 import { ToolbarModule } from './componentes/toolbar/toolbar.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { ToolbarModule } from './componentes/toolbar/toolbar.module';
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
-    ToolbarModule // PATO
+    ToolbarModule, // PATO
+    HttpClientModule
   ],
   providers: [
     StatusBar,
