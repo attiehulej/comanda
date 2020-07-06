@@ -62,7 +62,18 @@ export class LoginPage implements OnInit {
               if (usuario.perfil === TipoUsuario.CLIENTE_REGISTRADO || usuario.perfil === TipoUsuario.CLIENTE_ANONIMO) { // Clientes
                 this.moveTo('clientes');
               } else { // Personal
-                this.moveTo('home');
+                switch(usuario.perfil)
+                {
+                  case TipoUsuario.COCINERO:
+                    this.moveTo('cocinero');
+                    break;
+                  case TipoUsuario.BARTENDER:
+                    this.moveTo('bartender');
+                    break;
+                  default:
+                    this.moveTo('home');
+                    break;
+                }
               }
             } else { // No aprobado
               this.utilsService.presentAlert('Hola!',

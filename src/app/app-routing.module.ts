@@ -44,7 +44,15 @@ const routes: Routes = [
   {
     path: 'propinas',
     loadChildren: () => import('./componentes/propinas/propinas.module').then(m => m.PropinasPageModule)
+  },  {
+    path: 'cocinero',
+    loadChildren: () => import('./componentes/cocinero/cocinero.module').then( m => m.CocineroPageModule)
+  },
+  {
+    path: 'bartender',
+    loadChildren: () => import('./componentes/bartender/bartender.module').then( m => m.BartenderPageModule)
   }
+
 ];
 
 @NgModule({
