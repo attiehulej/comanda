@@ -34,10 +34,10 @@ export class ListaEsperaPage implements OnInit {
   obtenerEstado() {
     this.utilsService.presentLoading();
     this.pedidoService.obtenerPedidosActivos(this.usuario).subscribe(pedido => {
+      this.utilsService.dismissLoading();
       if (pedido && pedido.length === 0) { // Si no tiene pedidos en cursos
         // Validamos lista de espera
         this.listaEsperaService.obtenerUsuario(this.usuario.id).subscribe(lista => {
-          this.utilsService.dismissLoading();
           if (lista && lista.length === 0) { // Si no esta en la lista de espera, lo agregamos
             this.agregarListaEspera();
           }

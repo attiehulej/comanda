@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { FirebaseService } from './firebase.service';
 import { map } from 'rxjs/internal/operators/map';
 import { Mesa } from '../clases/mesa';
+import { EstadosMesa } from '../enums/estado-mesa.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +42,38 @@ export class MesaService {
       })
     );
   }
+
+  // Mesas libres
+  obtenerMesasLibres() {
+    return this.firebaseService.getDocs('mesas').pipe(
+      map(mesas => {
+        // Solo mesas que no esten dadas de baja
+        return mesas.filter((m) => ((m.payload.doc.data() as Mesa).fechaBaja === null &&
+          (m.payload.doc.data() as Mesa).estado === EstadosMesa.LIBRE))
+          .map(a => {
+            const data = a.payload.doc.data() as Mesa;
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          });
+      })
+    );
+  }
+
+    // Mesas asignadas
+    obtenerMesasAsignadas() {
+      return this.firebaseService.getDocs('mesas').pipe(
+        map(mesas => {
+          // Solo mesas que no esten dadas de baja
+          return mesas.filter((m) => ((m.payload.doc.data() as Mesa).fechaBaja === null &&
+            (m.payload.doc.data() as Mesa).estado === EstadosMesa.ASIGNADA))
+            .map(a => {
+              const data = a.payload.doc.data() as Mesa;
+              const id = a.payload.doc.id;
+              return { id, ...data };
+            });
+        })
+      );
+    }
 
   // Obtener mesa por id (id)
   obtenerMesa(uid: string) {

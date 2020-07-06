@@ -7,14 +7,22 @@ import { HttpClient } from '@angular/common/http';
 })
 export class FirebaseService {
 
-  constructor(public firestore: AngularFirestore, private http : HttpClient) { }
+  constructor(public firestore: AngularFirestore, private http: HttpClient) { }
 
   getDocs(collection: string) {
     return this.firestore.collection(collection).snapshotChanges();
   }
 
+  getDocsPromise(collection: string) {
+    return this.firestore.collection(collection).get();
+  }
+
   getDoc(collection: string, documentId: string) {
     return this.firestore.collection(collection).doc(documentId).snapshotChanges();
+  }
+
+  getDocPromise(collection: string, documentId: string) {
+    return this.firestore.collection(collection).doc(documentId).get();
   }
 
   getDocQuery(collection: string, key: string, equal: boolean, value: any) {
@@ -37,14 +45,13 @@ export class FirebaseService {
     return this.firestore.collection(collection).doc(documentId).delete();
   }
 
-  sendEmail(usuario:any, cuerpo:any, subject:string)
-  {
+  sendEmail(usuario: any, cuerpo: any, subject: string) {
     this.http.post(`https://us-central1-comanda-def1a.cloudfunctions.net/mailer`, {
-          to: usuario.correo,
-          message: cuerpo,
-          subject: subject 
-          }).subscribe(res=>{
-            console.log(res);
-          });  
+      to: usuario.correo,
+      message: cuerpo,
+      subject
+    }).subscribe(res => {
+      console.log(res);
+    });
   }
 }

@@ -7,7 +7,7 @@ export class Pedido {
     public tieneDescuento?: boolean;
     public usuarioId?: string;
     public mesaId?: string;
-    public estado?: EstadoPedido;
+    public estado?: EstadoPedido = EstadoPedido.PENDIENTE;
     public fechaAlta: Date = new Date();
     public fechaModificado: Date = null;
     public fechaBaja: Date = null;
