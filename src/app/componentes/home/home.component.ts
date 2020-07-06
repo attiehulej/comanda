@@ -24,12 +24,17 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.authService.currentUser().then((response: firebase.User) => {
-      const aux = this.authService.obtenerDetalle(response);
-      aux.subscribe(datos => {
+      this.authService.obtenerDetalle(response).subscribe(datos => {
         this.usuario = datos;
       });
-    }).catch((reject: any) => {
-      console.log(reject);
+    });
+  }
+
+  ionViewWillEnter() {
+    this.authService.currentUser().then((response: firebase.User) => {
+      this.authService.obtenerDetalle(response).subscribe(datos => {
+        this.usuario = datos;
+      });
     });
   }
 
@@ -41,6 +46,9 @@ export class HomeComponent implements OnInit {
     this.utilsService.showLoadingAndNavigate('mesas');
   }
 
+  gestionarListaEspera() {
+    this.utilsService.showLoadingAndNavigate('clientes-espera');
+  }
   gestionarPropinas() {
     this.utilsService.showLoadingAndNavigate('propinas');
   }
@@ -50,7 +58,8 @@ export class HomeComponent implements OnInit {
     this.utilsService.showLoadingAndNavigate('inicio');
   }*/
 
-  public productos(): void {
+  irAProductos(): void {
     this.utilsService.showLoadingAndNavigate('productos');
   }
+
 }

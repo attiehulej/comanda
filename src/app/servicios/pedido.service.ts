@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { FirebaseService } from './firebase.service';
 import { map } from 'rxjs/internal/operators/map';
 import { Pedido } from '../clases/pedido';
+import { Usuario } from '../clases/usuario';
+import { EstadoPedido } from '../enums/estado-pedido.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +21,34 @@ export class PedidoService {
           const id = a.payload.doc.id;
           return { id, ...data };
         });
+      })
+    );
+  }
+
+  // Obtiene todos los pedidos activos por usuario
+  obtenerPedidosActivos(usr: Usuario) {
+    return this.firebaseService.getDocQuery('pedidos', 'usuarioId', true, usr.id).pipe(
+      map(prod => {
+        return prod.filter((p) => (p.payload.doc.data() as Pedido).estado !== EstadoPedido.TERMINADO)
+          .map(a => {
+            const data = a.payload.doc.data() as Pedido;
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          });
+      })
+    );
+  }
+
+  // Obtiene todos los pedidos finalizados por usuario
+  obtenerPedidosFinalizados(usr: Usuario) {
+    return this.firebaseService.getDocQuery('pedidos', 'usuarioId', true, usr.id).pipe(
+      map(prod => {
+        return prod.filter((p) => (p.payload.doc.data() as Pedido).estado === EstadoPedido.TERMINADO)
+          .map(a => {
+            const data = a.payload.doc.data() as Pedido;
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          });
       })
     );
   }

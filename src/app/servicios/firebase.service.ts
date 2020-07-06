@@ -17,6 +17,10 @@ export class FirebaseService {
     return this.firestore.collection(collection).doc(documentId).snapshotChanges();
   }
 
+  getDocQuery(collection: string, key: string, equal: boolean, value: any) {
+    return this.firestore.collection(collection, ref => ref.where(key, (equal ? '==' : '<='), value)).snapshotChanges();
+  }
+
   addDoc2(collection: string, documentId: string, doc: any) {
     return this.firestore.collection(collection).doc(documentId).set(doc);
   }

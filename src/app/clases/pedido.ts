@@ -6,6 +6,7 @@ export class Pedido {
     public productos?: [{ cantidad: number, producto: Producto }];
     public tieneDescuento?: boolean;
     public usuarioId?: string;
+    public mesaId?: string;
     public estado?: EstadoPedido;
     public fechaAlta: Date = new Date();
     public fechaModificado: Date = null;

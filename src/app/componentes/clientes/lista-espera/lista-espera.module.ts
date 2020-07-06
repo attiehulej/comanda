@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { ListaEsperaPageRoutingModule } from './lista-espera-routing.module';
 
 import { ListaEsperaPage } from './lista-espera.page';
+import { ToolbarModule } from 'src/app/componentes/toolbar/toolbar.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ListaEsperaPageRoutingModule
+    ListaEsperaPageRoutingModule,
+    ToolbarModule
   ],
   declarations: [ListaEsperaPage]
 })
