@@ -10,6 +10,7 @@ import { Usuario } from 'src/app/clases/usuario';
 export class BartenderPage implements OnInit {
 
   usuario: Usuario = null;
+  pedidosPendientes: boolean = false;
 
   constructor(public authService: AuthService) { }
 
@@ -21,4 +22,8 @@ export class BartenderPage implements OnInit {
     });
   }
 
+  cambiarVistaBartender(): boolean
+  {
+    return this.pedidosPendientes;
+  }
 }

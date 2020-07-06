@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../servicios/auth.service';
 import { Usuario } from 'src/app/clases/usuario';
+import { flatMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-cocinero',
@@ -10,6 +11,7 @@ import { Usuario } from 'src/app/clases/usuario';
 export class CocineroPage implements OnInit {
 
   usuario: Usuario = null;
+  pedidosPendientes: boolean = false;
 
   constructor(public authService: AuthService) { }
 
@@ -21,4 +23,8 @@ export class CocineroPage implements OnInit {
     });
   }
 
+  cambiarVistaCocinero(): boolean
+  {
+    return this.pedidosPendientes;
+  }
 }

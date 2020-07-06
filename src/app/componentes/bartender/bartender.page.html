@@ -2,5 +2,6 @@
 </app-toolbar>
 
 <ion-content class="background">
-
+    <div class="mensajePedidosPendientesBartender" *ngIf="!cambiarVistaBartender()">No hay pedidos pendientes</div>
+    <div class="contenedorBartender" *ngIf="cambiarVistaBartender()"></div>
 </ion-content>
