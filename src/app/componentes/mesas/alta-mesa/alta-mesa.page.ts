@@ -4,7 +4,6 @@ import { TipoMesa } from 'src/app/enums/tipo-mesa.enum';
 import { CameraService } from 'src/app/servicios/camera.service';
 import { Mesa } from 'src/app/clases/mesa';
 import { MesaService } from 'src/app/servicios/mesa.service';
-import { EstadosMesa } from 'src/app/enums/estado-mesa.enum';
 import { UtilsService } from 'src/app/servicios/utils.service';
 
 @Component({

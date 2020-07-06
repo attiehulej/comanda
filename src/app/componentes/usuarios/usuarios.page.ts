@@ -6,6 +6,7 @@ import { TipoUsuario } from 'src/app/enums/tipo-usuario.enum';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { Usuario } from 'src/app/clases/usuario';
 import { EditarUsuarioPage } from './editar-usuario/editar-usuario.page';
+import { FirebaseService } from 'src/app/servicios/firebase.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -20,7 +21,8 @@ export class UsuariosPage implements OnInit {
   constructor(
     public usuarioService: UsuarioService,
     private utilsService: UtilsService,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private fireService : FirebaseService) { }
 
   ngOnInit() {
     this.obtenerUsuarios();
@@ -55,6 +57,7 @@ export class UsuariosPage implements OnInit {
     this.authService.gestionarUsuario(usuario, EstadoUsuario.APROBADO)
       .then(() => this.utilsService.dismissLoading())
       .catch(err => this.utilsService.dismissLoading());
+    this.fireService.sendEmail(usuario, "¡Usted ha sido aceptado, bienvenido a Coherence Restaurant!","Respuesta solicitud registro Coherence Restaurant");
   }
 
   declinarUsuario(usuario): void {
@@ -62,6 +65,7 @@ export class UsuariosPage implements OnInit {
     this.authService.gestionarUsuario(usuario, EstadoUsuario.RECHAZADO)
       .then(() => this.utilsService.dismissLoading())
       .catch(err => this.utilsService.dismissLoading());
+      this.fireService.sendEmail(usuario, "Lo sentimos, pero su solicitud a sido rechazada","Respuesta solicitud registro Coherence Restaurant");
   }
 
   volver(): void {

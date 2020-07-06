@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseService {
 
-  constructor(public firestore: AngularFirestore) { }
+  constructor(public firestore: AngularFirestore, private http : HttpClient) { }
 
   getDocs(collection: string) {
     return this.firestore.collection(collection).snapshotChanges();
@@ -34,5 +35,16 @@ export class FirebaseService {
 
   deleteDoc(collection: string, documentId: string) {
     return this.firestore.collection(collection).doc(documentId).delete();
+  }
+
+  sendEmail(usuario:any, cuerpo:any, subject:string)
+  {
+    this.http.post(`https://us-central1-comanda-def1a.cloudfunctions.net/mailer`, {
+          to: usuario.correo,
+          message: cuerpo,
+          subject: subject 
+          }).subscribe(res=>{
+            console.log(res);
+          });  
   }
 }

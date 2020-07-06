@@ -6,7 +6,7 @@ import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent , canActivate: [AuthGuard]},
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'inicio', component: InicioComponent }, // PATO
   {
     path: 'splash',
@@ -27,19 +27,23 @@ const routes: Routes = [
   },
   {
     path: 'usuarios',
-    loadChildren: () => import('./componentes/usuarios/usuarios.module').then( m => m.UsuariosPageModule)
+    loadChildren: () => import('./componentes/usuarios/usuarios.module').then(m => m.UsuariosPageModule)
   },
   {
     path: 'mesas',
-    loadChildren: () => import('./componentes/mesas/mesas.module').then( m => m.MesasPageModule)
+    loadChildren: () => import('./componentes/mesas/mesas.module').then(m => m.MesasPageModule)
   },
   {
     path: 'productos',
-    loadChildren: () => import('./componentes/productos/productos.module').then( m => m.ProductosPageModule)
+    loadChildren: () => import('./componentes/productos/productos.module').then(m => m.ProductosPageModule)
   },
   {
     path: 'clientes-espera',
-    loadChildren: () => import('./componentes/home/clientes-espera/clientes-espera.module').then( m => m.ClientesEsperaPageModule)
+    loadChildren: () => import('./componentes/home/clientes-espera/clientes-espera.module').then(m => m.ClientesEsperaPageModule)
+  },
+  {
+    path: 'propinas',
+    loadChildren: () => import('./componentes/propinas/propinas.module').then(m => m.PropinasPageModule)
   }
 ];
 
