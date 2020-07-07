@@ -31,30 +31,17 @@ export class NotificationService {
       let notificacion : Notificacion = aux;
       if(notificacion.receptor == tipoDeUsuario && notificacion.firstApparition)
       {
-        this.lanzarNotificacion(notificacion, tipoDeUsuario);
+        this.lanzarNotificacion(notificacion);
       } 
     }
   }
 
-  lanzarNotificacion(notificacion : Notificacion, tipoDeUsuario : TipoUsuario)
+  lanzarNotificacion(notificacion : Notificacion)
   {
-    let mensaje : string = "";
     notificacion.firstApparition = false; //SE LO PONE EN FALSE PARA QUE NO VUELVA A APARECER
     this.actualizarNotificacion(notificacion).then(data => {
-      switch(tipoDeUsuario)
-      {
-        case TipoUsuario.COCINERO:
-          mensaje = "COCINERO nueva notificacion";
-          break;
-        case TipoUsuario.BARTENDER:
-          mensaje = "BARTENDER nueva notificacion";
-          break;
-        case TipoUsuario.MOZO:
-          mensaje = "MOZO nueva notificacion";
-          break;
-      }
       console.log("Notificacion id = " + notificacion.id + " idPedido = " + notificacion.idPedido);
-      this.utilsService.presentToast(mensaje, "toast-info");
+      this.utilsService.presentToast(notificacion.mensaje, "toast-info");
     });
   }
 
