@@ -8,5 +8,6 @@ export class Notificacion {
     public fechaBaja?: Date = null;
     public mensaje?: string;
     public receptor?: TipoUsuario;
+    public firstApparition: boolean = true;
     //public emisor?: [{nombre: string, idEmisor: string}];
 }

@@ -16,20 +16,31 @@ export class NotificationService {
 
   activarNotificaiones(tipoDeUsuario : TipoUsuario)
   {
-    this.db.collection('notificaciones').snapshotChanges().subscribe(data => this.lanzarNotificacion(tipoDeUsuario, data));
+    this.db.collection('notificaciones').snapshotChanges().subscribe(data => this.verficarNotificaciones(tipoDeUsuario, data));
   }
 
-  lanzarNotificacion(tipoDeUsuario : TipoUsuario, datos)
+  verficarNotificaciones(tipoDeUsuario : TipoUsuario, datos)
   {
-    let mensaje : string = "";
-    let notificacion = datos.map((a: any) => {
+    let notificaciones = datos.map((a: any) => {
       const data = a.payload.doc.data();
       data.id = a.payload.doc.id;
       return data;
     });
-    console.log(tipoDeUsuario);
-    if(notificacion[0].receptor == tipoDeUsuario)
+    for (const aux of notificaciones) 
     {
+      let notificacion : Notificacion = aux;
+      if(notificacion.receptor == tipoDeUsuario && notificacion.firstApparition)
+      {
+        this.lanzarNotificacion(notificacion, tipoDeUsuario);
+      } 
+    }
+  }
+
+  lanzarNotificacion(notificacion : Notificacion, tipoDeUsuario : TipoUsuario)
+  {
+    let mensaje : string = "";
+    notificacion.firstApparition = false; //SE LO PONE EN FALSE PARA QUE NO VUELVA A APARECER
+    this.actualizarNotificacion(notificacion).then(data => {
       switch(tipoDeUsuario)
       {
         case TipoUsuario.COCINERO:
@@ -42,8 +53,9 @@ export class NotificationService {
           mensaje = "MOZO nueva notificacion";
           break;
       }
+      console.log("Notificacion id = " + notificacion.id + " idPedido = " + notificacion.idPedido);
       this.utilsService.presentToast(mensaje, "toast-info");
-    }
+    });
   }
 
   crearNotificacion(notificacion: Notificacion) 

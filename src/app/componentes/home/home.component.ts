@@ -31,12 +31,13 @@ export class HomeComponent implements OnInit {
       this.authService.obtenerDetalle(response).subscribe(datos => {
         this.usuario = datos;
         this.notificationService.activarNotificaiones(this.usuario.perfil);
+        /*
         let notificacion = new Notificacion();
         notificacion.idPedido = "27";
         notificacion.mensaje = "sale con fritas";
         notificacion.receptor = TipoUsuario.COCINERO;
         this.notificationService.crearNotificacion(notificacion);//.then(data => console.log(data));
-
+        */
       })
       //.subscribe(datos => {console.log(datos[0].mensaje)});
     });
