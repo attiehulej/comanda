@@ -62,18 +62,7 @@ export class LoginPage implements OnInit {
               if (usuario.perfil === TipoUsuario.CLIENTE_REGISTRADO || usuario.perfil === TipoUsuario.CLIENTE_ANONIMO) { // Clientes
                 this.moveTo('clientes');
               } else { // Personal
-                switch(usuario.perfil)
-                {
-                  case TipoUsuario.COCINERO:
-                    this.moveTo('cocinero');
-                    break;
-                  case TipoUsuario.BARTENDER:
-                    this.moveTo('bartender');
-                    break;
-                  default:
-                    this.moveTo('home');
-                    break;
-                }
+                this.moveTo('home');
               }
             } else { // No aprobado
               this.utilsService.presentAlert('Hola!',
@@ -172,7 +161,7 @@ export class LoginPage implements OnInit {
         text: 'BARTENDER',
         handler: () => {
           this.formLogin.controls.correoLogin.setValue('bartender@bartender.com');
-          this.formLogin.controls.claveLogin.setValue('123456');
+          this.formLogin.controls.claveLogin.setValue('270699');
         }
       },
       {
