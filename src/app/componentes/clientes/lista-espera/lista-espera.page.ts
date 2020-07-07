@@ -4,6 +4,7 @@ import { ListaEsperaService } from 'src/app/servicios/lista-espera.service';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { ListaEspera } from 'src/app/clases/lista-espera';
 import { PedidoService } from 'src/app/servicios/pedido.service';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 @Component({
   selector: 'app-lista-espera',
@@ -19,7 +20,8 @@ export class ListaEsperaPage implements OnInit {
     private utilsService: UtilsService,
     private listaEsperaService: ListaEsperaService,
     private authService: AuthService,
-    private pedidoService: PedidoService
+    private pedidoService: PedidoService,
+    private barcodeScanner: BarcodeScanner
   ) { }
 
   ngOnInit() {
@@ -33,9 +35,9 @@ export class ListaEsperaPage implements OnInit {
 
   obtenerEstado() {
     this.utilsService.presentLoading();
-    this.pedidoService.obtenerPedidosActivos(this.usuario).subscribe(pedido => {
+    this.pedidoService.obtenerPedidosActivos(this.usuario).subscribe(pedidos => {
       this.utilsService.dismissLoading();
-      if (pedido && pedido.length === 0) { // Si no tiene pedidos en cursos
+      if (pedidos && pedidos.length === 0) { // Si no tiene pedidos en cursos
         // Validamos lista de espera
         this.listaEsperaService.obtenerUsuario(this.usuario.id).subscribe(lista => {
           if (lista && lista.length === 0) { // Si no esta en la lista de espera, lo agregamos
@@ -43,21 +45,38 @@ export class ListaEsperaPage implements OnInit {
           }
         });
       } else { // Si tiene pedido en curso, le avisamos que ya tiene mesa asignada
-        this.pedido = pedido;
+        this.pedido = pedidos;
       }
     });
-
   }
 
   agregarListaEspera() {
     const listE = new ListaEspera();
-    listE.usuario = this.usuario;
+    listE.usuario = { id: this.usuario.id, nombre: this.usuario.nombre, foto: this.usuario.foto };
     this.listaEsperaService.agregarALista(listE);
   }
 
 
   atras(): void {
     this.utilsService.showLoadingAndNavigate('clientes');
+  }
+
+  irPedidoActivo(): void {
+    this.utilsService.showLoadingAndNavigate('clientes/pedidos');
+  }
+
+  escanearQR(): void {
+    this.barcodeScanner.scan({ formats: 'QR_CODE' }).then((data) => {
+      if (data && !data.cancelled) {
+        if (this.pedido.length > 0 && data.text === this.pedido[0].mesa.id) {
+          // Si tiene pedidos activos y coincide con el codigo de qr de la mesa asignada lo llevamo al pedido
+          this.irPedidoActivo();
+        } else {
+          // No existe QR o no es de la mesa asignada
+          this.utilsService.presentAlert('Lo sentimos', '', 'El código escaneado no existe o no es de la mesa asignada');
+        }
+      }
+    }, (err) => this.utilsService.handleError(err));
   }
 
 }

@@ -7,7 +7,7 @@
       <h2>Bienvenido <ion-label color="warning">{{usuario?.nombre}}</ion-label>!</h2>
     </ion-text>
   </ion-card>
-  <ion-card (click)="irListaEspera()" *ngIf="pedidosActivos && pedidosActivos.length === 0">
+  <ion-card (click)="escanearQR()" *ngIf="pedidosActivos && pedidosActivos.length === 0">
     <img src="../../../../assets/mesa-qr.png" />
     <ion-card-header>
       <ion-card-subtitle></ion-card-subtitle>
@@ -22,7 +22,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card (click)="irPedidoActivo()" *ngIf="pedidosActivos && pedidosActivos.length > 0">
+  <ion-card (click)="escanearQR()" *ngIf="pedidosActivos && pedidosActivos.length > 0">
     <img src="../../../../assets/mesa-qr.png" />
     <ion-card-header>
       <ion-card-subtitle></ion-card-subtitle>
@@ -33,11 +33,9 @@
     </ion-card-header>
 
     <ion-card-content>
-      Detalles de tu pedido en curso. Podrás agregar comida, consultar al mozo, pagar y realizar una encuesta de
-      satisfaccion.
+      Escaneá el código QR que se encuentra en la mesa para ver el detalle de tu pedido en curso.
     </ion-card-content>
   </ion-card>
-
 
   <ion-card>
     <img src="../../../../assets/platos.png" />

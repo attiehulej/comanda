@@ -87,8 +87,8 @@ export class ClientesEsperaPage implements OnInit {
     // Creamos el pedido
     const pedido = new Pedido();
 
-    pedido.mesaId = mesa.id;
-    pedido.usuarioId = cliente.id;
+    pedido.mesa = { id: mesa.id, numero: mesa.numero };
+    pedido.usuario = { id: cliente.id, nombre: cliente.nombre };
 
     this.utilsService.presentLoading();
     this.pedidoService.crearPedido(pedido).then(resp => {
