@@ -1,22 +1,27 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, OnDestroy } from '@angular/core';
 import { IonContent } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { Pedido } from '../../clases/pedido';
 import { Usuario } from '../../clases/usuario';
 import { PedidoService } from '../../servicios/pedido.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss'],
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, OnDestroy {
   @ViewChild(IonContent, { static: true }) content: IonContent;
   @Input() pedido: Pedido;
   @Input() receptor: string;
   @Input() user: Usuario;
   public msg: string;
+  loading = false;
   index = null;
+  public listaMensajes: any[];
+  private desuscribir = new Subject<void>();
 
   constructor(
     private pedidos: PedidoService,
@@ -24,6 +29,18 @@ export class ChatComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loading = true;
+    this.pedidos.obtenerPedido(this.pedido.id)
+    .pipe(takeUntil(this.desuscribir))
+    .subscribe(call => {
+      this.loading = false;
+      this.listaMensajes = call.mensajes;
+    });
+  }
+
+  ngOnDestroy() {
+    this.desuscribir.next();
+    this.desuscribir.complete();
   }
 
   closeModal() {
@@ -41,10 +58,11 @@ export class ChatComponent implements OnInit {
         },
         destinatario: this.receptor
       };
-      if (!this.pedido.mensajes) {
-        this.pedido.mensajes = [];
+      if (!this.listaMensajes) {
+        this.listaMensajes = [];
       }
-      this.pedido.mensajes.push(message);
+      this.listaMensajes.push(message);
+      this.pedido.mensajes = this.listaMensajes;
       this.content.scrollToBottom(0);
       this.pedidos.actualizarPedido(this.pedido.id, this.pedido);
       this.msg = '';

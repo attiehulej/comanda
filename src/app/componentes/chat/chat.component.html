@@ -12,8 +12,8 @@
 </ion-header>
 
 <ion-content class="background" padding [scrollEvents]="true">
-  <div *ngIf="pedido">
-    <ion-card *ngFor="let mensaje of pedido.mensajes;let i = index; let last = last"
+  <div *ngIf="pedido && !loading">
+    <ion-card *ngFor="let mensaje of listaMensajes;let i = index; let last = last"
       [class]="mensaje.user.id !== user.id ? 'ion-float-left' : 'ion-float-right'">
       <ion-card-header>
         <ion-card-title *ngIf="mensaje.user.id !== user.id">{{mensaje.user.nombre}}
