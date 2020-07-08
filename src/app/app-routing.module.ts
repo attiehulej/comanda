@@ -46,10 +46,6 @@ const routes: Routes = [
     loadChildren: () => import('./componentes/propinas/propinas.module').then(m => m.PropinasPageModule)
   },
   {
-    path: 'cocinero',
-    loadChildren: () => import('./componentes/cocinero/cocinero.module').then( m => m.CocineroPageModule)
-  },
-  {
     path: 'propinas',
     loadChildren: () => import('./componentes/propinas/propinas.module').then(m => m.PropinasPageModule)
   },
@@ -60,8 +56,11 @@ const routes: Routes = [
   {
     path: 'mozo',
     loadChildren: () => import('./componentes/mozo/mozo.module').then( m => m.MozoPageModule)
+  },
+  {
+    path: 'notificaciones',
+    loadChildren: () => import('./componentes/notificaciones/notificaciones.module').then( m => m.NotificacionesPageModule)
   }
-
 ];
 
 @NgModule({

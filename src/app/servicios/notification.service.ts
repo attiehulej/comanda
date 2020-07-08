@@ -4,6 +4,7 @@ import { UtilsService } from 'src/app/servicios/utils.service';
 import { Notificacion } from 'src/app/clases/notificacion';
 import { TipoUsuario } from '../enums/tipo-usuario.enum';
 import { FirebaseService } from './firebase.service';
+import { map } from 'rxjs/internal/operators/map';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,19 @@ export class NotificationService {
   activarNotificaiones(tipoDeUsuario : TipoUsuario)
   {
     this.db.collection('notificaciones').snapshotChanges().subscribe(data => this.verficarNotificaciones(tipoDeUsuario, data));
+  }
+
+  obtenerNotificaciones() {
+    return this.firebaseService.getDocs('notificaciones').pipe(
+      map(users => {
+        // Solo usuarios que no esten dados de baja
+        return users.filter((u) => (u.payload.doc.data() as Notificacion).fechaBaja === null).map(a => {
+          const data = a.payload.doc.data() as Notificacion;
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    );
   }
 
   verficarNotificaciones(tipoDeUsuario : TipoUsuario, datos)

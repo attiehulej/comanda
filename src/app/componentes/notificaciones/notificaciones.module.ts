@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { BartenderPageRoutingModule } from './bartender-routing.module';
-import { BartenderPage } from './bartender.page';
+import { NotificacionesPageRoutingModule } from './notificaciones-routing.module';
+import { NotificacionesPage } from './notificaciones.page';
 import { ToolbarModule } from '../toolbar/toolbar.module';
 
 @NgModule({
@@ -11,9 +11,9 @@ import { ToolbarModule } from '../toolbar/toolbar.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    BartenderPageRoutingModule,
-    ToolbarModule 
+    NotificacionesPageRoutingModule,
+    ToolbarModule
   ],
-  declarations: [BartenderPage]
+  declarations: [NotificacionesPage]
 })
-export class BartenderPageModule {}
+export class NotificacionesPageModule {}
