@@ -12,7 +12,7 @@
   </ion-toolbar>
 </ion-header> -->
 
-<app-toolbar [titulo]="'COHERENCE'" [usuario]="usuario">
+<app-toolbar [notificaciones]="true" [titulo]="'COHERENCE'" [usuario]="usuario">
 </app-toolbar>
 
 <ion-content class="background ion-padding">
@@ -61,18 +61,6 @@
       expand="block" color="warning" (click)="productos()">
       <ion-icon slot="start" name="pizza-outline"></ion-icon>
       Gestionar Productos
-    </ion-button>
-
-    <ion-button *ngIf="usuario && usuario.perfil === 'COCINERO'" size="large"
-      expand="block" color="warning" (click)="irACocinero()">
-      <ion-icon slot="start" name="fast-food-outline"></ion-icon>
-      Cocinero
-    </ion-button>
-
-    <ion-button *ngIf="usuario && usuario.perfil === 'BARTENDER'" size="large"
-      expand="block" color="warning" (click)="irABartender()">
-      <ion-icon slot="start" name="wine-outline"></ion-icon>
-      Bartender
     </ion-button>
 
     <ion-button size="large" expand="block" color="warning">

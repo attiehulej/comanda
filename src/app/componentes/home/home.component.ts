@@ -74,12 +74,4 @@ export class HomeComponent implements OnInit {
   irAProductos(): void {
     this.utilsService.showLoadingAndNavigate('productos');
   }
-
-  irACocinero():void{
-    this.utilsService.showLoadingAndNavigate('cocinero');
-  }
-
-  irABartender():void{
-    this.utilsService.showLoadingAndNavigate('bartender');
-  }
 }
