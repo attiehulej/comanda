@@ -82,4 +82,8 @@ export class HomeComponent implements OnInit {
   irABartender():void{
     this.utilsService.showLoadingAndNavigate('bartender');
   }
+
+  irAMozo(): void {
+    this.utilsService.showLoadingAndNavigate('mozo');
+  }
 }

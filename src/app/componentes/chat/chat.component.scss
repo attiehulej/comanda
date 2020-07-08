@@ -1,0 +1,24 @@
+ion-card{
+    --background: #ffffff;
+    width: 70%;
+}
+
+ion-card-title{
+    font-size: 15px;
+    display: inline-block;
+    text-transform: capitalize;
+}
+
+ion-card-subtitle{
+    font-size: 10px;
+    float: right;
+    position: relative;
+    top: 30px;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}

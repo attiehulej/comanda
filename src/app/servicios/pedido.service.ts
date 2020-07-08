@@ -27,7 +27,7 @@ export class PedidoService {
 
   // Obtiene todos los pedidos activos por usuario
   obtenerPedidosActivos(usr: Usuario) {
-    return this.firebaseService.getDocQuery('pedidos', 'usuarioId', true, usr.id).pipe(
+    return this.firebaseService.getDocQuery('pedidos', 'usuario.id', true, usr.id).pipe(
       map(prod => {
         return prod.filter((p) => (p.payload.doc.data() as Pedido).estado !== EstadoPedido.TERMINADO)
           .map(a => {
@@ -41,7 +41,7 @@ export class PedidoService {
 
   // Obtiene todos los pedidos finalizados por usuario
   obtenerPedidosFinalizados(usr: Usuario) {
-    return this.firebaseService.getDocQuery('pedidos', 'usuarioId', true, usr.id).pipe(
+    return this.firebaseService.getDocQuery('pedidos', 'usuario.id', true, usr.id).pipe(
       map(prod => {
         return prod.filter((p) => (p.payload.doc.data() as Pedido).estado === EstadoPedido.TERMINADO)
           .map(a => {

@@ -51,6 +51,10 @@ const routes: Routes = [
   {
     path: 'bartender',
     loadChildren: () => import('./componentes/bartender/bartender.module').then( m => m.BartenderPageModule)
+  },
+  {
+    path: 'mozo',
+    loadChildren: () => import('./componentes/mozo/mozo.module').then( m => m.MozoPageModule)
   }
 
 ];

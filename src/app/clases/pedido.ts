@@ -3,12 +3,21 @@ import { EstadoPedido } from '../enums/estado-pedido.enum';
 
 export class Pedido {
     public id?: string;
-    public productos?: [{ cantidad: number, producto: Producto }];
+    public productos?: [{ cantidad?: number, producto?: Producto, terminado?: boolean }?] = [];
     public tieneDescuento?: boolean;
-    public usuarioId?: string;
-    public mesaId?: string;
-    public estado?: EstadoPedido;
+    public usuario?: { id: string, nombre: string };
+    public mesa?: { id: string, numero: number };
+    public estado?: EstadoPedido = EstadoPedido.PENDIENTE;
     public fechaAlta: Date = new Date();
     public fechaModificado: Date = null;
     public fechaBaja: Date = null;
+    public mensajes?: {
+        text: string,
+        created_at: any,
+        user: {
+            id: string,
+            nombre: string
+        },
+        destinatario: string
+    }[];
 }

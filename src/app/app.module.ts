@@ -32,6 +32,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { InicioComponent } from './componentes/inicio/inicio.component';
 import { ToolbarModule } from './componentes/toolbar/toolbar.module';
 import { HttpClientModule } from '@angular/common/http';
+import { ChatModule } from './componentes/chat/chat.module';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { HttpClientModule } from '@angular/common/http';
     AngularFireAuthModule,
     AngularFireStorageModule,
     ToolbarModule, // PATO
+    ChatModule, // PATO
     HttpClientModule
   ],
   providers: [
