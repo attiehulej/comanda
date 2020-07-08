@@ -5,6 +5,7 @@ import { PedidoService } from 'src/app/servicios/pedido.service';
 import { Pedido } from 'src/app/clases/pedido';
 import { Usuario } from 'src/app/clases/usuario';
 import { ListaProductoPage } from './lista-producto/lista-producto.page';
+import { PedidoDetallePage } from './pedido-detalle/pedido-detalle.page';
 
 @Component({
   selector: 'app-pedidos',
@@ -43,6 +44,10 @@ export class PedidosPage implements OnInit {
 
   agregarComida() {
     this.utilsService.presentModal(ListaProductoPage, { pedido: this.pedido });
+  }
+
+  verDetalle() {
+    this.utilsService.presentModal(PedidoDetallePage, { pedido: this.pedido });
   }
 
   atras(): void {
