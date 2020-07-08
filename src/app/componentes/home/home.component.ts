@@ -38,8 +38,8 @@ export class HomeComponent implements OnInit {
         notificacion.receptor = TipoUsuario.COCINERO;
         this.notificationService.crearNotificacion(notificacion);//.then(data => console.log(data));
         */
-      })
-      //.subscribe(datos => {console.log(datos[0].mensaje)});
+      });
+      // .subscribe(datos => {console.log(datos[0].mensaje)});
     });
   }
 
@@ -62,24 +62,17 @@ export class HomeComponent implements OnInit {
   gestionarListaEspera() {
     this.utilsService.showLoadingAndNavigate('clientes-espera');
   }
+
   gestionarPropinas() {
     this.utilsService.showLoadingAndNavigate('propinas');
   }
-
-  /*logOut(): void {
-    this.authService.logout();
-    this.utilsService.showLoadingAndNavigate('inicio');
-  }*/
 
   irAProductos(): void {
     this.utilsService.showLoadingAndNavigate('productos');
   }
 
-  irACocinero():void{
-    this.utilsService.showLoadingAndNavigate('cocinero');
+  irAPendientes() {
+    this.utilsService.showLoadingAndNavigate('pendientes');
   }
 
-  irABartender():void{
-    this.utilsService.showLoadingAndNavigate('bartender');
-  }
 }

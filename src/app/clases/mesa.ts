@@ -9,5 +9,5 @@ export class Mesa {
     public fechaAlta: Date = new Date();
     public fechaModificado: Date = null;
     public fechaBaja: Date = null;
-    public estado: string = EstadosMesa[EstadosMesa.LIBRE];
+    public estado: EstadosMesa = EstadosMesa.LIBRE;
 }

@@ -1,4 +1,4 @@
 export enum EstadosMesa {
-    LIBRE,
-    ASIGNADA
+    LIBRE = 'LIBRE',
+    ASIGNADA = 'ASIGNADA'
 }

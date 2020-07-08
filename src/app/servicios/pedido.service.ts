@@ -15,8 +15,8 @@ export class PedidoService {
   // Obtiene todos los pedidos
   obtenerPedidos() {
     return this.firebaseService.getDocs('pedidos').pipe(
-      map(prod => {
-        return prod.map(a => {
+      map(pedido => {
+        return pedido.map(a => {
           const data = a.payload.doc.data() as Pedido;
           const id = a.payload.doc.id;
           return { id, ...data };
@@ -25,11 +25,11 @@ export class PedidoService {
     );
   }
 
-  // Obtiene todos los pedidos activos por usuario
-  obtenerPedidosActivos(usr: Usuario) {
-    return this.firebaseService.getDocQuery('pedidos', 'usuarioId', true, usr.id).pipe(
-      map(prod => {
-        return prod.filter((p) => (p.payload.doc.data() as Pedido).estado !== EstadoPedido.TERMINADO)
+  // Obtiene los pedidos pendientes
+  obtenerPedidosPendientes() {
+    return this.firebaseService.getDocs('pedidos').pipe(
+      map(pedido => {
+        return pedido.filter((p) => (p.payload.doc.data() as Pedido).estado === EstadoPedido.PENDIENTE)
           .map(a => {
             const data = a.payload.doc.data() as Pedido;
             const id = a.payload.doc.id;
@@ -39,11 +39,12 @@ export class PedidoService {
     );
   }
 
-  // Obtiene todos los pedidos finalizados por usuario
-  obtenerPedidosFinalizados(usr: Usuario) {
-    return this.firebaseService.getDocQuery('pedidos', 'usuarioId', true, usr.id).pipe(
-      map(prod => {
-        return prod.filter((p) => (p.payload.doc.data() as Pedido).estado === EstadoPedido.TERMINADO)
+
+  // Obtiene los pedidos confirmados
+  obtenerPedidosConfirmados() {
+    return this.firebaseService.getDocs('pedidos').pipe(
+      map(pedido => {
+        return pedido.filter((p) => (p.payload.doc.data() as Pedido).estado === EstadoPedido.CONFIRMADO)
           .map(a => {
             const data = a.payload.doc.data() as Pedido;
             const id = a.payload.doc.id;
@@ -52,12 +53,54 @@ export class PedidoService {
       })
     );
   }
+
+  // Obtiene los pedidos activos por usuario
+  obtenerPedidosActivos(usr: Usuario) {
+    return this.firebaseService.getDocQuery('pedidos', 'usuario.id', true, usr.id).pipe(
+      map(pedido => {
+        return pedido.filter((p) => (p.payload.doc.data() as Pedido).estado !== EstadoPedido.TERMINADO)
+          .map(a => {
+            const data = a.payload.doc.data() as Pedido;
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          });
+      })
+    );
+  }
+
+  // Obtiene los pedidos finalizados por usuario
+  obtenerPedidosFinalizados(usr: Usuario) {
+    return this.firebaseService.getDocQuery('pedidos', 'usuario.id', true, usr.id).pipe(
+      map(pedido => {
+        return pedido.filter((p) => (p.payload.doc.data() as Pedido).estado === EstadoPedido.TERMINADO)
+          .map(a => {
+            const data = a.payload.doc.data() as Pedido;
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          });
+      })
+    );
+  }
+
+    // Obtiene los pedidos por cobrar
+    obtenerPedidosPorCobrar() {
+      return this.firebaseService.getDocs('pedidos').pipe(
+        map(pedido => {
+          return pedido.filter((p) => (p.payload.doc.data() as Pedido).estado === EstadoPedido.PAGANDO)
+            .map(a => {
+              const data = a.payload.doc.data() as Pedido;
+              const id = a.payload.doc.id;
+              return { id, ...data };
+            });
+        })
+      );
+    }
 
   // Obtener Pedido por id (id)
   obtenerPedido(uid: string) {
     return this.firebaseService.getDoc('pedidos', uid).pipe(
-      map((prod: any) => {
-        const data = prod.payload.data() as Pedido;
+      map((pedido: any) => {
+        const data = pedido.payload.data() as Pedido;
         const id = uid;
         return { id, ...data };
       })
@@ -65,17 +108,21 @@ export class PedidoService {
   }
 
   // Crear pedido (Class Pedido)
-  crearPedido(prod: Pedido) {
-    return this.firebaseService.addDoc('pedidos', Object.assign({}, prod));
+  crearPedido(pedido: Pedido) {
+    pedido.fechaAlta = new Date();
+    return this.firebaseService.addDoc('pedidos', Object.assign({}, pedido));
   }
 
-  // Actualizar pedidos (id y Class pedido)
-  actualizarPedido(id: string, prod: Pedido) {
-    return this.firebaseService.updateDoc('pedidos', id, Object.assign({}, prod));
+  // Actualizar pedidos (Class pedido)
+  actualizarPedido(pedido: Pedido) {
+    pedido.fechaModificado = new Date();
+    return this.firebaseService.updateDoc('pedidos', pedido.id, Object.assign({}, pedido));
   }
 
   // Borrar Pedido (id)
-  borrarPedido(id: string) {
-    return this.firebaseService.deleteDoc('pedidos', id);
+  // Realizamos baja logica del pedido
+  borrarPedido(pedido: Pedido) {
+    pedido.fechaBaja = new Date();
+    return this.firebaseService.updateDoc('pedidos', pedido.id, Object.assign({}, pedido));
   }
 }

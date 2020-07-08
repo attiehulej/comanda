@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, AfterViewInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { IonSlides } from '@ionic/angular';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -12,7 +12,8 @@ import { CameraService } from 'src/app/servicios/camera.service';
   templateUrl: './editar-producto.page.html',
   styleUrls: ['./editar-producto.page.scss'],
 })
-export class EditarProductoPage implements OnInit {
+export class EditarProductoPage implements OnInit, AfterViewInit {
+  public didInit = false;
 
   @Input() producto: Producto;
   @Input() callback: any;
@@ -48,6 +49,10 @@ export class EditarProductoPage implements OnInit {
       tiempoPromedio: ['', Validators.compose([Validators.required, Validators.min(0)])],
       precio: ['', Validators.compose([Validators.required, Validators.min(0)])]
     });
+  }
+
+  ngAfterViewInit() {
+    this.didInit = true;
   }
 
   ngOnInit() {

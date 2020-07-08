@@ -1,7 +1,5 @@
-import { Usuario } from './usuario';
-
 export class ListaEspera {
     id?: string;
-    usuario?: Usuario;
+    usuario?: { id: string, nombre: string, foto: string };
     fecha: Date = new Date();
 }
