@@ -57,8 +57,16 @@ export class ProductoDetallePage implements OnInit, AfterViewInit {
   agregarProducto() {
     if (this.cantidad > 0) {
       const prod = { cantidad: this.cantidad, producto: this.producto, terminado: false };
-      if (!this.pedido.productos) { this.pedido.productos = []; }
-      this.pedido.productos.push(prod);
+      if (!this.pedido.productos) { this.pedido.productos = []; } // Si no existe productos lo creamos
+      if (this.pedido.productos.some(produ => produ.producto.id === this.producto.id)) {
+        // Si existe el producto sumamos la cantidad
+        const prodIndex = this.pedido.productos.findIndex(x => x.producto.id === this.producto.id);
+        this.pedido.productos[prodIndex].cantidad++;
+      } else {
+        // Si no existe lo agregamos
+        this.pedido.productos.push(prod);
+      }
+
       this.callback(this.pedido);
       this.dismiss();
     }
