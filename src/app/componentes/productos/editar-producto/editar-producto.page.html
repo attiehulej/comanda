@@ -16,7 +16,7 @@
     <ion-row>
       <ion-col size="12">
 
-        <ion-slides color="warning" pager="true" [options]="slideOpts" #slideFotos
+        <ion-slides *ngIf="didInit" color="warning" pager="true" [options]="slideOpts" #slideFotos
           (ionSlideDidChange)="SlideDidChange(slider,slideFotos)"
           (ionSlidesDidLoad)="slideUpdate(slideFotos)"
           (ionSlideTap)="tomarFotoAltaProductos()">

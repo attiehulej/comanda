@@ -4,8 +4,10 @@ import { AuthService } from 'src/app/servicios/auth.service';
 import { PedidoService } from 'src/app/servicios/pedido.service';
 import { Pedido } from 'src/app/clases/pedido';
 import { Usuario } from 'src/app/clases/usuario';
-// import { ListaProductoPage } from './lista-producto/lista-producto.page';
 import { ChatComponent } from '../../chat/chat.component';
+import { ListaProductoPage } from './lista-producto/lista-producto.page';
+import { PedidoDetallePage } from './pedido-detalle/pedido-detalle.page';
+import { EstadoPedido } from 'src/app/enums/estado-pedido.enum';
 
 @Component({
   selector: 'app-pedidos',
@@ -42,9 +44,23 @@ export class PedidosPage implements OnInit {
     });
   }
 
-  /*agregarComida() {
+  agregarComida() {
     this.utilsService.presentModal(ListaProductoPage, { pedido: this.pedido });
-  }*/
+  }
+
+  verDetalle() {
+    const callback = (p: Pedido) => this.pagarPedido(p);
+    this.utilsService.presentModal(PedidoDetallePage, { pedido: this.pedido, callback });
+  }
+
+  pagarPedido(pedido: Pedido) {
+    pedido.estado = EstadoPedido.PAGANDO;
+    this.utilsService.presentLoading();
+    this.pedidoService.actualizarPedido(pedido).finally(() => {
+      this.utilsService.dismissLoading();
+      this.utilsService.presentToast('Procesando pago con el mozo...', 'toast-info');
+    });
+  }
 
   atras(): void {
     this.utilsService.showLoadingAndNavigate('clientes');

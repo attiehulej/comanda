@@ -3,6 +3,6 @@ export enum EstadoPedido {
     CONFIRMADO = 'CONFIRMADO',
     LISTO = 'LISTO',
     ENTREGADO = 'ENTREGADO',
-    PAGADO = 'PAGADO',
+    PAGANDO = 'PAGANDO',
     TERMINADO = 'TERMINADO'
 }

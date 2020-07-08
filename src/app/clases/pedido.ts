@@ -3,7 +3,7 @@ import { EstadoPedido } from '../enums/estado-pedido.enum';
 
 export class Pedido {
     public id?: string;
-    public productos?: [{ cantidad?: number, producto?: Producto, terminado?: boolean }?] = [];
+    public productos?: [{ cantidad?: number, producto?: Producto, terminado?: boolean, entregado?: boolean }?] = [];
     public tieneDescuento?: boolean;
     public usuario?: { id: string, nombre: string };
     public mesa?: { id: string, numero: number };

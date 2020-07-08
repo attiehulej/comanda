@@ -21,10 +21,13 @@
         </ion-icon>
       </ion-card-title>
     </ion-card-header>
+    <ion-card-content>
+      ESTADO <ion-label color="warning">{{pedido?.estado}}</ion-label>
+    </ion-card-content>
     <img src="../../../../../assets/mesa-qr.png" />
   </ion-card>
 
-  <ion-card>
+  <ion-card (click)="verDetalle()">
     <ion-card-header>
       <ion-card-subtitle></ion-card-subtitle>
       <ion-card-title>Ver <ion-label color="warning">DETALLE</ion-label>
@@ -38,7 +41,7 @@
     </ion-card-content>
   </ion-card>
 
-  <!-- <ion-card (click)="agregarComida()">
+  <ion-card *ngIf="pedido?.estado === 'PENDIENTE'" (click)="agregarComida()">
     <ion-card-header>
       <ion-card-subtitle></ion-card-subtitle>
       <ion-card-title>Agregar <ion-label color="warning">COMIDA</ion-label>
@@ -51,6 +54,20 @@
       Agrega productos a tu pedido.
     </ion-card-content>
   </ion-card> -->
+
+  <ion-card *ngIf="pedido?.estado === 'ENTREGADO'" (click)="verDetalle()">
+    <ion-card-header>
+      <ion-card-subtitle></ion-card-subtitle>
+      <ion-card-title>Pedir <ion-label color="warning">CUENTA</ion-label>
+        <ion-icon class="ion-float-right" color="warning" name="logo-usd">
+        </ion-icon>
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      Solicitar la cuenta para pagar.
+    </ion-card-content>
+  </ion-card>
 
   <ion-card (click)="chatear('MOZO')">
     <ion-card-header>
