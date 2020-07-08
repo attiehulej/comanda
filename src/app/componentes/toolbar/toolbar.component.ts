@@ -3,7 +3,7 @@ import { Usuario } from '../../clases/usuario';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { AuthService } from '../../servicios/auth.service';
 import { UtilsService } from '../../servicios/utils.service';
-
+import { NotificationService } from '../../servicios/notification.service';
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
@@ -19,6 +19,7 @@ export class ToolbarComponent implements OnInit {
     public usuarioService: UsuarioService,
     private authService: AuthService,
     private utilsService: UtilsService,
+    private notificationService: NotificationService
   ) { }
 
   ngOnInit() {}
@@ -26,6 +27,7 @@ export class ToolbarComponent implements OnInit {
   logOut(): void {
     this.authService.logout();
     localStorage.removeItem('perfil');
+    this.notificationService.desactivarNotificaciones();
     this.utilsService.showLoadingAndNavigate('inicio');
   }
 

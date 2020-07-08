@@ -11,19 +11,25 @@ import { map } from 'rxjs/internal/operators/map';
 })
 export class NotificationService {
 
+  subjectNotification;
+
   constructor(public db: AngularFirestore,
     private utilsService: UtilsService,
     private firebaseService: FirebaseService) { }
 
-  activarNotificaiones(tipoDeUsuario : TipoUsuario)
+  activarNotificaciones(tipoDeUsuario : TipoUsuario)
   {
-    this.db.collection('notificaciones').snapshotChanges().subscribe(data => this.verficarNotificaciones(tipoDeUsuario, data));
+    this.subjectNotification = this.firebaseService.getDocs('notificaciones').subscribe(data => this.verficarNotificaciones(tipoDeUsuario, data));
+  }
+
+  desactivarNotificaciones()
+  {
+    this.subjectNotification.unsubscribe();
   }
 
   obtenerNotificaciones() {
     return this.firebaseService.getDocs('notificaciones').pipe(
       map(users => {
-        // Solo usuarios que no esten dados de baja
         return users.filter((u) => (u.payload.doc.data() as Notificacion).fechaBaja === null).map(a => {
           const data = a.payload.doc.data() as Notificacion;
           const id = a.payload.doc.id;
