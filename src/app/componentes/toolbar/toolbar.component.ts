@@ -13,6 +13,7 @@ export class ToolbarComponent implements OnInit {
   @Input() titulo: string;
   @Input() backBtn: string;
   @Input() usuario: Usuario;
+  @Input() notificaciones: boolean;
 
   constructor(
     public usuarioService: UsuarioService,
@@ -26,5 +27,9 @@ export class ToolbarComponent implements OnInit {
     this.authService.logout();
     localStorage.removeItem('perfil');
     this.utilsService.showLoadingAndNavigate('inicio');
+  }
+
+  goToNotificaciones():void {
+    this.utilsService.showLoadingAndNavigate('notificaciones');
   }
 }
