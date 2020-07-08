@@ -1,0 +1,7 @@
+<app-toolbar [titulo]="'Cocinero'" [backBtn]="'home'" [usuario]="usuario">
+</app-toolbar>
+
+<ion-content class="background">
+    <div class="mensajePedidosPendientesCocinero" *ngIf="!cambiarVistaCocinero()">No hay pedidos pendientes</div>
+    <div class="contenedorCocinero" *ngIf="cambiarVistaCocinero()"></div>
+</ion-content>

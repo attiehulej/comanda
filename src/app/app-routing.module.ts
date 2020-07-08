@@ -46,9 +46,18 @@ const routes: Routes = [
     loadChildren: () => import('./componentes/propinas/propinas.module').then(m => m.PropinasPageModule)
   },
   {
+    path: 'cocinero',
+    loadChildren: () => import('./componentes/cocinero/cocinero.module').then( m => m.CocineroPageModule)
+  },
+  {
+    path: 'propinas',
+    loadChildren: () => import('./componentes/propinas/propinas.module').then(m => m.PropinasPageModule)
+  },
+  {
     path: 'pendientes',
     loadChildren: () => import('./componentes/home/pendientes/pendientes.module').then( m => m.PendientesPageModule)
   }
+
 ];
 
 @NgModule({
