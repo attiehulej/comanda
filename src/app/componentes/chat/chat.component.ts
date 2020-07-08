@@ -64,7 +64,7 @@ export class ChatComponent implements OnInit, OnDestroy {
       this.listaMensajes.push(message);
       this.pedido.mensajes = this.listaMensajes;
       this.content.scrollToBottom(0);
-      this.pedidos.actualizarPedido(this.pedido.id, this.pedido);
+      this.pedidos.actualizarPedido(this.pedido);
       this.msg = '';
     }
   }
