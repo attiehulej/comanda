@@ -53,7 +53,7 @@
     <ion-card-content>
       Agrega productos a tu pedido.
     </ion-card-content>
-  </ion-card>
+  </ion-card> -->
 
   <ion-card *ngIf="pedido?.estado === 'ENTREGADO'" (click)="verDetalle()">
     <ion-card-header>
@@ -69,7 +69,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card>
+  <ion-card (click)="chatear('MOZO')">
     <ion-card-header>
       <ion-card-subtitle></ion-card-subtitle>
       <ion-card-title>Consultar al <ion-label color="warning">MOZO</ion-label>

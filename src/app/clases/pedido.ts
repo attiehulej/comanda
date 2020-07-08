@@ -11,4 +11,13 @@ export class Pedido {
     public fechaAlta: Date = new Date();
     public fechaModificado: Date = null;
     public fechaBaja: Date = null;
+    public mensajes?: {
+        text: string,
+        created_at: any,
+        user: {
+            id: string,
+            nombre: string
+        },
+        destinatario: string
+    }[];
 }

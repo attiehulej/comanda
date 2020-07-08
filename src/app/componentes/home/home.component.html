@@ -57,11 +57,11 @@
       Gestionar Propinas
     </ion-button>
 
-    <ion-button *ngIf="usuario && (usuario.perfil === 'COCINERO' || usuario.perfil === 'BARTENDER')" size="large"
+    <!-- <ion-button *ngIf="usuario && (usuario.perfil === 'COCINERO' || usuario.perfil === 'BARTENDER')" size="large"
       expand="block" color="warning" (click)="productos()">
       <ion-icon slot="start" name="pizza-outline"></ion-icon>
       Gestionar Productos
-    </ion-button>
+    </ion-button> -->
 
     <!-- PENDIENTES -->
     <ion-button
@@ -72,7 +72,13 @@
     </ion-button>
     <!-- ---------- -->
 
-    <!--     <ion-button size="large" expand="block" color="warning">
+    <ion-button *ngIf="usuario && usuario.perfil === 'MOZO'" size="large"
+      expand="block" color="warning" (click)="irAMozo()">
+      <ion-icon slot="start" name="wine-outline"></ion-icon>
+      Mozo
+    </ion-button>
+
+    <ion-button size="large" expand="block" color="warning">
       <ion-icon slot="start" name="restaurant-outline"></ion-icon> Listado Pedidos
     </ion-button> -->
   </section>

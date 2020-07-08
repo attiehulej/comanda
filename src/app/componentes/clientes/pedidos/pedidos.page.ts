@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/servicios/auth.service';
 import { PedidoService } from 'src/app/servicios/pedido.service';
 import { Pedido } from 'src/app/clases/pedido';
 import { Usuario } from 'src/app/clases/usuario';
+import { ChatComponent } from '../../chat/chat.component';
 import { ListaProductoPage } from './lista-producto/lista-producto.page';
 import { PedidoDetallePage } from './pedido-detalle/pedido-detalle.page';
 import { EstadoPedido } from 'src/app/enums/estado-pedido.enum';
@@ -67,6 +68,10 @@ export class PedidosPage implements OnInit {
 
   calcularTotal() {
     return this.pedido?.productos.reduce((a, b) => a + b.cantidad * b.producto.precio, 0);
+  }
+
+  chatear(destinatario: string) {
+    this.utilsService.presentModal(ChatComponent, { pedido: this.pedido, receptor: destinatario, user: this.usuario });
   }
 
 }

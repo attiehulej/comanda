@@ -56,6 +56,10 @@ const routes: Routes = [
   {
     path: 'pendientes',
     loadChildren: () => import('./componentes/home/pendientes/pendientes.module').then( m => m.PendientesPageModule)
+  },
+  {
+    path: 'mozo',
+    loadChildren: () => import('./componentes/mozo/mozo.module').then( m => m.MozoPageModule)
   }
 
 ];
