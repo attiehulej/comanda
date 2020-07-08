@@ -39,10 +39,11 @@ export class ListaEsperaPage implements OnInit {
       this.utilsService.dismissLoading();
       if (pedidos && pedidos.length === 0) { // Si no tiene pedidos en cursos
         // Validamos lista de espera
-        this.listaEsperaService.obtenerUsuario(this.usuario.id).subscribe(lista => {
+        const subListE = this.listaEsperaService.obtenerUsuario(this.usuario.id).subscribe(lista => {
           if (lista && lista.length === 0) { // Si no esta en la lista de espera, lo agregamos
             this.agregarListaEspera();
           }
+          subListE.unsubscribe();
         });
       } else { // Si tiene pedido en curso, le avisamos que ya tiene mesa asignada
         this.pedido = pedidos;
