@@ -58,6 +58,7 @@ export class PedidosPage implements OnInit {
     this.utilsService.presentLoading();
     this.pedidoService.actualizarPedido(pedido).finally(() => {
       this.utilsService.dismissLoading();
+      this.atras();
       this.utilsService.presentToast('Procesando pago con el mozo...', 'toast-info');
     });
   }
