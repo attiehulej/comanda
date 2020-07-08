@@ -63,9 +63,18 @@
       Gestionar Productos
     </ion-button>
 
-    <ion-button size="large" expand="block" color="warning">
-      <ion-icon slot="start" name="restaurant-outline"></ion-icon> Listado Pedidos
+    <!-- PENDIENTES -->
+    <ion-button
+      *ngIf="usuario && (usuario.perfil === 'COCINERO' || usuario.perfil === 'BARTENDER' || usuario.perfil === 'MOZO')"
+      size="large" expand="block" color="warning" (click)="irAPendientes()">
+      <ion-icon slot="start" name="pizza-outline"></ion-icon>
+      Listado Pendientes
     </ion-button>
+    <!-- ---------- -->
+
+    <!--     <ion-button size="large" expand="block" color="warning">
+      <ion-icon slot="start" name="restaurant-outline"></ion-icon> Listado Pedidos
+    </ion-button> -->
   </section>
 
 </ion-content>

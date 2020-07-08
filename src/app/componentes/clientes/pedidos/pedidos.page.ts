@@ -6,6 +6,7 @@ import { Pedido } from 'src/app/clases/pedido';
 import { Usuario } from 'src/app/clases/usuario';
 import { ListaProductoPage } from './lista-producto/lista-producto.page';
 import { PedidoDetallePage } from './pedido-detalle/pedido-detalle.page';
+import { EstadoPedido } from 'src/app/enums/estado-pedido.enum';
 
 @Component({
   selector: 'app-pedidos',
@@ -47,7 +48,17 @@ export class PedidosPage implements OnInit {
   }
 
   verDetalle() {
-    this.utilsService.presentModal(PedidoDetallePage, { pedido: this.pedido });
+    const callback = (p: Pedido) => this.pagarPedido(p);
+    this.utilsService.presentModal(PedidoDetallePage, { pedido: this.pedido, callback });
+  }
+
+  pagarPedido(pedido: Pedido) {
+    pedido.estado = EstadoPedido.PAGANDO;
+    this.utilsService.presentLoading();
+    this.pedidoService.actualizarPedido(pedido).finally(() => {
+      this.utilsService.dismissLoading();
+      this.utilsService.presentToast('Procesando pago con el mozo...', 'toast-info');
+    });
   }
 
   atras(): void {

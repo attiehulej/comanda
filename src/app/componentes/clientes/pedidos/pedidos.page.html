@@ -55,6 +55,20 @@
     </ion-card-content>
   </ion-card>
 
+  <ion-card *ngIf="pedido?.estado === 'ENTREGADO'" (click)="verDetalle()">
+    <ion-card-header>
+      <ion-card-subtitle></ion-card-subtitle>
+      <ion-card-title>Pedir <ion-label color="warning">CUENTA</ion-label>
+        <ion-icon class="ion-float-right" color="warning" name="logo-usd">
+        </ion-icon>
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      Solicitar la cuenta para pagar.
+    </ion-card-content>
+  </ion-card>
+
   <ion-card>
     <ion-card-header>
       <ion-card-subtitle></ion-card-subtitle>

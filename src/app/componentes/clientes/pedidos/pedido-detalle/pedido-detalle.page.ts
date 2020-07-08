@@ -11,6 +11,8 @@ import { ProductoService } from 'src/app/servicios/producto.service';
 export class PedidoDetallePage implements OnInit {
 
   @Input() pedido: Pedido;
+  @Input() callback: any;
+
 
   constructor(
     private modalCtrl: ModalController,
@@ -22,6 +24,11 @@ export class PedidoDetallePage implements OnInit {
 
   dismiss() {
     this.modalCtrl.dismiss();
+  }
+
+  pagarPedido() {
+    this.callback(this.pedido);
+    this.dismiss();
   }
 
   calcularTotal() {

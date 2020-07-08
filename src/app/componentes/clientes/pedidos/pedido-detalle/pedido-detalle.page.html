@@ -49,6 +49,8 @@
   </ion-list>
 </ion-content>
 <ion-footer color="light">
+  <ion-button *ngIf="pedido?.estado === 'ENTREGADO'" (click)="pagarPedido()" color="warning" expand="block">PAGAR
+  </ion-button>
   <ion-toolbar>
     <ion-title class="ion-text-center">
       TOTAL:

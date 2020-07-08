@@ -25,7 +25,36 @@ export class PedidoService {
     );
   }
 
-  // Obtiene todos los pedidos activos por usuario
+  // Obtiene los pedidos pendientes
+  obtenerPedidosPendientes() {
+    return this.firebaseService.getDocs('pedidos').pipe(
+      map(pedido => {
+        return pedido.filter((p) => (p.payload.doc.data() as Pedido).estado === EstadoPedido.PENDIENTE)
+          .map(a => {
+            const data = a.payload.doc.data() as Pedido;
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          });
+      })
+    );
+  }
+
+
+  // Obtiene los pedidos confirmados
+  obtenerPedidosConfirmados() {
+    return this.firebaseService.getDocs('pedidos').pipe(
+      map(pedido => {
+        return pedido.filter((p) => (p.payload.doc.data() as Pedido).estado === EstadoPedido.CONFIRMADO)
+          .map(a => {
+            const data = a.payload.doc.data() as Pedido;
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          });
+      })
+    );
+  }
+
+  // Obtiene los pedidos activos por usuario
   obtenerPedidosActivos(usr: Usuario) {
     return this.firebaseService.getDocQuery('pedidos', 'usuario.id', true, usr.id).pipe(
       map(pedido => {
@@ -39,7 +68,7 @@ export class PedidoService {
     );
   }
 
-  // Obtiene todos los pedidos finalizados por usuario
+  // Obtiene los pedidos finalizados por usuario
   obtenerPedidosFinalizados(usr: Usuario) {
     return this.firebaseService.getDocQuery('pedidos', 'usuario.id', true, usr.id).pipe(
       map(pedido => {
@@ -52,6 +81,20 @@ export class PedidoService {
       })
     );
   }
+
+    // Obtiene los pedidos por cobrar
+    obtenerPedidosPorCobrar() {
+      return this.firebaseService.getDocs('pedidos').pipe(
+        map(pedido => {
+          return pedido.filter((p) => (p.payload.doc.data() as Pedido).estado === EstadoPedido.PAGANDO)
+            .map(a => {
+              const data = a.payload.doc.data() as Pedido;
+              const id = a.payload.doc.id;
+              return { id, ...data };
+            });
+        })
+      );
+    }
 
   // Obtener Pedido por id (id)
   obtenerPedido(uid: string) {

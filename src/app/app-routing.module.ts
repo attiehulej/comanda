@@ -44,6 +44,10 @@ const routes: Routes = [
   {
     path: 'propinas',
     loadChildren: () => import('./componentes/propinas/propinas.module').then(m => m.PropinasPageModule)
+  },
+  {
+    path: 'pendientes',
+    loadChildren: () => import('./componentes/home/pendientes/pendientes.module').then( m => m.PendientesPageModule)
   }
 ];
 

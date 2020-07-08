@@ -49,17 +49,17 @@ export class HomeComponent implements OnInit {
   gestionarListaEspera() {
     this.utilsService.showLoadingAndNavigate('clientes-espera');
   }
+
   gestionarPropinas() {
     this.utilsService.showLoadingAndNavigate('propinas');
   }
 
-  /*logOut(): void {
-    this.authService.logout();
-    this.utilsService.showLoadingAndNavigate('inicio');
-  }*/
-
   irAProductos(): void {
     this.utilsService.showLoadingAndNavigate('productos');
+  }
+
+  irAPendientes() {
+    this.utilsService.showLoadingAndNavigate('pendientes');
   }
 
 }
