@@ -63,9 +63,11 @@ export class ClientesPage implements OnInit {
     this.utilsService.showLoadingAndNavigate('clientes/pedidos');
   }
 
+  irFinalizados(): void {
+    this.utilsService.showLoadingAndNavigate('clientes/finalizados');
+  }
+
   escanearQR(): void {
-    // this.irListaEspera();
-    this.irPedidoActivo();
     this.barcodeScanner.scan({ formats: 'QR_CODE' }).then((data) => {
       if (data && !data.cancelled) {
         if (data.text === 'LISTA_DE_ESPERA') { // Si usa el QR de lista de espera lo llevamos a LE
