@@ -5,6 +5,9 @@ import { AuthService } from 'src/app/servicios/auth.service';
 import { ListaEspera } from 'src/app/clases/lista-espera';
 import { PedidoService } from 'src/app/servicios/pedido.service';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { NotificationService } from 'src/app/servicios/notification.service';
+import { Notificacion } from 'src/app/clases/notificacion';
+import { TipoUsuario } from 'src/app/enums/tipo-usuario.enum';
 
 @Component({
   selector: 'app-lista-espera',
@@ -21,7 +24,8 @@ export class ListaEsperaPage implements OnInit {
     private listaEsperaService: ListaEsperaService,
     private authService: AuthService,
     private pedidoService: PedidoService,
-    private barcodeScanner: BarcodeScanner
+    private barcodeScanner: BarcodeScanner,
+    public notificationService: NotificationService
   ) { }
 
   ngOnInit() {
@@ -55,6 +59,10 @@ export class ListaEsperaPage implements OnInit {
     const listE = new ListaEspera();
     listE.usuario = { id: this.usuario.id, nombre: this.usuario.nombre, foto: this.usuario.foto };
     this.listaEsperaService.agregarALista(listE);
+    let notificacion = new Notificacion();
+    notificacion.mensaje = "Nuevo cliente en la lista de espera";
+    notificacion.receptor = TipoUsuario.METRE;
+    this.notificationService.crearNotificacion(notificacion);
   }
 
 

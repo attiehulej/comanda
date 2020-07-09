@@ -10,6 +10,8 @@ import { Producto } from 'src/app/clases/producto';
 import { Mesa } from 'src/app/clases/mesa';
 import { EstadosMesa } from 'src/app/enums/estado-mesa.enum';
 import { MesaService } from 'src/app/servicios/mesa.service';
+import { NotificationService } from 'src/app/servicios/notification.service';
+import { Notificacion } from 'src/app/clases/notificacion';
 
 @Component({
   selector: 'app-pendientes',
@@ -26,7 +28,8 @@ export class PendientesPage implements OnInit {
     private utilsService: UtilsService,
     private authService: AuthService,
     private pedidoService: PedidoService,
-    private mesaService: MesaService
+    private mesaService: MesaService,
+    public notificationService: NotificationService
   ) { }
 
   ngOnInit() {
@@ -103,6 +106,48 @@ export class PendientesPage implements OnInit {
     this.pedidoService.actualizarPedido(pedido).finally(() => {
       this.utilsService.dismissLoading();
     });
+  }
+
+  administradorNotificaciones(pedido: Pedido): void {
+    let notificacionCocinero: boolean = false;
+    let notificacionBartender: boolean = false;
+    for (const aux of pedido.productos) { //RECORRO PEDIDO PARA VERFICAR A QUE TIPO DE USUARIO ENVIAR NOTIFICACION
+      let producto = aux.producto;
+      if(producto.sector == Sectores.COMIDAS || producto.sector == Sectores.POSTRES)
+      {
+        notificacionCocinero = true;
+        continue;
+      }
+      if(producto.sector == Sectores.BEBIDAS)
+      {
+        notificacionBartender = true;
+      }
+    }
+
+    //SI EXISTE ALGUN PRODUCTO DEL SECTOR CORRESPONDIENTE SE CREA LA NOTIFICACION
+    if(notificacionCocinero)
+    {
+      this.enviarNotificacion(TipoUsuario.COCINERO);
+    }
+    if(notificacionBartender)
+    {
+      this.enviarNotificacion(TipoUsuario.BARTENDER);
+    }
+  }
+
+  enviarNotificacion(tipoUsuario : TipoUsuario): void {
+    let notificacion = new Notificacion();
+    notificacion.mensaje = "Tiene un pedido a preparar";
+    switch(tipoUsuario)
+    {
+      case TipoUsuario.COCINERO:
+        notificacion.receptor = TipoUsuario.COCINERO;
+        break;
+      case TipoUsuario.BARTENDER:
+        notificacion.receptor = TipoUsuario.BARTENDER;
+        break;
+    }
+    this.notificationService.crearNotificacion(notificacion);
   }
 
   cobrarPedido(pedido: Pedido) {
