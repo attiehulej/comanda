@@ -63,6 +63,10 @@ export class ClientesPage implements OnInit {
     this.utilsService.showLoadingAndNavigate('clientes/pedidos');
   }
 
+  irFinalizados(): void {
+    this.utilsService.showLoadingAndNavigate('clientes/finalizados');
+  }
+
   escanearQR(): void {
     this.barcodeScanner.scan({ formats: 'QR_CODE' }).then((data) => {
       if (data && !data.cancelled) {

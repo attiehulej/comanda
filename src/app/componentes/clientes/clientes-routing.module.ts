@@ -21,6 +21,10 @@ const routes: Routes = [
     path: 'pedidos',
     loadChildren: () => import('./pedidos/pedidos.module').then( m => m.PedidosPageModule)
   },
+  {
+    path: 'finalizados',
+    loadChildren: () => import('./finalizados/finalizados.module').then( m => m.FinalizadosPageModule)
+  },
 ];
 
 @NgModule({
