@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
     this.authService.currentUser().then((response: firebase.User) => {
       this.authService.obtenerDetalle(response).subscribe(datos => {
         this.usuario = datos;
-        this.notificationService.activarNotificaiones(this.usuario.perfil);
+        this.notificationService.activarNotificaciones(this.usuario.perfil);
         /*
         let notificacion = new Notificacion();
         notificacion.idPedido = "27";
