@@ -51,15 +51,15 @@ const routes: Routes = [
   },
   {
     path: 'pendientes',
-    loadChildren: () => import('./componentes/home/pendientes/pendientes.module').then( m => m.PendientesPageModule)
+    loadChildren: () => import('./componentes/home/pendientes/pendientes.module').then(m => m.PendientesPageModule)
   },
   {
     path: 'mozo',
-    loadChildren: () => import('./componentes/mozo/mozo.module').then( m => m.MozoPageModule)
+    loadChildren: () => import('./componentes/mozo/mozo.module').then(m => m.MozoPageModule)
   },
   {
     path: 'notificaciones',
-    loadChildren: () => import('./componentes/notificaciones/notificaciones.module').then( m => m.NotificacionesPageModule)
+    loadChildren: () => import('./componentes/notificaciones/notificaciones.module').then(m => m.NotificacionesPageModule)
   }
 ];
 
