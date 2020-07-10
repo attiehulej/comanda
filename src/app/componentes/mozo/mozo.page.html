@@ -14,16 +14,9 @@
     <ion-item-sliding *ngFor="let pedido of getPendientes()">
       <ion-item color="warning">
         <ion-label color="light">
-          <p>
-            <ion-badge color="light">
-              <ion-icon name="calculator-outline"></ion-icon>
-              {{pedido.mesa.numero}}
-            </ion-badge>
-            <ion-badge color="dark">
-              <ion-icon name="information-circle-outline"></ion-icon>
-              {{pedido.usuario.nombre}}
-            </ion-badge>
-          </p>
+          <h2 class="ion-text-capitalize bold">{{pedido.usuario?.nombre}}</h2>
+          <h3>PEDIDO #{{pedido.id}}</h3>
+          <h3>MESA #{{pedido.mesa?.numero}}</h3>
         </ion-label>
       </ion-item>
 
