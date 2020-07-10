@@ -33,10 +33,11 @@
         <h2 class="ion-text-capitalize bold">{{p.producto.nombre}}</h2>
         <h3>{{p.producto.descripcion}}</h3>
         <p>Cantidad: {{p.cantidad}}</p>
+        <p>Precio: {{p.producto.precio|currency}}</p>
         <p>
           <ion-badge color="light">
             <ion-icon name="logo-usd"></ion-icon>
-            {{p.producto.precio|number:'1.2-2'}}
+            {{(p.cantidad*p.producto.precio)|number:'1.2-2'}}
           </ion-badge>
           <ion-badge color="{(p.terminado) ? 'success'  : 'dark'}}">
             <ion-icon name="time-outline"></ion-icon>
