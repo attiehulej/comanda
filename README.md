@@ -35,20 +35,20 @@
 - Servicios Pedido, Producto y lista espera
 - Clientes pendientes (aprobacion)
 
-## 4er Semana (20/06 al 27/06)
+## 4ta Semana (20/06 al 27/06)
 - Generacion de QRs de mesas
 - Avance en pedidos, productos y lista de espera
 - Carta de productos
 - Edicion y borrado de todas las entidades
 
-## 4er Semana (27/06 al 04/07) PRE-ENTREGA
+## 5ta Semana (27/06 al 04/07) PRE-ENTREGA
 - Pantalla de inicio para staff y clientes
 - Pantalla de acciones pendientes por sector (Mozo, Metre, Cocinero y Bartender)
 - Avance de flujo completo de pedido (Buscar mesa, asignacion, pedido de productos y detalle)
 - Listado de productos para agregar al pedido
 - Envio de mails (para los casos solicitados)
  
-## 4er Semana (04/07 al 11/04) ENTREGA
+## 6ta Semana (04/07 al 11/04) ENTREGA
 - Detalle de pedidos
 - Pedidos finalizados
 - Solicitar cuenta + Propina
