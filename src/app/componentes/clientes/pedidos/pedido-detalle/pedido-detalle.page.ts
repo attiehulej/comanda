@@ -16,7 +16,7 @@ export class PedidoDetallePage implements OnInit {
 
   constructor(
     private modalCtrl: ModalController,
-    private productoService: ProductoService
+    public productoService: ProductoService
   ) { }
 
   ngOnInit() {
@@ -33,5 +33,17 @@ export class PedidoDetallePage implements OnInit {
 
   calcularTotal() {
     return this.pedido.productos.reduce((a, b) => a + b.cantidad * b.producto.precio, 0);
+  }
+
+  calcularPropina() {
+    try {
+      return this.calcularTotal() * (this.pedido.propina.porcentaje / 100);
+    } catch (error) {
+      return 0;
+    }
+  }
+
+  calcularTotalFinal() {
+    return this.calcularTotal() + this.calcularPropina();
   }
 }

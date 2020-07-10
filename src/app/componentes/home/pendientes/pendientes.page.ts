@@ -10,6 +10,8 @@ import { Producto } from 'src/app/clases/producto';
 import { Mesa } from 'src/app/clases/mesa';
 import { EstadosMesa } from 'src/app/enums/estado-mesa.enum';
 import { MesaService } from 'src/app/servicios/mesa.service';
+import { NotificationService } from 'src/app/servicios/notification.service';
+import { Notificacion } from 'src/app/clases/notificacion';
 
 @Component({
   selector: 'app-pendientes',
@@ -26,7 +28,8 @@ export class PendientesPage implements OnInit {
     private utilsService: UtilsService,
     private authService: AuthService,
     private pedidoService: PedidoService,
-    private mesaService: MesaService
+    private mesaService: MesaService,
+    public notificationService: NotificationService
   ) { }
 
   ngOnInit() {
@@ -101,8 +104,55 @@ export class PendientesPage implements OnInit {
     pedido.estado = EstadoPedido.CONFIRMADO;
     this.utilsService.presentLoading();
     this.pedidoService.actualizarPedido(pedido).finally(() => {
+      this.administradorNotificaciones(pedido);
       this.utilsService.dismissLoading();
     });
+  }
+
+  administradorNotificaciones(pedido: Pedido): void {
+    let notificacionCocinero: boolean = false;
+    let notificacionBartender: boolean = false;
+    for (const aux of pedido.productos) { //RECORRO PEDIDO PARA VERFICAR A QUE TIPO DE USUARIO ENVIAR NOTIFICACION
+      let producto = aux.producto;
+      if(producto.sector == Sectores.COMIDAS || producto.sector == Sectores.POSTRES)
+      {
+        notificacionCocinero = true;
+        continue;
+      }
+      if(producto.sector == Sectores.BEBIDAS)
+      {
+        notificacionBartender = true;
+      }
+    }
+
+    //SI EXISTE ALGUN PRODUCTO DEL SECTOR CORRESPONDIENTE SE CREA LA NOTIFICACION
+    if(notificacionCocinero)
+    {
+      this.enviarNotificacion(TipoUsuario.COCINERO);
+    }
+    if(notificacionBartender)
+    {
+      this.enviarNotificacion(TipoUsuario.BARTENDER);
+    }
+    this.enviarNotificacion(TipoUsuario.MOZO); //SE LE ENVIA NOTIFICACION DE NUEVO PEDIDO
+  }
+
+  enviarNotificacion(tipoUsuario : TipoUsuario): void {
+    let notificacion = new Notificacion();
+    notificacion.mensaje = "Tiene un nuevo pedido";
+    switch(tipoUsuario)
+    {
+      case TipoUsuario.COCINERO:
+        notificacion.receptor = TipoUsuario.COCINERO;
+        break;
+      case TipoUsuario.BARTENDER:
+        notificacion.receptor = TipoUsuario.BARTENDER;
+        break;
+      case TipoUsuario.MOZO:
+        notificacion.receptor = TipoUsuario.MOZO;
+        break;
+    }
+    this.notificationService.crearNotificacion(notificacion);
   }
 
   cobrarPedido(pedido: Pedido) {
@@ -147,7 +197,19 @@ export class PendientesPage implements OnInit {
     this.utilsService.showLoadingAndNavigate('home');
   }
 
-  calcularTotal(ped) {
+  calcularTotal(ped: Pedido) {
     return ped.productos.reduce((a, b) => a + b.cantidad * b.producto.precio, 0);
+  }
+
+  calcularPropina(ped: Pedido) {
+    try {
+      return this.calcularTotal(ped) * (ped.propina.porcentaje / 100);
+    } catch (error) {
+      return 0;
+    }
+  }
+
+  calcularTotalFinal(ped: Pedido) {
+    return this.calcularTotal(ped) + this.calcularPropina(ped);
   }
 }

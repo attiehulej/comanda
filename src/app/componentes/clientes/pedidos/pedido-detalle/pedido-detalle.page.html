@@ -33,14 +33,30 @@
         <h2 class="ion-text-capitalize bold">{{p.producto.nombre}}</h2>
         <h3>{{p.producto.descripcion}}</h3>
         <p>Cantidad: {{p.cantidad}}</p>
+        <p>Precio: {{p.producto.precio|currency}}</p>
         <p>
           <ion-badge color="light">
             <ion-icon name="logo-usd"></ion-icon>
-            {{p.producto.precio}}
+            {{(p.cantidad*p.producto.precio)|number:'1.2-2'}}
           </ion-badge>
           <ion-badge color="{(p.terminado) ? 'success'  : 'dark'}}">
             <ion-icon name="time-outline"></ion-icon>
             {{(p.terminado) ? 'Listo'  : 'En Preparación'}}
+          </ion-badge>
+        </p>
+      </ion-label>
+    </ion-item>
+
+    <!-- PROPINA -->
+    <ion-item *ngIf="pedido?.propina" color="warning">
+      <ion-label color="light">
+        <h2 class="ion-text-capitalize bold">PROPINA</h2>
+        <h3>Satisfacción: {{pedido.propina.satisfaccion}}</h3>
+        <p>Porcentaje: {{pedido.propina.porcentaje}}</p>
+        <p>
+          <ion-badge color="light">
+            <ion-icon name="logo-usd"></ion-icon>
+            {{calcularPropina()|number:'1.2-2'}}
           </ion-badge>
         </p>
       </ion-label>
@@ -54,7 +70,8 @@
   <ion-toolbar>
     <ion-title class="ion-text-center">
       TOTAL:
-      <ion-text color="warning">$ {{calcularTotal() + '.00'}}</ion-text>
+      <!-- <ion-text color="warning">$ {{calcularTotalFinal() + '.00'}}</ion-text> -->
+      <ion-text color="warning">$ {{calcularTotalFinal()|number:'1.2-2'}}</ion-text>
     </ion-title>
   </ion-toolbar>
 </ion-footer>

@@ -54,18 +54,18 @@ export class UsuariosPage implements OnInit {
 
   aprobarUsuario(usuario): void {
     this.utilsService.presentLoading();
+    this.fireService.sendEmail(usuario, '¡Usted ha sido aceptado, bienvenido a Coherence Restaurant!', 'Respuesta solicitud registro Coherence Restaurant');
     this.authService.gestionarUsuario(usuario, EstadoUsuario.APROBADO)
       .then(() => this.utilsService.dismissLoading())
       .catch(err => this.utilsService.dismissLoading());
-    this.fireService.sendEmail(usuario, '¡Usted ha sido aceptado, bienvenido a Coherence Restaurant!', 'Respuesta solicitud registro Coherence Restaurant');
   }
 
   declinarUsuario(usuario): void {
     this.utilsService.presentLoading();
+    this.fireService.sendEmail(usuario, 'Lo sentimos, pero su solicitud a sido rechazada', 'Respuesta solicitud registro Coherence Restaurant');
     this.authService.gestionarUsuario(usuario, EstadoUsuario.RECHAZADO)
       .then(() => this.utilsService.dismissLoading())
       .catch(err => this.utilsService.dismissLoading());
-    this.fireService.sendEmail(usuario, 'Lo sentimos, pero su solicitud a sido rechazada', 'Respuesta solicitud registro Coherence Restaurant');
   }
 
   volver(): void {

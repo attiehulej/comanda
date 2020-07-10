@@ -55,6 +55,7 @@ export class LoginPage implements OnInit {
         .then((response) => {
           // tslint:disable-next-line:no-shadowed-variable
           response.subscribe((usuario: Usuario) => {  // Aprobado
+            console.log(usuario);
             this.utilsService.dismissLoading();
             this.formLogin.reset();
             if (usuario.estado === EstadoUsuario.APROBADO) {
@@ -181,34 +182,14 @@ export class LoginPage implements OnInit {
       {
         text: 'Cliente 1',
         handler: () => {
-          this.formLogin.controls.correoLogin.setValue('cliente1@cliente1.com');
+          this.formLogin.controls.correoLogin.setValue('cliente1@gmail.com');
           this.formLogin.controls.claveLogin.setValue('123456');
         }
       },
       {
         text: 'Cliente 2',
         handler: () => {
-          this.formLogin.controls.correoLogin.setValue('cliente2@cliente2.com');
-          this.formLogin.controls.claveLogin.setValue('123456');
-        }
-      }, {
-        text: 'Cliente 3',
-        handler: () => {
-          this.formLogin.controls.correoLogin.setValue('cliente3@cliente3.com');
-          this.formLogin.controls.claveLogin.setValue('123456');
-        }
-      },
-      {
-        text: 'Cliente 4 (Pendiente)',
-        handler: () => {
-          this.formLogin.controls.correoLogin.setValue('cliente4@cliente4.com');
-          this.formLogin.controls.claveLogin.setValue('123456');
-        }
-      },
-      {
-        text: 'Cliente 5',
-        handler: () => {
-          this.formLogin.controls.correoLogin.setValue('cliente5@cliente5.com');
+          this.formLogin.controls.correoLogin.setValue('cliente2@gmail.com');
           this.formLogin.controls.claveLogin.setValue('123456');
         }
       },

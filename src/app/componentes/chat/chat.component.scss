@@ -13,12 +13,20 @@ ion-card-subtitle{
     font-size: 10px;
     float: right;
     position: relative;
-    top: 30px;
+    /*top: 30px;*/
 }
 
-.footer {
+.ion-float-left ion-card-subtitle {
+    top: 45px;
+}
+
+.ion-float-right ion-card-subtitle {
+    top: 35px;
+}
+
+/*.footer {
     position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
-}
+}*/
