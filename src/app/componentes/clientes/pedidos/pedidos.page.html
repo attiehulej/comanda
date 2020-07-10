@@ -83,6 +83,20 @@
     </ion-card-content>
   </ion-card>
 
+  <ion-card *ngIf="pedido?.estado === 'CONFIRMADO' || pedido?.estado === 'ENTREGADO'" (click)="verEncuesta()">
+    <ion-card-header>
+      <ion-card-subtitle></ion-card-subtitle>
+      <ion-card-title>Llenar <ion-label color="warning">ENCUESTA</ion-label>
+        <ion-icon class="ion-float-right" color="warning" name="document-outline">
+        </ion-icon>
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      Completar la encuesta de satisfacción.
+    </ion-card-content>
+  </ion-card>
+
   <ion-card (click)="chatear('MOZO')">
     <ion-card-header>
       <ion-card-subtitle></ion-card-subtitle>

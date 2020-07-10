@@ -12,6 +12,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { PropinaService } from 'src/app/servicios/propina.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { EncuestaPage } from './encuesta/encuesta.page';
 
 @Component({
   selector: 'app-pedidos',
@@ -75,8 +76,23 @@ export class PedidosPage implements OnInit, OnDestroy {
     });
   }
 
+  guardarEncuesta(pedido: Pedido) {
+    this.utilsService.presentLoading();
+    this.pedidoService.actualizarPedido(pedido)
+    .catch(error => alert(error.message))
+    .finally(() => {
+      this.utilsService.dismissLoading();
+      this.utilsService.presentToast('Guardando encuesta...', 'toast-info');
+    });
+  }
+
   atras(): void {
     this.utilsService.showLoadingAndNavigate('clientes');
+  }
+
+  verEncuesta() {
+    const callback = (p: Pedido) => this.guardarEncuesta(p);
+    this.utilsService.presentModal(EncuestaPage, { pedido: this.pedido, callback });
   }
 
   calcularTotal() {
