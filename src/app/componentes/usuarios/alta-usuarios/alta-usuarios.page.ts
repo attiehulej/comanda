@@ -123,6 +123,7 @@ export class AltaUsuariosPage implements OnInit {
           let notificacion = new Notificacion();
           notificacion.mensaje = "Nuevo cliente pendiente de aprobacion";
           notificacion.receptor = TipoUsuario.DUEÑO;
+          notificacion.receptorSecundario = TipoUsuario.SUPERVISOR;
           this.notificationService.crearNotificacion(notificacion);
         }
         this.utilsService.dismissLoading();
