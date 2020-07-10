@@ -49,7 +49,7 @@ export class NotificationService {
     for (const aux of notificaciones) 
     {
       let notificacion : Notificacion = aux;
-      if(notificacion.receptor == tipoDeUsuario && notificacion.firstApparition)
+      if((notificacion.receptor == tipoDeUsuario || notificacion.receptorSecundario == tipoDeUsuario) && notificacion.firstApparition)
       {
         this.lanzarNotificacion(notificacion);
       } 

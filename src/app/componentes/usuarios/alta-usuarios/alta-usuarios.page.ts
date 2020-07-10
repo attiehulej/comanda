@@ -9,7 +9,9 @@ import { Usuario } from '../../../clases/usuario';
 import { EstadoUsuario } from 'src/app/enums/estado-usuario.enum';
 import { TipoUsuario } from 'src/app/enums/tipo-usuario.enum';
 import { UtilsService } from 'src/app/servicios/utils.service';
-
+import { NotificationService } from 'src/app/servicios/notification.service';
+import { Notificacion } from 'src/app/clases/notificacion';
+import { from } from 'rxjs';
 @Component({
   selector: 'app-alta-usuarios',
   templateUrl: './alta-usuarios.page.html',
@@ -32,7 +34,8 @@ export class AltaUsuariosPage implements OnInit {
     private camera: CameraService,
     public db: AngularFirestore,
     public scanner: BarcodeScanner,
-    public authService: AuthService
+    public authService: AuthService,
+    public notificationService: NotificationService
   ) {
     this.usuarios = db.collection('usuarios').valueChanges();
     this.usuarios.subscribe(usuarios => this.listaUsuarios = usuarios, error => console.log(error));
@@ -115,6 +118,14 @@ export class AltaUsuariosPage implements OnInit {
           break;
       }
       this.authService.signUp(nuevoUsuario).then(datos => {
+        if(nuevoUsuario.perfil == TipoUsuario.CLIENTE_REGISTRADO || nuevoUsuario.perfil == TipoUsuario.CLIENTE_ANONIMO)
+        {
+          let notificacion = new Notificacion();
+          notificacion.mensaje = "Nuevo cliente pendiente de aprobacion";
+          notificacion.receptor = TipoUsuario.DUEÑO;
+          notificacion.receptorSecundario = TipoUsuario.SUPERVISOR;
+          this.notificationService.crearNotificacion(notificacion);
+        }
         this.utilsService.dismissLoading();
         console.log(datos);
         this.volverAltaUsuarios();
