@@ -104,6 +104,7 @@ export class PendientesPage implements OnInit {
     pedido.estado = EstadoPedido.CONFIRMADO;
     this.utilsService.presentLoading();
     this.pedidoService.actualizarPedido(pedido).finally(() => {
+      this.administradorNotificaciones(pedido);
       this.utilsService.dismissLoading();
     });
   }
@@ -133,11 +134,12 @@ export class PendientesPage implements OnInit {
     {
       this.enviarNotificacion(TipoUsuario.BARTENDER);
     }
+    this.enviarNotificacion(TipoUsuario.MOZO); //SE LE ENVIA NOTIFICACION DE NUEVO PEDIDO
   }
 
   enviarNotificacion(tipoUsuario : TipoUsuario): void {
     let notificacion = new Notificacion();
-    notificacion.mensaje = "Tiene un pedido a preparar";
+    notificacion.mensaje = "Tiene un nuevo pedido";
     switch(tipoUsuario)
     {
       case TipoUsuario.COCINERO:
@@ -145,6 +147,9 @@ export class PendientesPage implements OnInit {
         break;
       case TipoUsuario.BARTENDER:
         notificacion.receptor = TipoUsuario.BARTENDER;
+        break;
+      case TipoUsuario.MOZO:
+        notificacion.receptor = TipoUsuario.MOZO;
         break;
     }
     this.notificationService.crearNotificacion(notificacion);
