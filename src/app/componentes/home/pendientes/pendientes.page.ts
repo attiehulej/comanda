@@ -197,7 +197,19 @@ export class PendientesPage implements OnInit {
     this.utilsService.showLoadingAndNavigate('home');
   }
 
-  calcularTotal(ped) {
+  calcularTotal(ped: Pedido) {
     return ped.productos.reduce((a, b) => a + b.cantidad * b.producto.precio, 0);
+  }
+
+  calcularPropina(ped: Pedido) {
+    try {
+      return this.calcularTotal(ped) * (ped.propina.porcentaje / 100);
+    } catch (error) {
+      return 0;
+    }
+  }
+
+  calcularTotalFinal(ped: Pedido) {
+    return this.calcularTotal(ped) + this.calcularPropina(ped);
   }
 }

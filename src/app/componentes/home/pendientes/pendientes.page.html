@@ -80,7 +80,7 @@
         <h2 class="ion-text-capitalize bold">{{ped.usuario?.nombre}}</h2>
         <h3>PEDIDO #{{ped.id}}</h3>
         <h3>MESA #{{ped.mesa?.numero}}</h3>
-        <h3>Total: $ {{calcularTotal(ped) + '.00'}}</h3>
+        <h3>Total: $ {{calcularTotalFinal(ped)|number:'1.2-2'}}</h3>
         <ion-button (click)="cobrarPedido(ped)" color="light" size="small">
           Cobrar</ion-button>
       </ion-label>

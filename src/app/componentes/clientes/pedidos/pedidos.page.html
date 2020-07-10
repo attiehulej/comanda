@@ -37,7 +37,7 @@
     </ion-card-header>
 
     <ion-card-content>
-      Consulta el detalle de tu pedido actuál.
+      Consulta el detalle de tu pedido actual.
     </ion-card-content>
   </ion-card>
 
@@ -55,6 +55,20 @@
     </ion-card-content>
   </ion-card> -->
 
+  <ion-card *ngIf="pedido?.estado === 'ENTREGADO'" (click)="escanearQR()">
+    <ion-card-header>
+      <ion-card-subtitle></ion-card-subtitle>
+      <ion-card-title>Adicionar <ion-label color="warning">PROPINA</ion-label>
+        <ion-icon class="ion-float-right" color="warning" name="cash-outline">
+        </ion-icon>
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      En relación al servicio brindado.
+    </ion-card-content>
+  </ion-card>
+
   <ion-card *ngIf="pedido?.estado === 'ENTREGADO'" (click)="verDetalle()">
     <ion-card-header>
       <ion-card-subtitle></ion-card-subtitle>
@@ -66,6 +80,20 @@
 
     <ion-card-content>
       Solicitar la cuenta para pagar.
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="pedido?.estado === 'CONFIRMADO' || pedido?.estado === 'ENTREGADO'" (click)="verEncuesta()">
+    <ion-card-header>
+      <ion-card-subtitle></ion-card-subtitle>
+      <ion-card-title>Llenar <ion-label color="warning">ENCUESTA</ion-label>
+        <ion-icon class="ion-float-right" color="warning" name="document-outline">
+        </ion-icon>
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      Completar la encuesta de satisfacción.
     </ion-card-content>
   </ion-card>
 
@@ -88,7 +116,7 @@
   <ion-toolbar>
     <ion-title class="ion-text-center">
       TOTAL:
-      <ion-text color="warning">$ {{calcularTotal() + '.00'}}</ion-text>
+      <ion-text color="warning">$ {{calcularTotalFinal()|number:'1.2-2'}}</ion-text>
     </ion-title>
   </ion-toolbar>
 </ion-footer>

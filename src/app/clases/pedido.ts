@@ -20,4 +20,11 @@ export class Pedido {
         },
         destinatario: string
     }[];
+    public propina?: {satisfaccion: string, porcentaje: number};
+    public encuesta?: {
+        calidad: number,
+        servicio: number,
+        limpieza: number,
+        comentarios?: string
+    };
 }
