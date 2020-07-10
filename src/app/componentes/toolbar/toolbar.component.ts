@@ -27,7 +27,14 @@ export class ToolbarComponent implements OnInit {
   logOut(): void {
     this.authService.logout();
     localStorage.removeItem('perfil');
-    this.notificationService.desactivarNotificaciones();
+    try{
+      this.notificationService.desactivarNotificaciones();
+    }
+    catch(error)
+    {
+      console.log(error);
+    }
+
     this.utilsService.showLoadingAndNavigate('inicio');
   }
 

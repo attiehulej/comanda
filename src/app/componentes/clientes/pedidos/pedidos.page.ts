@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UtilsService } from 'src/app/servicios/utils.service';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { PedidoService } from 'src/app/servicios/pedido.service';
@@ -8,21 +8,28 @@ import { ChatComponent } from '../../chat/chat.component';
 import { ListaProductoPage } from './lista-producto/lista-producto.page';
 import { PedidoDetallePage } from './pedido-detalle/pedido-detalle.page';
 import { EstadoPedido } from 'src/app/enums/estado-pedido.enum';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { PropinaService } from 'src/app/servicios/propina.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-pedidos',
   templateUrl: './pedidos.page.html',
   styleUrls: ['./pedidos.page.scss'],
 })
-export class PedidosPage implements OnInit {
+export class PedidosPage implements OnInit, OnDestroy {
 
   usuario: Usuario;
   pedido: Pedido;
+  private desuscribir = new Subject<void>();
 
   constructor(
     private utilsService: UtilsService,
     private authService: AuthService,
-    private pedidoService: PedidoService
+    private pedidoService: PedidoService,
+    private barcodeScanner: BarcodeScanner,
+    private propinas: PropinaService
   ) { }
 
   ngOnInit() {
@@ -32,6 +39,11 @@ export class PedidosPage implements OnInit {
         this.obtenerPedido();
       });
     });
+  }
+
+  ngOnDestroy() {
+    this.desuscribir.next();
+    this.desuscribir.complete();
   }
 
   obtenerPedido() {
@@ -71,8 +83,44 @@ export class PedidosPage implements OnInit {
     return this.pedido?.productos.reduce((a, b) => a + b.cantidad * b.producto.precio, 0);
   }
 
+  calcularPropina() {
+    try {
+      return this.calcularTotal() * (this.pedido.propina.porcentaje / 100);
+    } catch (error) {
+      return 0;
+    }
+  }
+
+  calcularTotalFinal() {
+    return this.calcularTotal() + this.calcularPropina();
+  }
+
   chatear(destinatario: string) {
     this.utilsService.presentModal(ChatComponent, { pedido: this.pedido, receptor: destinatario, user: this.usuario });
   }
 
+  escanearQR(): void {
+    this.barcodeScanner.scan({ formats: 'QR_CODE' }).then((data) => {
+      if (data && !data.cancelled) {
+        this.propinas.obtenerPropina(data.text)
+        .pipe(takeUntil(this.desuscribir))
+        .subscribe(prop => {
+          if (prop.porcentaje) {
+            this.pedido.propina = {
+              porcentaje: prop.porcentaje,
+              satisfaccion: prop.satisfaccion
+            };
+
+            this.utilsService.presentLoading();
+            this.pedidoService.actualizarPedido(this.pedido).finally(() => {
+              this.utilsService.dismissLoading();
+            });
+          } else {
+            // No existe QR de propina
+            this.utilsService.presentAlert('Lo sentimos', '', 'El código escaneado no existe');
+          }
+        });
+      }
+    }, (err) => this.utilsService.handleError(err));
+  }
 }

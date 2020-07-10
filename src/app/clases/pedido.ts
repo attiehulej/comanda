@@ -20,4 +20,5 @@ export class Pedido {
         },
         destinatario: string
     }[];
+    public propina?: {satisfaccion: string, porcentaje: number};
 }
