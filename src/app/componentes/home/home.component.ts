@@ -75,7 +75,7 @@ export class HomeComponent implements OnInit {
     this.utilsService.showLoadingAndNavigate('pendientes');
   }
 
-  irABartender():void{
+  irABartender(): void{
     this.utilsService.showLoadingAndNavigate('bartender');
   }
 
