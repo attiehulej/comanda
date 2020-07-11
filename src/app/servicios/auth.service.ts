@@ -29,7 +29,6 @@ export class AuthService {
     return new Promise<any>((resolve, reject) => {
       let call = this.afAuth.signInAnonymously();
       if (usuario.perfil !== TipoUsuario.CLIENTE_ANONIMO) {
-        console.log("dfnmwowdowd");
         call = this.afAuth.createUserWithEmailAndPassword(usuario.correo, usuario.clave);
       }
       call.then(
@@ -60,7 +59,7 @@ export class AuthService {
   }
 
   obtenerDetalle(usuario) {
-    return this.usuarioService.obtenerUsuario(usuario.uid);
+    return this.usuarioService.obtenerUsuario(usuario?.uid);
   }
 
   /*

@@ -59,8 +59,8 @@ export class ListaEsperaPage implements OnInit {
     const listE = new ListaEspera();
     listE.usuario = { id: this.usuario.id, nombre: this.usuario.nombre, foto: this.usuario.foto };
     this.listaEsperaService.agregarALista(listE);
-    let notificacion = new Notificacion();
-    notificacion.mensaje = "Nuevo cliente en la lista de espera";
+    const notificacion = new Notificacion();
+    notificacion.mensaje = 'Nuevo cliente en la lista de espera';
     notificacion.receptor = TipoUsuario.METRE;
     this.notificationService.crearNotificacion(notificacion);
   }
