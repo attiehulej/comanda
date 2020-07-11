@@ -110,37 +110,37 @@ export class PendientesPage implements OnInit {
   }
 
   administradorNotificaciones(pedido: Pedido): void {
-    let notificacionCocinero: boolean = false;
-    let notificacionBartender: boolean = false;
-    for (const aux of pedido.productos) { //RECORRO PEDIDO PARA VERFICAR A QUE TIPO DE USUARIO ENVIAR NOTIFICACION
-      let producto = aux.producto;
-      if(producto.sector == Sectores.COMIDAS || producto.sector == Sectores.POSTRES)
+    let notificacionCocinero = false;
+    let notificacionBartender = false;
+    for (const aux of pedido.productos) { // RECORRO PEDIDO PARA VERFICAR A QUE TIPO DE USUARIO ENVIAR NOTIFICACION
+      const producto = aux.producto;
+      if (producto.sector === Sectores.COMIDAS || producto.sector === Sectores.POSTRES)
       {
         notificacionCocinero = true;
         continue;
       }
-      if(producto.sector == Sectores.BEBIDAS)
+      if (producto.sector === Sectores.BEBIDAS)
       {
         notificacionBartender = true;
       }
     }
 
-    //SI EXISTE ALGUN PRODUCTO DEL SECTOR CORRESPONDIENTE SE CREA LA NOTIFICACION
-    if(notificacionCocinero)
+    // SI EXISTE ALGUN PRODUCTO DEL SECTOR CORRESPONDIENTE SE CREA LA NOTIFICACION
+    if (notificacionCocinero)
     {
       this.enviarNotificacion(TipoUsuario.COCINERO);
     }
-    if(notificacionBartender)
+    if (notificacionBartender)
     {
       this.enviarNotificacion(TipoUsuario.BARTENDER);
     }
-    //this.enviarNotificacion(TipoUsuario.MOZO); //SE LE ENVIA NOTIFICACION DE NUEVO PEDIDO
+    // this.enviarNotificacion(TipoUsuario.MOZO); //SE LE ENVIA NOTIFICACION DE NUEVO PEDIDO
   }
 
-  enviarNotificacion(tipoUsuario : TipoUsuario): void {
-    let notificacion = new Notificacion();
-    notificacion.mensaje = "Tiene un nuevo pedido";
-    switch(tipoUsuario)
+  enviarNotificacion(tipoUsuario: TipoUsuario): void {
+    const notificacion = new Notificacion();
+    notificacion.mensaje = 'Tiene un nuevo pedido';
+    switch (tipoUsuario)
     {
       case TipoUsuario.COCINERO:
         notificacion.receptor = TipoUsuario.COCINERO;
