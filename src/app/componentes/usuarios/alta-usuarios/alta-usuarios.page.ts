@@ -47,8 +47,8 @@ export class AltaUsuariosPage implements OnInit {
         correo: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(25), Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]],
         clave: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(6), Validators.pattern('[0-9]*')]],
         clave2: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(6), Validators.pattern('[0-9]*')]],
-        nombre: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(12), Validators.pattern('[a-zA-Z ]*')]],
-        apellido: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(12), Validators.pattern('[a-zA-Z ]*')]],
+        nombre: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(16), Validators.pattern('[a-zA-Z ]*')]],
+        apellido: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(16), Validators.pattern('[a-zA-Z ]*')]],
         dni: ['', [Validators.required, Validators.min(0), Validators.minLength(7), Validators.maxLength(8), Validators.pattern('[0-9]*')]],
         cuil: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(11), Validators.pattern('[0-9]*')]],
         tipo: ['', [Validators.required]],
@@ -118,7 +118,7 @@ export class AltaUsuariosPage implements OnInit {
           break;
       }
       this.authService.signUp(nuevoUsuario).then(datos => {
-        if(nuevoUsuario.perfil == TipoUsuario.CLIENTE_REGISTRADO || nuevoUsuario.perfil == TipoUsuario.CLIENTE_ANONIMO)
+        if(nuevoUsuario.perfil == TipoUsuario.CLIENTE_REGISTRADO)
         {
           let notificacion = new Notificacion();
           notificacion.mensaje = "Nuevo cliente pendiente de aprobacion";
@@ -199,10 +199,13 @@ export class AltaUsuariosPage implements OnInit {
         break;
 
       case 'CLIENTE_ANONIMO':
-        if (this.formUsuario.controls.correo.valid &&
+        /*if (this.formUsuario.controls.correo.valid &&
           this.formUsuario.controls.clave.valid &&
           this.formUsuario.controls.clave.value === this.formUsuario.controls.clave2.value &&
           this.formUsuario.controls.nombre.valid) {
+          retorno = false;
+        }*/
+        if (this.formUsuario.controls.nombre.valid) {
           retorno = false;
         }
         break;
@@ -267,10 +270,11 @@ export class AltaUsuariosPage implements OnInit {
         break;
 
       case 'CLIENTE_ANONIMO':
-        if (elemento === 'correo' ||
+        /*if (elemento === 'correo' ||
         elemento === 'clave' ||
         elemento === 'clave2' ||
-        elemento === 'nombre') {
+        elemento === 'nombre') {*/
+        if(elemento === 'nombre') {
           retorno = true;
         }
         break;

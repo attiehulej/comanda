@@ -134,7 +134,7 @@ export class PendientesPage implements OnInit {
     {
       this.enviarNotificacion(TipoUsuario.BARTENDER);
     }
-    this.enviarNotificacion(TipoUsuario.MOZO); //SE LE ENVIA NOTIFICACION DE NUEVO PEDIDO
+    //this.enviarNotificacion(TipoUsuario.MOZO); //SE LE ENVIA NOTIFICACION DE NUEVO PEDIDO
   }
 
   enviarNotificacion(tipoUsuario : TipoUsuario): void {
