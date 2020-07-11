@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore'; // PATO
 import { VibrationService } from 'src/app/servicios/vibration.service';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
@@ -25,7 +25,7 @@ export class LoginPage implements OnInit {
   listaUsuarios: any[];
   esDuenio = false;
   public formLogin: FormGroup;
-
+  public loginSub: Subscription;
   constructor(
     public router: Router,
     public db: AngularFirestore,
@@ -45,6 +45,13 @@ export class LoginPage implements OnInit {
       });
   }
 
+  ngOnDestroy(){
+    if(this.loginSub){
+      this.loginSub.unsubscribe();
+      console.log("se ejecuto elon destryo");
+    }
+  }
+
   onSubmitLogin(): void {
     if (this.errorFomularioAltaUsarios() === false) {
       this.utilsService.presentLoading();
@@ -54,7 +61,7 @@ export class LoginPage implements OnInit {
       this.authService.signIn(usuario)
         .then((response) => {
           // tslint:disable-next-line:no-shadowed-variable
-          response.subscribe((usuario: Usuario) => {  // Aprobado
+          this.loginSub = response.subscribe((usuario: Usuario) => {  // Aprobado
             console.log(usuario);
             this.utilsService.dismissLoading();
             this.formLogin.reset();
@@ -62,6 +69,7 @@ export class LoginPage implements OnInit {
               localStorage.setItem('perfil', usuario.perfil); // PATO
               if (usuario.perfil === TipoUsuario.CLIENTE_REGISTRADO || usuario.perfil === TipoUsuario.CLIENTE_ANONIMO) { // Clientes
                 this.moveTo('clientes');
+                console.log('actualize clientes');
               } else { // Personal
                 this.moveTo('home');
               }
@@ -69,7 +77,9 @@ export class LoginPage implements OnInit {
               this.utilsService.presentAlert('Hola!',
                 'Pronto vas a poder disfrutar de COHERENCE',
                 'Tu cuenta esta pendiente de aprobación.');
+              this.authService.logout();
             }
+            this.loginSub.unsubscribe();
           });
         })
         .catch((err: any) => {

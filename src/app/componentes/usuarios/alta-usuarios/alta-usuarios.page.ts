@@ -118,6 +118,7 @@ export class AltaUsuariosPage implements OnInit {
           break;
       }
       this.authService.signUp(nuevoUsuario).then(datos => {
+        this.utilsService.dismissLoading();
         if(nuevoUsuario.perfil == TipoUsuario.CLIENTE_REGISTRADO)
         {
           let notificacion = new Notificacion();
@@ -125,10 +126,13 @@ export class AltaUsuariosPage implements OnInit {
           notificacion.receptor = TipoUsuario.DUEÑO;
           notificacion.receptorSecundario = TipoUsuario.SUPERVISOR;
           this.notificationService.crearNotificacion(notificacion);
+          this.volverAltaUsuarios();
         }
-        this.utilsService.dismissLoading();
+        else{
+          this.utilsService.showLoadingAndNavigate('clientes');
+        }
         console.log(datos);
-        this.volverAltaUsuarios();
+        
       }, (err) => {
         this.utilsService.dismissLoading();
         this.utilsService.handleError(err, true);

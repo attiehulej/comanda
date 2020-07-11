@@ -6,6 +6,7 @@ import { Usuario } from '../clases/usuario';
 import { EstadoUsuario } from '../enums/estado-usuario.enum';
 import { first } from 'rxjs/operators';
 import { TipoUsuario } from '../enums/tipo-usuario.enum';
+import { UtilsService } from './utils.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class AuthService {
   constructor(
     public afAuth: AngularFireAuth,
     public usuarioService: UsuarioService,
+    public utilsService: UtilsService
   ) { }
 
   isLoggedIn() {
@@ -36,7 +38,7 @@ export class AuthService {
           if (response) {
             usuario.id = response.user.uid;
             this.usuarioService.crearUsuario(usuario.id, usuario)
-              .then((usr: any) => resolve('exito')); // ADENTRO DEL RESOLVE => this.obtenerDetalle(usr)
+              .then((usr: any) => resolve('exito')).catch(e => this.utilsService.handleError(e)); // ADENTRO DEL RESOLVE => this.obtenerDetalle(usr)
           }
         },
         (error: any) => reject(error));

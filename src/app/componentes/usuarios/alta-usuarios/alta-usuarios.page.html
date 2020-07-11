@@ -44,7 +44,7 @@
       <label class="lblClave2AltaUsuarios">Confirme Contraseña</label>
       <input type="password" class="inpClave2AltaUsuarios" formControlName="clave2">
       <label class="lblErrorClave2AltaUsuarios"
-        [hidden]="formUsuario.controls.clave2.pristine || formUsuario.controls.clave.value === formUsuario.controls.clave2.value">NO COINCIDE CON LA CLAVE INGRESADA</label>
+        [hidden]="formUsuario.controls.clave2.pristine || formUsuario.controls.clave.value === formUsuario.controls.clave2.value">CLAVE INVALIDA</label>
     </div>
 
     <div class="divNombreAltaUsuarios" *ngIf="mostrarSegunAlta('nombre')">
