@@ -24,7 +24,10 @@ export class NotificationService {
 
   desactivarNotificaciones()
   {
-    this.subjectNotification.unsubscribe();
+    if(this.subjectNotification)
+    {
+      this.subjectNotification.unsubscribe();
+    }
   }
 
   obtenerNotificaciones() {
