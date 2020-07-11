@@ -59,7 +59,7 @@ export class AuthService {
   }
 
   obtenerDetalle(usuario) {
-    return this.usuarioService.obtenerUsuario(usuario.uid);
+    return this.usuarioService.obtenerUsuario(usuario?.uid);
   }
 
   /*
