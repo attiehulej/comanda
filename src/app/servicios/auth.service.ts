@@ -5,6 +5,7 @@ import { UsuarioService } from './usuario.service';
 import { Usuario } from '../clases/usuario';
 import { EstadoUsuario } from '../enums/estado-usuario.enum';
 import { first } from 'rxjs/operators';
+import { TipoUsuario } from '../enums/tipo-usuario.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,8 @@ export class AuthService {
   signUp(usuario: Usuario) {
     return new Promise<any>((resolve, reject) => {
       let call = this.afAuth.signInAnonymously();
-      if (usuario.estado !== EstadoUsuario.ANONIMO) {
+      if (usuario.perfil !== TipoUsuario.CLIENTE_ANONIMO) {
+        console.log("dfnmwowdowd");
         call = this.afAuth.createUserWithEmailAndPassword(usuario.correo, usuario.clave);
       }
       call.then(
