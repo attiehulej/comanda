@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "firebase-functions-test": "^0.2.0",
-    "lint": "^0.7.0"
+    "lint": "^0.8.8"
   },
   "private": true
 }
